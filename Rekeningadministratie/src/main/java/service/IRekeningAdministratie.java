@@ -7,6 +7,7 @@ package service;
 
 import dao.DatabaseManager;
 import domain.Account;
+import domain.Auto;
 import domain.Cartracker;
 import domain.Eigenaar;
 import domain.Factuur;
@@ -67,6 +68,8 @@ public interface IRekeningAdministratie {
     
     public void addFactuurOnderdeel(FactuurOnderdeel fo);
     public void addFactuurOnderdeel(int CartrakerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers);
+
+    public List<Auto> getAutos(int i);
 
     
 }

@@ -5,6 +5,7 @@
  */
 package dao;
 
+import domain.Auto;
 import domain.Cartracker;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
@@ -32,4 +33,6 @@ public interface IDataDistributer {
     public void addCartraker(Cartracker cartracker);
 
     public Cartracker findCartrakerWithId(int nummer);
+
+    public List<Auto> getAutos(int i);
 }

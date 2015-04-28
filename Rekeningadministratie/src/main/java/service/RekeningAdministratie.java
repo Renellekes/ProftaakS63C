@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import dao.DatabaseManager;
 import dao.IDataDistributer;
+import domain.Auto;
 import service.File;
 import java.util.List;
 import java.util.Timer;
@@ -190,5 +191,11 @@ public class RekeningAdministratie implements IRekeningAdministratie {
     public void addFactuurOnderdeel(int CartrakerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
         FactuurOnderdeel factuurOnderdeel = new FactuurOnderdeel(CartrakerID, kilometertarief, beginTijd, eindTijd, aantalKilometers);
         this.addFactuurOnderdeel(factuurOnderdeel);
+    }
+
+    @Override
+    public List<Auto> getAutos(int i) {
+        List<Auto> autos = database.getAutos(i);
+        return autos;
     }
 }

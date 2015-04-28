@@ -19,7 +19,7 @@ import service.IRekeningAdministratie;
 
 /**
  *
- * @author kay de groter
+ * @author kay de groot
  */
 @Singleton
 @Stateless

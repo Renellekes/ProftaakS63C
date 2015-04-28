@@ -5,12 +5,15 @@
  */
 package boundary.rest;
 
+import domain.Auto;
 import domain.Cartracker;
 import domain.FactuurOnderdeel;
+import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,6 +29,14 @@ public class restRekeningAdministratie {
     
     @Inject
     private IRekeningAdministratie ira;
+    
+    @GET
+    @Path("getAllCars")
+    public List<Auto> getAllCars(){
+        List<Auto> autos = ira.getAutos(0);
+        return autos;
+    }
+    
     
     @PUT
     @Path("addFactuurOnderdeel/{factuurOnderdeel}")

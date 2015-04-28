@@ -5,6 +5,7 @@
  */
 package dao;
 
+import domain.Auto;
 import domain.Cartracker;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
@@ -91,6 +92,13 @@ public class DatabaseManager implements IDataDistributer {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public List<Auto> getAutos(int i) {
+        Query query = em.createQuery("SELECT c FROM Auto c WHERE c.id = " + i);
+        List<Auto> autos = query.getResultList();
+        return autos;
     }
 
 }
