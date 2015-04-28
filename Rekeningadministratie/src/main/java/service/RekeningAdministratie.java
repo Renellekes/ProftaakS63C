@@ -104,18 +104,6 @@ public class RekeningAdministratie implements IRekeningAdministratie {
     public void connectDatsbase(DatabaseManager db) {
     }
 
-    @Override
-    public void addKilometertarief(Kilometertarief kilometertarief) {
-    }
-
-    @Override
-    public void modifyKilometertarief(int ID, Kilometertarief kilometertarief) {
-    }
-
-    @Override
-    public void removeKilometertarief(int ID) {
-    }
-
     /**
      * This method wil look through al the Factuuronderdelen for those who have
      * a enddate for this month then they wil be added to a factuur whish is
@@ -197,5 +185,30 @@ public class RekeningAdministratie implements IRekeningAdministratie {
     public List<Auto> getAutos(int i) {
         List<Auto> autos = database.getAutos(i);
         return autos;
+    }
+
+    @Override
+    public List<Kilometertarief> getAlleKilometerTarieven() {
+        return database.getAlleKilometerTarieven();
+    }
+
+    @Override
+    public Kilometertarief getKilometerTarief(int id) {
+        return database.getKilometerTarief(id);
+    }
+
+    @Override
+    public void addKilometerTarief(Kilometertarief kt) {
+        database.addKilometerTarief(kt);
+    }
+
+    @Override
+    public void editKilometerTarief(Kilometertarief kt) {
+        database.editKilometerTarief(kt);
+    }
+
+    @Override
+    public void deleteKilometerTarief(int id) {
+        database.deleteKilometerTarief(id);
     }
 }

@@ -9,6 +9,7 @@ import domain.Auto;
 import domain.Cartracker;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
+import domain.Kilometertarief;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,9 @@ import javax.transaction.UserTransaction;
 @Stateless
 public class DatabaseManager implements IDataDistributer {
 
+    //HIER MOETEN WE ECHT WAT AAN DOEN! CENTRALE DB ERGENS?
     @PersistenceContext(unitName = "com.kaydegroot_Rekeningadministratie_war_1.0PU")
+    
     private EntityManager em;
 
     public DatabaseManager() {
@@ -98,7 +101,38 @@ public class DatabaseManager implements IDataDistributer {
     public List<Auto> getAutos(int i) {
         Query query = em.createQuery("SELECT c FROM Auto c WHERE c.id = " + i);
         List<Auto> autos = query.getResultList();
-        return autos;
+        return autos;    }
+
+    @Override
+    public List<Kilometertarief> getAlleKilometerTarieven() {
+        Query query = em.createQuery("SELECT * FROM Kilometertarief");
+        List<Kilometertarief> tarieven = query.getResultList();
+        return tarieven;  
+        }
+
+    @Override
+    public Kilometertarief getKilometerTarief(int id) {
+        Query query = em.createQuery("SELECT c FROM Kilometertarief c WHERE c.id = " + id);
+        List<Kilometertarief> tarieven = query.getResultList();
+        if (tarieven.size() >0){
+            return tarieven.get(0);
+        }else{
+            return null;
+        }  }
+
+    @Override
+    public void addKilometerTarief(Kilometertarief kt) {
+        em.persist(kt);
+    }
+
+    @Override
+    public void editKilometerTarief(Kilometertarief kt) {
+        em.merge(kt);
+    }       
+
+    @Override
+    public void deleteKilometerTarief(int id) {
+        em.remove(id);
     }
 
 }

@@ -9,6 +9,7 @@ import domain.Auto;
 import domain.Cartracker;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
+import domain.Kilometertarief;
 import java.util.List;
 
 /**
@@ -35,4 +36,14 @@ public interface IDataDistributer {
     public Cartracker findCartrakerWithId(int nummer);
 
     public List<Auto> getAutos(int i);
+    
+    public List<Kilometertarief> getAlleKilometerTarieven();
+    
+    public Kilometertarief getKilometerTarief(int id);
+    
+    public void addKilometerTarief(Kilometertarief kt);
+    
+    public void editKilometerTarief(Kilometertarief kt);
+    
+    public void deleteKilometerTarief(int id);
 }

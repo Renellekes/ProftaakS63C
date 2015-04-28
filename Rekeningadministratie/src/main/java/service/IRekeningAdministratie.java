@@ -40,12 +40,6 @@ public interface IRekeningAdministratie {
 
     public void connectDatsbase(DatabaseManager db);
 
-    public void addKilometertarief(Kilometertarief kilometertarief);
-
-    public void modifyKilometertarief(int ID, Kilometertarief kilometertarief);
-
-    public void removeKilometertarief(int ID);
-
     public void AutomaticFactuur();
 
     public void addFactuur(Factuur factuur);
@@ -71,5 +65,13 @@ public interface IRekeningAdministratie {
 
     public List<Auto> getAutos(int i);
 
+    public List<Kilometertarief> getAlleKilometerTarieven();
     
+    public Kilometertarief getKilometerTarief(int id);
+    
+    public void addKilometerTarief(Kilometertarief kt);
+    
+    public void editKilometerTarief(Kilometertarief kt);
+    
+    public void deleteKilometerTarief(int id);
 }
