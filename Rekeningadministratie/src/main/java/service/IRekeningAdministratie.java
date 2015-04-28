@@ -34,7 +34,7 @@ public interface IRekeningAdministratie {
 
     public void addCartraker(Cartracker cartracker) ;
 
-    public void modifyCartraker(int ID, Cartracker cartracker);
+    public void modifyCartraker(Cartracker cartracker);
 
     public void removeCartraker(int ID);
 

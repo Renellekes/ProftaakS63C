@@ -16,6 +16,8 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import static javax.ws.rs.HttpMethod.POST;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -41,9 +43,9 @@ public class restRekeningAdministratie {
     
     
     @PUT
-    @Path("addFactuurOnderdeel/{factuurOnderdeel}")
+    @Path("addFactuurOnderdeel")
     @Consumes({"application/xml", "application/json"})
-    public Boolean addFactuurOnderdeel(@PathParam("factuuronderdeel") FactuurOnderdeel factuurOnderdeel) {
+    public Boolean addFactuurOnderdeel(FactuurOnderdeel factuurOnderdeel) {
         //Tweet t = new Tweet
         try {
             this.ira.addFactuurOnderdeel(factuurOnderdeel);
@@ -54,10 +56,10 @@ public class restRekeningAdministratie {
         }
     }
     
-    @PUT
-    @Path("addCartraker/{cartraker}")
+    @POST
+    @Path("addCartraker")
     @Consumes({"application/xml", "application/json"})
-    public Boolean addCartraker(@PathParam("cartraker") Cartracker cartracker) {
+    public Boolean addCartraker(Cartracker cartracker) {
         //Tweet t = new Tweet
         try {
             this.ira.addCartraker(cartracker);
@@ -69,11 +71,11 @@ public class restRekeningAdministratie {
     }
     
     @PUT
-    @Path("modifyCartraker/{cartraker}/{id}")
+    @Path("modifyCartraker")
     @Consumes({"application/xml", "application/json"})
-    public Boolean modifyCartraker(@PathParam("cartraker") Cartracker cartracker,@PathParam("id") int nummer) {
+    public Boolean modifyCartraker(Cartracker cartracker) {
         try {
-            this.ira.modifyCartraker(nummer,cartracker);
+            this.ira.modifyCartraker(cartracker);
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
