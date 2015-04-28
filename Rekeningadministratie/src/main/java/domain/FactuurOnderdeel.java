@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,8 +59,10 @@ public class FactuurOnderdeel {
         this.setMonth();
     }
 
-    private void setMonth() {
-        switch (this.eindTijd.getMonth()) {
+    public void setMonth() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.eindTijd);
+        switch (cal.get(Calendar.MONTH)) {
             case 0:
                 maand = "januari";
                 break;

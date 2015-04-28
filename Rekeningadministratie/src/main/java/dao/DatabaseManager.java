@@ -46,8 +46,11 @@ public class DatabaseManager implements IDataDistributer {
     @Override
     public List<FactuurOnderdeel> findOnderdelenForMonth(String Maand) {
         Query query = em.createQuery("SELECT c FROM FactuurOnderdeel c WHERE c.MAAND = " + Maand);
-        List<Factuur> facturen =query.getResultList();
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<FactuurOnderdeel> facturen =query.getResultList();
+        for(FactuurOnderdeel fo:facturen){
+            fo.setMonth();
+        }
+        return facturen;
     }
 
     @Override
