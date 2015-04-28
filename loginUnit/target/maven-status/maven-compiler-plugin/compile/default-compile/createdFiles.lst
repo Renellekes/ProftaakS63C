@@ -1,0 +1,6 @@
+dao\DataBase.class
+service\LogonResource.class
+dao\LogonDAOCollectionImpl.class
+service\ApplicationConfig.class
+service\LogonService.class
+dao\LogonDAO.class
