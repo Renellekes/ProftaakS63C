@@ -25,6 +25,5 @@ public class ApplicationConfig extends Application{
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(boundary.rest.RestResponseFilter.class);
-        resources.add(boundary.rest.restRekeningAdministratie.class);
     }
 }

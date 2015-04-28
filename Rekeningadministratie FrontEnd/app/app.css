@@ -1,0 +1,135 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+  float: right;
+  margin-right: 150px;
+  overflow: hidden;
+}
+#menu2 {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+  float: right;
+  margin-right: 50px;
+  overflow: hidden;
+}
+#leftmenu {
+    float: left;
+    margin-left: 50px;
+}
+#rightmenu {
+    float: right;
+    margin-right: 50px;
+}
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+body {
+	background: rgb(138,138,138);
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+        padding: 0;
+}
+#header {
+        margin: 0;
+        height: 100px;
+	padding: 0;
+	width: 100%;
+        border-bottom: 5px solid rgb(255,95,17);
+        background: rgb(231,232,234);
+}
+#header a{
+        float: right;
+        margin-right: 800px;
+}
+#header h1{
+        margin-left: 400px;
+}
+#tabel {
+        margin-left: 50px;
+        margin-top: 25px;
+}
+#box {
+        background: rgb(231,232,234);
+	border: 5px solid rgb(255,95,17);
+        min-height: 100px;
+	padding: 5px 15px 15px;
+	position: relative;
+	min-width: 300px;
+        margin-bottom: 10px;
+        overflow: hidden;
+}
+#box h2{
+        margin-left: 50px;
+}
+#tweet {
+        background: rgb(231,232,234);
+	border: 2px solid rgb(255,95,17);
+        min-height: 50px;
+	padding: 5px 15px 15px;
+	position: relative;
+	min-width: 200px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        overflow: hidden;
+}
+#body
+{
+        margin-top: 20px;
+        overflow: hidden;
+}
+#bodyleft {
+        float: left;    
+        margin-left: 150px;
+        margin-top: 50px;
+        overflow: hidden;
+}
+#bodyright {
+        float: right;
+        margin-right: 150px;
+        margin-top: 50px;
+        overflow: hidden;
+}
+#bodyleft2 {
+        float: left;    
+        margin-left: 50px;
+        margin-top: 50px;
+        overflow: hidden;
+}
+#bodyright2 {
+        float: right;
+        margin-right: 0px;
+        margin-top: 50px;
+        overflow: hidden;
+}
+#following td {
+        border: 1px solid rgb(255,95,17);
+}
+#pagina {
+    width: 100%;
+    overflow: hidden;
+}
