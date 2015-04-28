@@ -47,7 +47,7 @@ public class FactuurOnderdeel {
     private double bedrag;
 
     public FactuurOnderdeel() {
-        this.setMonth();
+//        this.setMonth();
     }
 
     public FactuurOnderdeel(int CartrakerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
@@ -56,7 +56,7 @@ public class FactuurOnderdeel {
         this.beginTijd = beginTijd;
         this.eindTijd = eindTijd;
         this.aantalKilometers = aantalKilometers;
-        this.setMonth();
+//        this.setMonth();
     }
 
     public void setMonth() {
