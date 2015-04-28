@@ -86,14 +86,14 @@ public class RekeningAdministratie implements IRekeningAdministratie {
     }
 
     @Override
-    public void modifyCartraker(int ID, Cartracker cartracker) {
-        List<Cartracker> cartrackers = database.findAllCartraker();
-        for (Cartracker c : cartrackers) {
-            if (c.getId() == ID) {
-                database.mergeCartraker(cartracker);
-            }
-        }
-
+    public void modifyCartraker(Cartracker cartracker) {
+//        List<Cartracker> cartrackers = database.findAllCartraker();
+//        for (Cartracker c : cartrackers) {
+//            if (c.getId() == ID) {
+//                database.mergeCartraker(cartracker);
+//            }
+//        }
+        database.mergeCartraker(cartracker);
     }
 
     @Override

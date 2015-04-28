@@ -6,15 +6,15 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-04-28T16:07:26")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-04-28T17:34:53")
 @StaticMetamodel(Factuur.class)
 public class Factuur_ { 
 
-    public static volatile SingularAttribute<Factuur, FactuurOnderdeel> factuuronderdelen;
-    public static volatile SingularAttribute<Factuur, Double> totaalBedrag;
-    public static volatile SingularAttribute<Factuur, String> betaalStatus;
     public static volatile SingularAttribute<Factuur, Cartracker> cartraker;
+    public static volatile SingularAttribute<Factuur, String> betaalStatus;
     public static volatile SingularAttribute<Factuur, Integer> nummer;
+    public static volatile SingularAttribute<Factuur, Double> totaalBedrag;
     public static volatile SingularAttribute<Factuur, String> maand;
+    public static volatile SingularAttribute<Factuur, FactuurOnderdeel> factuuronderdelen;
 
 }

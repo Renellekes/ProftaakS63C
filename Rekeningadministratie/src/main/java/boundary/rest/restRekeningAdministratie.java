@@ -19,6 +19,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import service.IRekeningAdministratie;
 
 /**
@@ -41,10 +42,9 @@ public class restRekeningAdministratie {
     
     
     @PUT
-    @Path("addFactuurOnderdeel/{factuurOnderdeel}")
+    @Path("addFactuurOnderdeel")
     @Consumes({"application/xml", "application/json"})
-    public Boolean addFactuurOnderdeel(@PathParam("factuuronderdeel") FactuurOnderdeel factuurOnderdeel) {
-        //Tweet t = new Tweet
+    public Boolean addFactuurOnderdeel(FactuurOnderdeel factuurOnderdeel) {
         try {
             this.ira.addFactuurOnderdeel(factuurOnderdeel);
             return true;
@@ -55,10 +55,9 @@ public class restRekeningAdministratie {
     }
     
     @PUT
-    @Path("addCartraker/{cartraker}")
+    @Path("addCartraker")
     @Consumes({"application/xml", "application/json"})
-    public Boolean addCartraker(@PathParam("cartraker") Cartracker cartracker) {
-        //Tweet t = new Tweet
+    public Boolean addCartraker(Cartracker cartracker) {
         try {
             this.ira.addCartraker(cartracker);
             return true;
@@ -69,11 +68,11 @@ public class restRekeningAdministratie {
     }
     
     @PUT
-    @Path("modifyCartraker/{cartraker}/{id}")
+    @Path("modifyCartraker")
     @Consumes({"application/xml", "application/json"})
-    public Boolean modifyCartraker(@PathParam("cartraker") Cartracker cartracker,@PathParam("id") int nummer) {
+    public Boolean modifyCartraker(Cartracker cartracker) {
         try {
-            this.ira.modifyCartraker(nummer,cartracker);
+            this.ira.modifyCartraker(cartracker);
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -81,29 +80,31 @@ public class restRekeningAdministratie {
         }
     }
     
-    @PUT
-    @Path("WijzigingBetaalStatus/{status}{id}")
-    @Consumes({"application/xml", "application/json"})
-    public Boolean WijzigingBetaalStatus(@PathParam("status") String status,@PathParam("id") int nummer) {
-        //Tweet t = new Tweet
-        try {
-            this.ira.changeStatusFactuur(status, nummer);
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
+//    @PUT
+//    @Path("WijzigingBetaalStatus/{status}{id}")
+//    @Consumes({"application/xml", "application/json"})
+//    public Boolean WijzigingBetaalStatus(@PathParam("status") String status,@PathParam("id") int nummer) {
+//        //Tweet t = new Tweet
+//        try {
+//            this.ira.changeStatusFactuur(status, nummer);
+//            return true;
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            return false;
+//        }
+//    }
     
     @GET
     @Path("KilometerTarieven/All")
+    @Produces("application/xml,application/json")
     public List<Kilometertarief> getAlleKilometerTarieven(){
-        List<Kilometertarief> tarieven = ira.getAlleKilometerTarieven();
-        return tarieven;
+        ira.addKilometerTarief(new Kilometertarief("testregio", "Stads", 45.2));
+        return ira.getAlleKilometerTarieven();
     }
     
     @GET
     @Path("KilometerTarieven/{id}")
+    @Produces("application/xml,application/json")
     public Kilometertarief getKilometerTarief(@PathParam("id") int id){
         Kilometertarief tarief = ira.getKilometerTarief(id);
         return tarief;
