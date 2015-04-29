@@ -10,7 +10,7 @@ rekadmin.config(['$routeProvider', function ($routeProvider) {
     }]);
 
 rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
-    $scope.cars = [];
+$scope.cars = [];
     $scope.init = function ()
     {
         $scope.cars = Cartraker.query();
@@ -20,8 +20,19 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
 
     $scope.submit = function () {
         if ($scope.kenteken) {
-            $scope.list.push(this.kenteken);
+            var data = {
+                kenteken: $scope.kenteken,
+                voertuig: $scope.voertuig,
+                eerstekleur: $scope.eerstekleur,
+                aantalzitplaatsen:$scope.aantalzitplaatsen
+            }
+            var res = $http.post('http://localhost:24707/Rekeningadministratie/api/RekAdmin/addCartraker',data);
+            $scope.list.push(this.kenteken+$scope.kenteken+$scope.voertuig+$scope.eerstekleur+$scope.aantalzitplaatsen);
             $scope.kenteken = '';
+            $scope.voertuig= '';
+            $scope.eerstekleur= '';
+            $scope.aantalzitplaatsen= '';
+            
         }
     };
 });

@@ -9,6 +9,19 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', [function() {
-
-}]);
+.controller('View2Ctrl', function($scope, Cartraker, $http) {
+    $scope.facturen = [];
+    $scope.list = [];
+    
+    $scope.init = function ()
+    {
+        $scope.cars = Cartraker.getFactuurs();
+    }
+    
+    $scope.submit = function () {
+        if ($scope.Status) {
+            $scope.list.push(this.Status);
+            $scope.Status = '';
+        }
+    };
+});
