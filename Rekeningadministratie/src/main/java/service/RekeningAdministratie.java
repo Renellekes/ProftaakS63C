@@ -211,4 +211,9 @@ public class RekeningAdministratie implements IRekeningAdministratie {
     public void deleteKilometerTarief(int id) {
         database.deleteKilometerTarief(id);
     }
+
+    @Override
+    public List<Factuur> getAlleFacturen(int i) {
+         return database.getAlleFacturen(i);
+    }
 }

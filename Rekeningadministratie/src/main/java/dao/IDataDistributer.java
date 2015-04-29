@@ -46,4 +46,6 @@ public interface IDataDistributer {
     public void editKilometerTarief(Kilometertarief kt);
     
     public void deleteKilometerTarief(int id);
+
+    public List<Factuur> getAlleFacturen(int id);
 }

@@ -7,6 +7,7 @@ package boundary.rest;
 
 import domain.Auto;
 import domain.Cartracker;
+import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
 import java.util.List;
@@ -39,6 +40,13 @@ public class restRekeningAdministratie {
     public List<Auto> getAllCars(){
         List<Auto> autos = ira.getAutos(0);
         return autos;
+    }
+    
+    @GET
+    @Path("getAllFactuur")
+    public List<Factuur> getAllFactuur(){
+        List<Factuur> factuur = ira.getAlleFacturen(0);
+        return factuur;
     }
     
     
