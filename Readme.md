@@ -1,0 +1,2 @@
+Denk er bij alle frontend projecten aan dat de node_modules map niet mee gesynchroniseerd word.
+Deze dien je zelf aan te maken via npm install (Hiervoor moet je en Node.js geinstalleerd hebben en bower)

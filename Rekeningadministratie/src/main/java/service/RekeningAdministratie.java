@@ -214,6 +214,6 @@ public class RekeningAdministratie implements IRekeningAdministratie {
 
     @Override
     public List<Factuur> getAlleFacturen(int i) {
-         return database.getAlleFacturen(i);
+        return database.getAlleFacturen(i);
     }
 }
