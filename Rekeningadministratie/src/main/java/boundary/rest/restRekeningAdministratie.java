@@ -7,6 +7,7 @@ package boundary.rest;
 
 import domain.Auto;
 import domain.Cartracker;
+import domain.Eigenaar;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
@@ -66,11 +67,13 @@ public class restRekeningAdministratie {
     
     @POST
     @Path("addCartraker")
-    @Consumes({"application/xml", "application/json"})
-    public Boolean addCartraker(Cartracker cartracker) {
-        //Tweet t = new Tweet
+    @Consumes({"application/json"})
+    public Boolean addCartraker(Auto auto) {
+        Auto nieuweAuto =auto;
+        System.out.println("testing van dit" + nieuweAuto.getKenteken());
         try {
-            this.ira.addCartraker(cartracker);
+            
+//            this.ira.addAuto(nieuweAuto);
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());

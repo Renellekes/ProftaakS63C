@@ -48,4 +48,6 @@ public interface IDataDistributer {
     public void deleteKilometerTarief(int id);
 
     public List<Factuur> getAlleFacturen(int id);
+
+    public void addAuto(Auto nieuweAuto);
 }

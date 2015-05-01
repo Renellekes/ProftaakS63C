@@ -145,4 +145,9 @@ public class DatabaseManager implements IDataDistributer {
         return factuurs;
     }
 
+    @Override
+    public void addAuto(Auto nieuweAuto) {
+        em.persist(nieuweAuto);
+    }
+
 }

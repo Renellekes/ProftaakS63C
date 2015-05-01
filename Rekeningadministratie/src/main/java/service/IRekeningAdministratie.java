@@ -76,4 +76,6 @@ public interface IRekeningAdministratie {
     public void deleteKilometerTarief(int id);
 
     public List<Factuur> getAlleFacturen(int i);
+
+    public void addAuto(Auto nieuweAuto);
 }

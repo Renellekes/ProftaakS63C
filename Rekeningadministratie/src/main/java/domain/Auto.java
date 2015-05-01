@@ -22,12 +22,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Auto")
 public class Auto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
     private String kenteken;
-    @JoinColumn(name = "eigenaarID",referencedColumnName = "id")
+    @JoinColumn(name = "eigenaarID", referencedColumnName = "id")
     private Eigenaar eigenaar;
     @Column
     private File fileInfo;
@@ -55,6 +56,13 @@ public class Auto {
         this.eersteKleur = eersteKleur;
         this.zitplaatsen = zitplaatsen;
     }
-    
-    
+
+    public void setEigenaar(Eigenaar eigenaar) {
+        this.eigenaar = eigenaar;
+    }
+
+    public String getKenteken() {
+        return this.kenteken;
+    }
+
 }

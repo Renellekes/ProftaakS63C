@@ -216,4 +216,9 @@ public class RekeningAdministratie implements IRekeningAdministratie {
     public List<Factuur> getAlleFacturen(int i) {
         return database.getAlleFacturen(i);
     }
+
+    @Override
+    public void addAuto(Auto nieuweAuto) {
+        database.addAuto(nieuweAuto);
+    }
 }
