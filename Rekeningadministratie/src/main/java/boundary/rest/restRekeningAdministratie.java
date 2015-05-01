@@ -7,18 +7,20 @@ package boundary.rest;
 
 import domain.Auto;
 import domain.Cartracker;
-import domain.Eigenaar;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
 import java.util.List;
-import javax.annotation.security.RolesAllowed;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import static javax.ws.rs.HttpMethod.POST;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -30,11 +32,11 @@ import service.IRekeningAdministratie;
  * @author kay de groot
  */
 @Path("RekAdmin")
-@Stateless
 public class restRekeningAdministratie {
+    IRekeningAdministratie ira = lookupRekeningAdministratieLocal();
     
-    @Inject
-    private IRekeningAdministratie ira;
+//    @Inject
+//    private IRekeningAdministratie ira;
     
     @GET
     @Path("getAllCars")
@@ -70,7 +72,7 @@ public class restRekeningAdministratie {
     @Consumes({"application/json"})
     public Boolean addCartraker(Auto auto) {
         Auto nieuweAuto =auto;
-        System.out.println("testing van dit" + nieuweAuto.getKenteken());
+        System.out.println("testing van dit " + auto);
         try {
             
 //            this.ira.addAuto(nieuweAuto);
@@ -157,6 +159,16 @@ public class restRekeningAdministratie {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
+        }
+    }
+
+    private IRekeningAdministratie lookupRekeningAdministratieLocal() {
+        try {
+            Context c = new InitialContext();
+            return (IRekeningAdministratie) c.lookup("java:global/Rekeningadministratie/RekeningAdministratie!service.IRekeningAdministratie");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
         }
     }
 }

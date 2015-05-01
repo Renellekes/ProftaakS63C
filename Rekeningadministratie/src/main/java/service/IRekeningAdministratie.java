@@ -17,11 +17,13 @@ import domain.Medewerker;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.Remote;
 
 /**
  *
  * @author kay de groot
  */
+@Remote
 public interface IRekeningAdministratie {
     
     public void RekeningAdministratieInit();

@@ -49,6 +49,15 @@ public class Auto {
         this.eigenaar = eigenaar;
     }
 
+    public Auto(String kenteken, String voertuig, String eersteKleur, int zitplaatsen) {
+        this.kenteken = kenteken;
+        this.voertuig = voertuig;
+        this.eersteKleur = eersteKleur;
+        this.zitplaatsen = zitplaatsen;
+    }
+
+    
+    
     public Auto(String kenteken, Eigenaar eigenaar, String voertuig, String eersteKleur, int zitplaatsen) {
         this.kenteken = kenteken;
         this.eigenaar = eigenaar;
@@ -57,12 +66,75 @@ public class Auto {
         this.zitplaatsen = zitplaatsen;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getKenteken() {
+        return kenteken;
+    }
+
+    public void setKenteken(String kenteken) {
+        this.kenteken = kenteken;
+    }
+
+    public Eigenaar getEigenaar() {
+        return eigenaar;
+    }
+
     public void setEigenaar(Eigenaar eigenaar) {
         this.eigenaar = eigenaar;
     }
 
-    public String getKenteken() {
-        return this.kenteken;
+    public File getFileInfo() {
+        return fileInfo;
+    }
+
+    public void setFileInfo(File fileInfo) {
+        this.fileInfo = fileInfo;
+    }
+
+    public boolean isGestolen() {
+        return gestolen;
+    }
+
+    public void setGestolen(boolean gestolen) {
+        this.gestolen = gestolen;
+    }
+
+    public String getVoertuig() {
+        return voertuig;
+    }
+
+    public void setVoertuig(String voertuig) {
+        this.voertuig = voertuig;
+    }
+
+    public String getEersteKleur() {
+        return eersteKleur;
+    }
+
+    public void setEersteKleur(String eersteKleur) {
+        this.eersteKleur = eersteKleur;
+    }
+
+    public int getZitplaatsen() {
+        return zitplaatsen;
+    }
+
+    public void setZitplaatsen(int zitplaatsen) {
+        this.zitplaatsen = zitplaatsen;
+    }
+
+    
+    
+    @Override
+    public String toString() {
+        return "Auto{" + "id=" + id + ", kenteken=" + kenteken + ", eigenaar=" + eigenaar + ", fileInfo=" + fileInfo + ", gestolen=" + gestolen + ", voertuig=" + voertuig + ", eersteKleur=" + eersteKleur + ", zitplaatsen=" + zitplaatsen + '}';
     }
 
 }
