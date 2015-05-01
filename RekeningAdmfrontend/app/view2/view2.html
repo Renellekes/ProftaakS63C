@@ -1,7 +1,7 @@
 <div ng-app="view1" ng-controller="View2Ctrl" ng-init="init()">
     <p>Create or modify cartracker</p>
     <div class="border1">
-        <p ng-repeat="factuur in facturen">Factuur voor {{factuur.maand}}</p>
+        <p ng-repeat="factuur in facturen" ng-click="onClickRepeat(factuur.maand)">Factuur voor {{factuur.maand}}</p>
     </div>
     <div class="border2">
         <p style="margin: 5%">Nieuwe Cartraker toevoegen</p>
@@ -11,6 +11,5 @@
             <button  type="submit" id="submit" value="Submit">Auto toevoegen</button>
             <pre>list={{list}}</pre>
         </form> 
-         
     </div>
 </div>

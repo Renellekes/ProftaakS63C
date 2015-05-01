@@ -12,16 +12,22 @@ angular.module('myApp.view2', ['ngRoute'])
 .controller('View2Ctrl', function($scope, Cartraker, $http) {
     $scope.facturen = [];
     $scope.list = [];
-    
+    $scope.tekst = "Geen uitgekozen";
     $scope.init = function ()
     {
         $scope.cars = Cartraker.getFactuurs();
     }
     
     $scope.submit = function () {
-        if ($scope.Status) {
+        if ($scope.Status && $scope.tekst !="Geen uitgekozen" ) {
             $scope.list.push(this.Status);
             $scope.Status = '';
+        }else{
+            $scope.tekst = "foute waarde";
         }
     };
+    
+    $scope.onClickRepeat = function(klickWaarde){
+        $scope.tekst = klickWaarde;
+    }
 });
