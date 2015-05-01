@@ -5,10 +5,14 @@
  */
 package boundary.rest;
 
+import com.google.gson.Gson;
 import domain.Auto;
 import domain.Cartracker;
+import domain.Eigenaar;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
+import domain.RestTest;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -37,7 +41,8 @@ public class restRekeningAdministratie {
     
     @GET
     @Path("getAllCars")
-    public List<Auto> getAllCars(){
+    @Produces("application/xml,application/json")
+    public List<Auto> getAllCars(){        
         List<Auto> autos = ira.getAutos(0);
         return autos;
     }
@@ -54,6 +59,13 @@ public class restRekeningAdministratie {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+    
+    @GET
+    @Path("/")
+    @Produces("application/json")
+    public RestTest findAll() {
+        return new RestTest("a","b","c","d");
     }
     
     @POST
@@ -98,10 +110,16 @@ public class restRekeningAdministratie {
     
     @GET
     @Path("KilometerTarieven/All")
-    @Produces("application/xml,application/json")
+    @Produces("application/json")
     public List<Kilometertarief> getAlleKilometerTarieven(){
-        ira.addKilometerTarief(new Kilometertarief("testregio", "Stads", 45.2));
-        return ira.getAlleKilometerTarieven();
+        ira.addKilometerTarief(new Kilometertarief("testregio", "Stads", 452));
+        List<Kilometertarief> tarieven =  ira.getAlleKilometerTarieven();
+        System.out.println(tarieven.size());
+        for (Kilometertarief kt : tarieven){
+            System.out.println("Bedrag: " + kt.getBedrag());
+            System.out.println("Tariefcategorie: " + kt.getTariefCategorie());
+        }
+        return tarieven;
     }
     
     @GET

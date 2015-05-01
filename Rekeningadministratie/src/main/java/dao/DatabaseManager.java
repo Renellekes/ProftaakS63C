@@ -10,6 +10,7 @@ import domain.Cartracker;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -109,7 +110,7 @@ public class DatabaseManager implements IDataDistributer {
     @Override
     public List<Kilometertarief> getAlleKilometerTarieven() {
         Query query = em.createQuery("SELECT c FROM Kilometertarief c");
-        List<Kilometertarief> tarieven = query.getResultList();
+        List<Kilometertarief> tarieven = new ArrayList(query.getResultList());
         return tarieven;  
         }
 
