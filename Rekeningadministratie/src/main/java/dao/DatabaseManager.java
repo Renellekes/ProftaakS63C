@@ -139,4 +139,16 @@ public class DatabaseManager implements IDataDistributer {
         em.remove(id);
     }
 
+    @Override
+    public List<Factuur> getAlleFacturen(int id) {
+        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + id);
+        List<Factuur> factuurs = query.getResultList();
+        return factuurs;
+    }
+
+    @Override
+    public void addAuto(Auto nieuweAuto) {
+        em.persist(nieuweAuto);
+    }
+
 }

@@ -18,11 +18,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.Remote;
 
 /**
  *
  * @author kay de groot
  */
+@Remote
 public interface IRekeningAdministratie {
     
     public void RekeningAdministratieInit();
@@ -75,4 +77,8 @@ public interface IRekeningAdministratie {
     public void editKilometerTarief(Kilometertarief kt);
     
     public void deleteKilometerTarief(int id);
+
+    public List<Factuur> getAlleFacturen(int i);
+
+    public void addAuto(Auto nieuweAuto);
 }

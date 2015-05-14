@@ -5,6 +5,6 @@ restservice.factory('Cartraker', ['$resource', function ($resource) {
         null, 
         {
             'query': {method: 'GET', isArray: true, url: 'getAllCars'},
-            'create':{method:'put',params:''}
+            'getFactuurs':{method: 'GET', isArray: true, url: 'getAllFactuur'}
         });
     }]);

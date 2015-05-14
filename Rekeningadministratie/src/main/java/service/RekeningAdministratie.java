@@ -87,13 +87,13 @@ public class RekeningAdministratie implements IRekeningAdministratie {
 
     @Override
     public void modifyCartraker(Cartracker cartracker) {
-//        List<Cartracker> cartrackers = database.findAllCartraker();
-//        for (Cartracker c : cartrackers) {
-//            if (c.getId() == ID) {
-//                database.mergeCartraker(cartracker);
-//            }
-//        }
-        database.mergeCartraker(cartracker);
+        List<Cartracker> cartrackers = database.findAllCartraker();
+        for (Cartracker c : cartrackers) {
+            if (c.getId() == cartracker.getId()) {
+                database.mergeCartraker(cartracker);
+            }
+        }
+
     }
 
     @Override
@@ -210,5 +210,15 @@ public class RekeningAdministratie implements IRekeningAdministratie {
     @Override
     public void deleteKilometerTarief(int id) {
         database.deleteKilometerTarief(id);
+    }
+
+    @Override
+    public List<Factuur> getAlleFacturen(int i) {
+        return database.getAlleFacturen(i);
+    }
+
+    @Override
+    public void addAuto(Auto nieuweAuto) {
+        database.addAuto(nieuweAuto);
     }
 }
