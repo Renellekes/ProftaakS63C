@@ -1,6 +1,6 @@
 'use strict';
 
-var rekadmin = angular.module('myApp.view1', ['ngRoute'])
+var rekadmin = angular.module('myApp.view1', ['ngRoute']);
 
 rekadmin.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/view1', {
@@ -14,7 +14,7 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
     $scope.init = function ()
     {
         $scope.cars = Cartraker.query();
-    }
+    };
 
     $scope.list = [];
 
@@ -25,7 +25,7 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
                 voertuig: $scope.voertuig,
                 eerstekleur: $scope.eerstekleur,
                 zitplaatsen: $scope.aantalzitplaatsen
-            }
+            };
             var res = $http.post('http://localhost:24707/Rekeningadministratie/api/RekAdmin/addCartraker', Auto);
             res.success(function (data, status, headers, config) {
                 $scope.cars = Cartraker.query();
