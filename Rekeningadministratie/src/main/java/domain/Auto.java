@@ -6,6 +6,7 @@
 package domain;
 
 import java.io.File;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Auto")
-public class Auto {
+public class Auto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

@@ -5,13 +5,14 @@
  */
 package domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author kay de groot
  */
-public class Medewerker {
+public class Medewerker implements Serializable {
     private int id;
     private String naam;
     private String email;

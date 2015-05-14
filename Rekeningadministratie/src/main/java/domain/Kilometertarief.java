@@ -5,7 +5,7 @@
  */
 package domain;
 
-import java.util.Date;
+import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @Stateless
 @Entity
 @Table(name = "Kilometertarief")
-public class Kilometertarief {
+public class Kilometertarief implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
