@@ -11,7 +11,6 @@ import domain.Cartracker;
 import domain.Eigenaar;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
-import domain.RestTest;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
@@ -61,13 +60,6 @@ public class restRekeningAdministratie {
         }
     }
     
-    @GET
-    @Path("/")
-    @Produces("application/json")
-    public RestTest findAll() {
-        return new RestTest("a","b","c","d");
-    }
-    
     @POST
     @Path("addCartraker")
     @Consumes({"application/xml", "application/json"})
@@ -111,7 +103,7 @@ public class restRekeningAdministratie {
     @GET
     @Path("KilometerTarieven/All")
     @Produces("application/json")
-    public List<Kilometertarief> getAlleKilometerTarieven(){
+    public String getAlleKilometerTarieven(){
         ira.addKilometerTarief(new Kilometertarief("testregio", "Stads", 452));
         List<Kilometertarief> tarieven =  ira.getAlleKilometerTarieven();
         System.out.println(tarieven.size());
@@ -119,7 +111,7 @@ public class restRekeningAdministratie {
             System.out.println("Bedrag: " + kt.getBedrag());
             System.out.println("Tariefcategorie: " + kt.getTariefCategorie());
         }
-        return tarieven;
+        return new Gson().toJson(tarieven);
     }
     
     @GET
