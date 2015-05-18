@@ -5,7 +5,8 @@
  */
 package domain;
 
-import java.util.Date;
+import java.io.Serializable;
+import javax.ejb.Stateless;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,9 +18,11 @@ import javax.persistence.Table;
  *
  * @author kay de groot
  */
+@Stateless
 @Entity
 @Table(name = "Kilometertarief")
-public class Kilometertarief {
+public class Kilometertarief implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -28,12 +31,13 @@ public class Kilometertarief {
     @Column
     private String tariefCategorie;
     @Column
-    private double bedrag;
+    private int bedrag;
+    
 
     public Kilometertarief() {
     }
 
-    public Kilometertarief( String regio, String tariefCategorie, double bedrag) {
+    public Kilometertarief( String regio, String tariefCategorie, int bedrag) {
         this.regio = regio;
         this.tariefCategorie = tariefCategorie;
         this.bedrag = bedrag;
@@ -43,7 +47,7 @@ public class Kilometertarief {
         return tariefCategorie;
     }
 
-    public double getBedrag() {
+    public int getBedrag() {
         return bedrag;
     }
     

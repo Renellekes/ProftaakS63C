@@ -12,6 +12,7 @@ import domain.Eigenaar;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -137,9 +138,16 @@ public class restRekeningAdministratie {
 
     @GET
     @Path("KilometerTarieven/All")
-    public List<Kilometertarief> getAlleKilometerTarieven() {
-        List<Kilometertarief> tarieven = ira.getAlleKilometerTarieven();
-        return tarieven;
+    @Produces("application/json")
+    public String getAlleKilometerTarieven(){
+        ira.addKilometerTarief(new Kilometertarief("testregio", "Stads", 452));
+        List<Kilometertarief> tarieven =  ira.getAlleKilometerTarieven();
+        System.out.println(tarieven.size());
+        for (Kilometertarief kt : tarieven){
+            System.out.println("Bedrag: " + kt.getBedrag());
+            System.out.println("Tariefcategorie: " + kt.getTariefCategorie());
+        }
+        return new Gson().toJson(tarieven);
     }
 
     @GET

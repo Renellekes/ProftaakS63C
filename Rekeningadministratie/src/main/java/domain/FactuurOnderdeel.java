@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import static javax.persistence.TemporalType.DATE;
  */
 @Entity
 @Table(name = "FactuurOnderdeel")
-public class FactuurOnderdeel {
+public class FactuurOnderdeel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

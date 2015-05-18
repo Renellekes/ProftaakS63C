@@ -1,0 +1,20 @@
+<div ng-app="KilometerTariefView" ng-controller="KilometerTariefCtrl" ng-init="init()">
+    <p>Hier kende spele met kilometertarieven</p>
+    <div class="border1">
+        <p ng-repeat="tarief in kilometerTarieven">{{tarief.regio}} || {{tarief.tariefCategorie}} || {{tarief.bedrag}}</p>
+    </div>
+    <div class="border2">
+        <p style="margin: 5%">Nieuwe kilometertarief toevoegen</p>
+        <form style="margin: 5%" ng-submit="voegKilometerTariefToe()">
+            regio:<br>
+            <input type="text" name="regio" ng-model="regio">
+            <br>
+            tarief categorie:<br>
+            <input type="text" name="tariefCategorie" ng-model="tariefCategorie"><br>
+            bedrag:<br>
+            <input type="text" name="bedrag" ng-model="bedrag"><br>
+            <button  type="submit" id="submit" value="Submit">kilometertarief toevoegen</button>
+        </form> 
+         
+    </div>
+</div>

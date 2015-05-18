@@ -34,7 +34,7 @@ public class DataInit {
         idd.addCartraker(c);
         
         c = idd.findAllCartraker().get(0);
-        Kilometertarief k = new Kilometertarief("testregio", "Stads", 45.2);
+        Kilometertarief k = new Kilometertarief("testregio", "Stads", 452);
         FactuurOnderdeel fo = new FactuurOnderdeel(c.getId(), k, new Date(), new Date(), 513);
         idd.addOnderdeel(fo);
     }
