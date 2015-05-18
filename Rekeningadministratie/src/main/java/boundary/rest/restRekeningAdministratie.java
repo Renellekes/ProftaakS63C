@@ -140,8 +140,8 @@ public class restRekeningAdministratie {
     @Path("KilometerTarieven/All")
     @Produces("application/json")
     public String getAlleKilometerTarieven(){
-        ira.addKilometerTarief(new Kilometertarief("testregio", "Stads", 452));
-        List<Kilometertarief> tarieven =  ira.getAlleKilometerTarieven();
+        ArrayList<Kilometertarief> tarieven = new ArrayList<>( ira.getAlleKilometerTarieven());
+        tarieven.add(new Kilometertarief("testregio", "Stads", 452));
         System.out.println(tarieven.size());
         for (Kilometertarief kt : tarieven){
             System.out.println("Bedrag: " + kt.getBedrag());
