@@ -13,7 +13,7 @@ restservice.factory('restService', ['$resource', function ($resource) {
         return $resource('http://localhost:24707/Rekeningadministratie/api/RekAdmin',
         null, 
         {
-            'getAlleKilometerTarieven': {method: 'GET', isArray: true, url: '/KilometerTarieven/All'},
+            'getAlleKilometerTarieven': {method: 'GET', isArray: true, url: 'KilometerTarieven/All'},
             'getKilometerTarief':{method: 'GET', isArray: true, url: '/KilometerTarieven/:id'}
         });
     }]);
