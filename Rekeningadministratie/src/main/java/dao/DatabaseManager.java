@@ -30,7 +30,7 @@ public class DatabaseManager implements IDataDistributer {
 
     //HIER MOETEN WE ECHT WAT AAN DOEN! CENTRALE DB ERGENS?
     @PersistenceContext(unitName = "com.kaydegroot_Rekeningadministratie_war_1.0PU")
-    
+
     private EntityManager em;
 
     public DatabaseManager() {
@@ -46,8 +46,8 @@ public class DatabaseManager implements IDataDistributer {
     @Override
     public List<FactuurOnderdeel> findOnderdelenForMonth(String Maand) {
         Query query = em.createQuery("SELECT c FROM FactuurOnderdeel c WHERE c.MAAND = " + Maand);
-        List<FactuurOnderdeel> facturen =query.getResultList();
-        for(FactuurOnderdeel fo:facturen){
+        List<FactuurOnderdeel> facturen = query.getResultList();
+        for (FactuurOnderdeel fo : facturen) {
             fo.setMonth();
         }
         return facturen;
@@ -71,10 +71,10 @@ public class DatabaseManager implements IDataDistributer {
     @Override
     public Factuur findFactuurWithID(int nummer) {
         Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + nummer);
-        List<Factuur> facturen =query.getResultList();
-        if (facturen.size() >0){
+        List<Factuur> facturen = query.getResultList();
+        if (facturen.size() > 0) {
             return facturen.get(0);
-        }else{
+        } else {
             return null;
         }
     }
@@ -86,42 +86,45 @@ public class DatabaseManager implements IDataDistributer {
 
     @Override
     public void addCartraker(Cartracker cartracker) {
+        System.out.println(cartracker);
         em.persist(cartracker);
     }
 
     @Override
     public Cartracker findCartrakerWithId(int nummer) {
         Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + nummer);
-        List<Cartracker> cartrackers =query.getResultList();
-        if (cartrackers.size() >0){
+        List<Cartracker> cartrackers = query.getResultList();
+        if (cartrackers.size() > 0) {
             return cartrackers.get(0);
-        }else{
+        } else {
             return null;
         }
     }
 
     @Override
     public List<Auto> getAutos(int i) {
-        Query query = em.createQuery("SELECT c FROM Auto c WHERE c.id = " + i);
+        Query query = em.createQuery("SELECT c FROM Auto c ");//"SELECT c FROM Auto c WHERE c.id = " + i
         List<Auto> autos = query.getResultList();
-        return autos;    }
+        return autos;
+    }
 
     @Override
     public List<Kilometertarief> getAlleKilometerTarieven() {
         Query query = em.createQuery("SELECT * FROM Kilometertarief");
         List<Kilometertarief> tarieven = query.getResultList();
-        return tarieven;  
-        }
+        return tarieven;
+    }
 
     @Override
     public Kilometertarief getKilometerTarief(int id) {
         Query query = em.createQuery("SELECT c FROM Kilometertarief c WHERE c.id = " + id);
         List<Kilometertarief> tarieven = query.getResultList();
-        if (tarieven.size() >0){
+        if (tarieven.size() > 0) {
             return tarieven.get(0);
-        }else{
+        } else {
             return null;
-        }  }
+        }
+    }
 
     @Override
     public void addKilometerTarief(Kilometertarief kt) {
@@ -131,7 +134,7 @@ public class DatabaseManager implements IDataDistributer {
     @Override
     public void editKilometerTarief(Kilometertarief kt) {
         em.merge(kt);
-    }       
+    }
 
     @Override
     public void deleteKilometerTarief(int id) {
@@ -148,6 +151,13 @@ public class DatabaseManager implements IDataDistributer {
     @Override
     public void addAuto(Auto nieuweAuto) {
         em.persist(nieuweAuto);
+    }
+
+    @Override
+    public List<Cartracker> getCartraker() {
+        Query query = em.createQuery("SELECT c FROM Cartraker c");
+        List<Cartracker> c = query.getResultList();
+        return c;
     }
 
 }

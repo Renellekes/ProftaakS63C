@@ -55,10 +55,25 @@ public class RekeningAdministratie implements IRekeningAdministratie {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                RekeningAdministratie.this.AutomaticFactuur();
-                cal.setTime(new Date());
-
+                List<FactuurOnderdeel> onderdelen = database.findOnderdelenForMonth(Maand[Calendar.MONTH]);
+                List<Cartracker> cs = database.findAllCartraker();
+                for (Cartracker c : cs) {
+                    Factuur factuur = new Factuur(c, 0, Maand[Calendar.MONTH]);
+                    for (FactuurOnderdeel fac : onderdelen) {
+                        if ((fac.getCartrakerID() == c.getId()) && (Maand[fac.getEindTijd().getMonth()].equals(Maand[Calendar.MONTH]))) {
+                            factuur.addFactuurOnderdelen(fac);
+                            onderdelen.remove(fac);
+                        }
+                    }
+                    if (factuur.getSizeOnderdeelList() > 0) {
+                        factuur.calculateAmount();
+                        c.addFactuur(factuur);
+                        database.mergeCartraker(c);
+                    }
+                }
                 //Dit moet worden verandert worden naar maand wanneer er niet meer hoeft te worden getest.
+                cal.clear();
+                cal.setTime(new Date());
                 cal.add(Calendar.HOUR_OF_DAY, 1);
                 timer.schedule(this, cal.getTime());
             }
@@ -80,9 +95,8 @@ public class RekeningAdministratie implements IRekeningAdministratie {
 
     @Override
     public void addCartraker(Cartracker cartracker) {
-
+        System.out.println(cartracker);
         database.addCartraker(cartracker);
-
     }
 
     @Override
@@ -111,22 +125,7 @@ public class RekeningAdministratie implements IRekeningAdministratie {
      */
     @Override
     public void AutomaticFactuur() {
-        List<FactuurOnderdeel> onderdelen = database.findOnderdelenForMonth(Maand[Calendar.MONTH]);
-        List<Cartracker> cs = database.findAllCartraker();
-        for (Cartracker c : cs) {
-            Factuur factuur = new Factuur(c, 0, Maand[Calendar.MONTH]);
-            for (FactuurOnderdeel fac : onderdelen) {
-                if ((fac.getCartrakerID() == c.getId()) && (Maand[fac.getEindTijd().getMonth()].equals(Maand[Calendar.MONTH]))) {
-                    factuur.addFactuurOnderdelen(fac);
-                    onderdelen.remove(fac);
-                }
-            }
-            if (factuur.getSizeOnderdeelList() > 0) {
-                factuur.calculateAmount();
-                c.addFactuur(factuur);
-                database.mergeCartraker(c);
-            }
-        }
+
     }
 
     @Override
@@ -220,5 +219,10 @@ public class RekeningAdministratie implements IRekeningAdministratie {
     @Override
     public void addAuto(Auto nieuweAuto) {
         database.addAuto(nieuweAuto);
+    }
+
+    @Override
+    public List<Cartracker> getCartraker() {
+        return database.getCartraker();
     }
 }

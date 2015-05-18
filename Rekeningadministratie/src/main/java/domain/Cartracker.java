@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,14 +28,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Cartracker")
 public class Cartracker {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @JoinColumn(name = "AutoID",referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Auto auto;
     @Column
     private boolean website;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private Collection<Factuur> facturen;
     private List<File> fileInfo;
 
@@ -49,9 +52,17 @@ public class Cartracker {
     public int getId() {
         return id;
     }
-    
-    public void addFactuur(Factuur factuur){
+
+    public void addFactuur(Factuur factuur) {
         this.facturen.add(factuur);
     }
-    
+
+    public Auto getAuto() {
+        return auto;
+    }
+
+    public void setAuto(Auto auto) {
+        this.auto = auto;
+    }
+
 }

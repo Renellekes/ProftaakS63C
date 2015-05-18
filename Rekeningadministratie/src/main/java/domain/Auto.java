@@ -6,6 +6,7 @@
 package domain;
 
 import java.io.File;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Auto {
     private int id;
     @Column
     private String kenteken;
-    @JoinColumn(name = "eigenaarID", referencedColumnName = "id")
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Eigenaar eigenaar;
     @Column
     private File fileInfo;

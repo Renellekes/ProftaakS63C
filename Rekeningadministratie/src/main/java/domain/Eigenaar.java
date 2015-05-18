@@ -7,6 +7,7 @@ package domain;
 
 import java.util.Collection;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Eigenaar {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.PERSIST)
     private Collection<Auto> autos;
     @Column
     private String naam;
