@@ -27,6 +27,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import service.IRekeningAdministratie;
 
 /**
@@ -37,8 +38,8 @@ import service.IRekeningAdministratie;
 public class restRekeningAdministratie {
     IRekeningAdministratie ira = lookupRekeningAdministratieLocal();
     
-//    @Inject
-//    private IRekeningAdministratie ira;
+    //@Inject
+    //private IRekeningAdministratie ira;
     
     @GET
     @Path("getAllCars")
@@ -117,8 +118,8 @@ public class restRekeningAdministratie {
     @Path("KilometerTarieven/All")
     @Produces("application/json")
     public String getAlleKilometerTarieven(){
-        ira.addKilometerTarief(new Kilometertarief("testregio", "Stads", 452));
-        List<Kilometertarief> tarieven =  ira.getAlleKilometerTarieven();
+        //ira.addKilometerTarief(new Kilometertarief("testregio", "Stads", 452));
+        List<Kilometertarief> tarieven =  new ArrayList(ira.getAlleKilometerTarieven());
         System.out.println(tarieven.size());
         for (Kilometertarief kt : tarieven){
             System.out.println("Bedrag: " + kt.getBedrag());
@@ -134,7 +135,7 @@ public class restRekeningAdministratie {
         return tarief;
     }
     
-    @PUT
+    @POST
     @Path("KilometerTarieven/add")
     @Consumes({"application/xml", "application/json"})
     public Boolean addKilometerTarief(Kilometertarief kt) {
@@ -147,7 +148,7 @@ public class restRekeningAdministratie {
         }
     }
  
-    @PUT
+    @POST
     @Path("KilometerTarieven/edit")
     @Consumes({"application/xml", "application/json"})
     public Boolean editKilometerTarief(Kilometertarief kt) {

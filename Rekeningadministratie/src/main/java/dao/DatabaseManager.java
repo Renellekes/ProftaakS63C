@@ -110,7 +110,7 @@ public class DatabaseManager implements IDataDistributer {
     @Override
     public List<Kilometertarief> getAlleKilometerTarieven() {
         Query query = em.createQuery("SELECT c FROM Kilometertarief c");
-        List<Kilometertarief> tarieven = new ArrayList(query.getResultList());
+        List<Kilometertarief> tarieven = query.getResultList();
         return tarieven;  
         }
 
