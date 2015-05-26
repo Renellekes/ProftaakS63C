@@ -1,0 +1,121 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (virtualspace.cpp:125), pid=1440, tid=5676
+#  fatal error: os::release_memory failed
+#
+# JRE version:  (7.0_75-b13) (build )
+# Java VM: Java HotSpot(TM) Client VM (24.75-b04 mixed mode windows-x86 )
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00734800):  JavaThread "Unknown thread" [_thread_in_vm, id=5676, stack(0x00620000,0x00670000)]
+
+Stack: [0x00620000,0x00670000],  sp=0x0066f3c0,  free space=316k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x191164]
+V  [jvm.dll+0x18ad96]
+V  [jvm.dll+0x166e4c]
+V  [jvm.dll+0x16733b]
+V  [jvm.dll+0x8ab86]
+V  [jvm.dll+0x88656]
+V  [jvm.dll+0x8733e]
+V  [jvm.dll+0x917f3]
+V  [jvm.dll+0x140814]
+V  [jvm.dll+0x16337c]
+V  [jvm.dll+0xca74f]
+C  [java.exe+0x13c1]
+C  [java.exe+0x1e33]
+C  [java.exe+0xa601]
+C  [java.exe+0xa68b]
+C  [kernel32.dll+0x4ee1c]
+C  [ntdll.dll+0x6399b]
+C  [ntdll.dll+0x6396e]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x00734800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=5676, stack(0x00620000,0x00670000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00cc0000 - 0x00cef000 	C:\Program Files\Java\jdk1.7.0_75\bin\java.exe
+0x76fe0000 - 0x77121000 	C:\Windows\SYSTEM32\ntdll.dll
+0x76d80000 - 0x76e54000 	C:\Windows\system32\kernel32.dll
+0x75010000 - 0x7505b000 	C:\Windows\system32\KERNELBASE.dll
+0x769a0000 - 0x76a40000 	C:\Windows\system32\ADVAPI32.dll
+0x76f30000 - 0x76fdc000 	C:\Windows\system32\msvcrt.dll
+0x76ad0000 - 0x76ae9000 	C:\Windows\SYSTEM32\sechost.dll
+0x754c0000 - 0x75562000 	C:\Windows\system32\RPCRT4.dll
+0x76e60000 - 0x76f29000 	C:\Windows\system32\USER32.dll
+0x76410000 - 0x7645e000 	C:\Windows\system32\GDI32.dll
+0x75570000 - 0x7557a000 	C:\Windows\system32\LPK.dll
+0x76b90000 - 0x76c2d000 	C:\Windows\system32\USP10.dll
+0x73ee0000 - 0x7407e000 	C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.18807_none_41e554362bd82458\COMCTL32.dll
+0x76940000 - 0x76997000 	C:\Windows\system32\SHLWAPI.dll
+0x76b70000 - 0x76b8f000 	C:\Windows\system32\IMM32.DLL
+0x76600000 - 0x766cc000 	C:\Windows\system32\MSCTF.dll
+0x68720000 - 0x687df000 	C:\Program Files\Java\jdk1.7.0_75\jre\bin\msvcr100.dll
+0x551b0000 - 0x55539000 	C:\Program Files\Java\jdk1.7.0_75\jre\bin\client\jvm.dll
+0x72210000 - 0x72217000 	C:\Windows\system32\WSOCK32.dll
+0x75310000 - 0x75345000 	C:\Windows\system32\WS2_32.dll
+0x75350000 - 0x75356000 	C:\Windows\system32\NSI.dll
+0x721d0000 - 0x72202000 	C:\Windows\system32\WINMM.dll
+0x77140000 - 0x77145000 	C:\Windows\system32\PSAPI.DLL
+0x73960000 - 0x7396c000 	C:\Program Files\Java\jdk1.7.0_75\jre\bin\verify.dll
+0x738d0000 - 0x738f0000 	C:\Program Files\Java\jdk1.7.0_75\jre\bin\java.dll
+0x6b2c0000 - 0x6b2d3000 	C:\Program Files\Java\jdk1.7.0_75\jre\bin\zip.dll
+0x72fc0000 - 0x730ab000 	C:\Windows\system32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Dclassworlds.conf=C:\Program Files\NetBeans 8.0.2\java\maven\bin\m2.conf -Dmaven.home=C:\Program Files\NetBeans 8.0.2\java\maven 
+java_command: org.codehaus.plexus.classworlds.launcher.Launcher -Dnetbeans.deploy=true -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.0.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 package
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.7.0_75
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Windows Live\Shared;C:\Program Files\OpenVPN\bin;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\Nmap;C:\Users\Mathijs Cox\AppData\Roaming\npm;C:\Program Files\nodejs\
+USERNAME=Mathijs Cox
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 6 Model 70 Stepping 1, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 Build 7601 Service Pack 1
+
+CPU:total 1 (1 cores per cpu, 1 threads per core) family 6 model 70 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, aes, erms, tsc, tscinvbit
+
+Memory: 4k page, physical 1048056k(20700k free), swap 4120056k(5988k free)
+
+vm_info: Java HotSpot(TM) Client VM (24.75-b04) for windows-x86 JRE (1.7.0_75-b13), built on Dec 18 2014 17:06:46 by "java_re" with unknown MS VC++:1600
+
+time: Tue May 26 13:59:19 2015
+elapsed time: 0 seconds
+
