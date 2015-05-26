@@ -1,0 +1,23 @@
+<div ng-app="view1" ng-controller="View1Ctrl" ng-init="init()">
+    <p>Create or modify cartracker</p>
+    <div class="border1">
+        <p ng-repeat="auto in cars">{{auto.kenteken}}</p>
+    </div>
+    <div class="border2">
+        <p style="margin: 5%">Nieuwe Cartraker toevoegen</p>
+        <form style="margin: 5%" ng-submit="submit()">
+            kenteken:<br>
+            <input type="text" name="kenteken" ng-model="kenteken">
+            <br>
+            voertuig:<br>
+            <input type="text" name="voertuig" ng-model="voertuig"><br>
+            De aller eerste kleur van dit voertuig:<br>
+            <input type="text" name="eerstekleur" ng-model="eerstekleur"><br>
+            Het aantal zitplaatsen:<br>
+            <input type="text" name="aantalzitplaatsen" ng-model="aantalzitplaatsen"><br>
+            <button  type="submit" id="submit" value="Submit">Auto toevoegen</button>
+            <pre>list={{list}}</pre>
+        </form> 
+         
+    </div>
+</div>
