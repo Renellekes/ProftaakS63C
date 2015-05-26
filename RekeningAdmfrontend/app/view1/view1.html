@@ -1,7 +1,7 @@
-<div ng-app="view1" ng-controller="View1Ctrl" ng-init="init()">
+<div ng-app="view1" ng-controller="View1Ctrl" >
     <p>Create or modify cartracker</p>
-    <div class="border1">
-        <p ng-repeat="auto in cars">{{auto.kenteken}}</p>
+    <div class="border1" ng-init="initData()">
+        <p ng-click="chooseCar(auto)" ng-repeat="auto in cars">{{auto.kenteken}}</p>
     </div>
     <div class="border2">
         <p style="margin: 5%">Nieuwe Cartraker toevoegen</p>
@@ -16,6 +16,7 @@
             Het aantal zitplaatsen:<br>
             <input type="text" name="aantalzitplaatsen" ng-model="aantalzitplaatsen"><br>
             <button  type="submit" id="submit" value="Submit">Auto toevoegen</button>
+            <button  type="submit" ng-click="addid()">Auto aanpassen</button>
             <pre>list={{list}}</pre>
         </form> 
          
