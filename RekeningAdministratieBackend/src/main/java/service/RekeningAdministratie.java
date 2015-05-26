@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import dao.DatabaseManager;
-import dao.IDataDistributer;
 import domain.Auto;
 import service.File;
 import java.util.List;
@@ -31,14 +30,14 @@ import javax.inject.Inject;
  * @author kay de groot
  */
 @Stateless
-public class RekeningAdministratie implements IRekeningAdministratie {
+public class RekeningAdministratie {
 
     private String[] Maand = {"januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"};
     private List<Account> accounts;
     private List<Cartracker> cartrackers;
 
     @Inject
-    private IDataDistributer database;
+    private DatabaseManager database;
 
     private List<Kilometertarief> kilometertarieven;
     private List<Eigenaar> eigenaren;
@@ -46,7 +45,6 @@ public class RekeningAdministratie implements IRekeningAdministratie {
     private Timer timer;
 
     @PostConstruct
-    @Override
     public void RekeningAdministratieInit() {
         timer = new Timer();
         final Calendar cal = Calendar.getInstance(); // creates calendar
@@ -81,25 +79,20 @@ public class RekeningAdministratie implements IRekeningAdministratie {
         timer.schedule(task, cal.getTime());
     }
 
-    @Override
     public void addAccount(Account account) {
     }
 
-    @Override
     public void modifyAccount(int ID, Account account) {
     }
 
-    @Override
     public void removeAccount(int ID) {
     }
 
-    @Override
     public void addCartraker(Cartracker cartracker) {
         System.out.println(cartracker);
         database.addCartraker(cartracker);
     }
 
-    @Override
     public void modifyCartraker(Cartracker cartracker) {
         List<Cartracker> cartrackers = database.findAllCartraker();
         for (Cartracker c : cartrackers) {
@@ -110,11 +103,9 @@ public class RekeningAdministratie implements IRekeningAdministratie {
 
     }
 
-    @Override
     public void removeCartraker(int ID) {
     }
 
-    @Override
     public void connectDatsbase(DatabaseManager db) {
     }
 
@@ -123,16 +114,13 @@ public class RekeningAdministratie implements IRekeningAdministratie {
      * a enddate for this month then they wil be added to a factuur whish is
      * added to the database and a cartraker.
      */
-    @Override
     public void AutomaticFactuur() {
 
     }
 
-    @Override
     public void addFactuur(Factuur factuur) {
     }
 
-    @Override
     public void changeStatusFactuur(String status, int nummer) {
         Factuur factuur = database.findFactuurWithID(nummer);
         if (!status.equals(factuur.getBetaalStatus())) {
@@ -141,87 +129,69 @@ public class RekeningAdministratie implements IRekeningAdministratie {
         }
     }
 
-    @Override
     public void updateFiles(List<File> files) {
     }
 
-    @Override
     public void addeigenaar(Eigenaar eigenaar) {
     }
 
-    @Override
     public void modifyEigenaar(int ID, Eigenaar eigenaar) {
     }
 
-    @Override
     public void removeEigenaar(int ID) {
     }
 
-    @Override
     public void addMedewerker(Medewerker medewerker) {
     }
 
-    @Override
     public void modifyMedewerker(int ID, Medewerker medewerker) {
     }
 
-    @Override
     public void removeMedewerker(int ID) {
     }
 
-    @Override
     public void addFactuurOnderdeel(FactuurOnderdeel fo) {
         database.addOnderdeel(fo);
     }
 
-    @Override
     public void addFactuurOnderdeel(int CartrakerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
         FactuurOnderdeel factuurOnderdeel = new FactuurOnderdeel(CartrakerID, kilometertarief, beginTijd, eindTijd, aantalKilometers);
         this.addFactuurOnderdeel(factuurOnderdeel);
     }
 
-    @Override
     public List<Auto> getAutos(int i) {
         List<Auto> autos = database.getAutos(i);
         return autos;
     }
 
-    @Override
     public List<Kilometertarief> getAlleKilometerTarieven() {
         return database.getAlleKilometerTarieven();
     }
 
-    @Override
     public Kilometertarief getKilometerTarief(int id) {
         return database.getKilometerTarief(id);
     }
 
-    @Override
     public void addKilometerTarief(Kilometertarief kt) {
         database.addKilometerTarief(kt);
     }
 
-    @Override
     public void editKilometerTarief(Kilometertarief kt) {
         database.editKilometerTarief(kt);
     }
 
-    @Override
     public void deleteKilometerTarief(int id) {
         database.deleteKilometerTarief(id);
     }
 
-    @Override
     public List<Factuur> getAlleFacturen(int i) {
         return database.getAlleFacturen(i);
     }
 
-    @Override
     public void addAuto(Auto nieuweAuto) {
         database.addAuto(nieuweAuto);
     }
 
-    @Override
     public List<Cartracker> getCartraker() {
         return database.getCartraker();
     }

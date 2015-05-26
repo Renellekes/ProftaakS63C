@@ -29,22 +29,23 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import service.IRekeningAdministratie;
+import service.RekeningAdministratie;
 
 /**
  *
  * @author kay de groot
  */
 @Path("RekAdmin")
+@Stateless
 public class restRekeningAdministratie {
 
-    IRekeningAdministratie ira = lookupRekeningAdministratieLocal();
+    //IRekeningAdministratie ira = lookupRekeningAdministratieLocal();
 
-//    @Inject
-//    private IRekeningAdministratie ira;
+    @Inject
+    RekeningAdministratie ira;
+    
     @GET
     @Path("getAllCars")
-    @Produces("application/json")
     public String getAllCars() {
         List<Auto> autos = ira.getAutos(0);
         if (autos.size() < 0) {
@@ -138,9 +139,8 @@ public class restRekeningAdministratie {
 
     @GET
     @Path("KilometerTarieven/All")
-    @Produces("application/json")
     public String getAlleKilometerTarieven(){
-        ArrayList<Kilometertarief> tarieven = new ArrayList<>( ira.getAlleKilometerTarieven());
+        ArrayList<Kilometertarief> tarieven = new ArrayList(ira.getAlleKilometerTarieven());
         tarieven.add(new Kilometertarief("testregio", "Stads", 452));
         System.out.println(tarieven.size());
         for (Kilometertarief kt : tarieven){
@@ -157,9 +157,9 @@ public class restRekeningAdministratie {
         return tarief;
     }
 
-    @PUT
-    @Path("KilometerTarieven/add")
-    @Consumes({"application/xml", "application/json"})
+    @POST
+    @Path("KilometerTarieven/Add")
+    @Consumes({"application/json"})
     public Boolean addKilometerTarief(Kilometertarief kt) {
         try {
             this.ira.addKilometerTarief(kt);
@@ -171,7 +171,7 @@ public class restRekeningAdministratie {
     }
 
     @PUT
-    @Path("KilometerTarieven/edit")
+    @Path("KilometerTarieven/Edit")
     @Consumes({"application/xml", "application/json"})
     public Boolean editKilometerTarief(Kilometertarief kt) {
         try {
@@ -195,13 +195,13 @@ public class restRekeningAdministratie {
         }
     }
 
-    private IRekeningAdministratie lookupRekeningAdministratieLocal() {
-        try {
-            Context c = new InitialContext();
-            return (IRekeningAdministratie) c.lookup("java:global/Rekeningadministratie/RekeningAdministratie!service.IRekeningAdministratie");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
+//    private IRekeningAdministratie lookupRekeningAdministratieLocal() {
+//        try {
+//            Context c = new InitialContext();
+//            return (IRekeningAdministratie) c.lookup("java:global/RekeningAdministratieBackend/RekeningAdministratieBackend!service.IRekeningAdministratie");
+//        } catch (NamingException ne) {
+//            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+//            throw new RuntimeException(ne);
+//        }
+//    }
 }

@@ -3,9 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/kay%20de%20groot/Desktop/ProftaakS63C/RekeningAdmfrontend/app/view1/view1.html</file>
             <file>file:/C:/Users/kay%20de%20groot/Desktop/ProftaakS63C/RekeningAdmfrontend/app/ResourceService.js</file>
             <file>file:/C:/Users/kay%20de%20groot/Desktop/ProftaakS63C/RekeningAdmfrontend/app/view1/view1.js</file>
+=======
+            <file>file:/C:/Users/kay%20de%20groot/Desktop/ProftaakS63C/RekeningAdmfrontend/app/ResourceService.js</file>
+        </group>
+        <group name="ProftaakS63C">
+            <file>file:/C:/Users/Mathijs%20Cox/Desktop/ProftaakS63/RekeningAdmfrontend/app/app.js</file>
+            <file>file:/C:/Users/Mathijs%20Cox/Desktop/ProftaakS63/RekeningAdmfrontend/app/ResourceService.js</file>
+            <file>file:/C:/Users/Mathijs%20Cox/Desktop/ProftaakS63/RekeningAdmfrontend/app/KilometerTarief/KilometerTariefView.js</file>
+            <file>file:/C:/Users/Mathijs%20Cox/Desktop/ProftaakS63/RekeningAdmfrontend/app/view1/view1.js</file>
+>>>>>>> 3e7cde3471af9c1ba9d4cfbaa7315850ff3afe62
         </group>
     </open-files>
 </project-private>
