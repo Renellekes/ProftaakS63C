@@ -22,7 +22,7 @@ rekadmin.controller('KilometerTariefCtrl', function($scope, restService, $http) 
                 tariefCategorie: $scope.tariefCategorie,
                 bedrag: $scope.bedrag
             };
-            var res = $http.post('http://localhost:47010/Rekeningadministratie/api/RekAdmin/kilometerTarieven/Add', KilometerTarief);
+            var res = $http.post('http://localhost:47010/Rekeningadministratie/api/RekAdmin/KilometerTarieven/Add', KilometerTarief);
             res.success(function (data, status, headers, config) {
                 $scope.kilometerTarieven = restService.getAlleKilometerTarieven();
             });
