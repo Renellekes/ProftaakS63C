@@ -7,33 +7,38 @@ package dao;
 
 import domain.Auto;
 import domain.Cartracker;
+import domain.Eigenaar;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ejb.Stateless;
-import javax.naming.Context;
-import javax.naming.InitialContext;
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.UserTransaction;
 
 /**
  *
  * @author kay de groot
  */
-@Stateless
+@Singleton
+@Startup
 public class DatabaseManager {
 
     //HIER MOETEN WE ECHT WAT AAN DOEN! CENTRALE DB ERGENS?
     @PersistenceContext(unitName = "MooieUnit")
 
     private EntityManager em;
+    
+    @PostConstruct
+    private void init() {
 
+        this.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
+    } 
+    
     public DatabaseManager() {
     }
 

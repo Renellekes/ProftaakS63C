@@ -48,11 +48,6 @@ public class restRekeningAdministratie {
     @Path("getAllCars")
     public String getAllCars() {
         List<Auto> autos = ira.getAutos(0);
-        if (autos.size() < 0) {
-
-        }
-        autos.add(new Auto("testing1", null, "testing1", 5));
-        autos.add(new Auto("testing2", null, "testing2", 3));
         return new Gson().toJson(autos);
     }
 
@@ -141,7 +136,6 @@ public class restRekeningAdministratie {
     @Path("KilometerTarieven/All")
     public String getAlleKilometerTarieven(){
         ArrayList<Kilometertarief> tarieven = new ArrayList(ira.getAlleKilometerTarieven());
-        tarieven.add(new Kilometertarief("testregio", "Stads", 452));
         System.out.println(tarieven.size());
         for (Kilometertarief kt : tarieven){
             System.out.println("Bedrag: " + kt.getBedrag());
@@ -194,14 +188,4 @@ public class restRekeningAdministratie {
             return false;
         }
     }
-
-//    private IRekeningAdministratie lookupRekeningAdministratieLocal() {
-//        try {
-//            Context c = new InitialContext();
-//            return (IRekeningAdministratie) c.lookup("java:global/RekeningAdministratieBackend/RekeningAdministratieBackend!service.IRekeningAdministratie");
-//        } catch (NamingException ne) {
-//            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-//            throw new RuntimeException(ne);
-//        }
-//    }
 }
