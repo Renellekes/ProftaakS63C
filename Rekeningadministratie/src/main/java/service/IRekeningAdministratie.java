@@ -81,4 +81,6 @@ public interface IRekeningAdministratie {
     public List<Factuur> getAlleFacturen(int i);
 
     public void addAuto(Auto nieuweAuto);
+
+    public List<Cartracker> getCartraker();
 }

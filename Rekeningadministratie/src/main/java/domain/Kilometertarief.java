@@ -18,7 +18,6 @@ import javax.persistence.Table;
  *
  * @author kay de groot
  */
-@Stateless
 @Entity
 @Table(name = "Kilometertarief")
 public class Kilometertarief implements Serializable {
@@ -49,6 +48,30 @@ public class Kilometertarief implements Serializable {
 
     public int getBedrag() {
         return bedrag;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRegio() {
+        return regio;
+    }
+
+    public void setRegio(String regio) {
+        this.regio = regio;
+    }
+
+    public void setTariefCategorie(String tariefCategorie) {
+        this.tariefCategorie = tariefCategorie;
+    }
+
+    public void setBedrag(int bedrag) {
+        this.bedrag = bedrag;
     }
     
     

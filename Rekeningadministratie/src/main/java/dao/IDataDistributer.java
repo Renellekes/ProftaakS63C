@@ -51,4 +51,6 @@ public interface IDataDistributer {
     public List<Factuur> getAlleFacturen(int id);
 
     public void addAuto(Auto nieuweAuto);
+
+    public List<Cartracker> getCartraker();
 }

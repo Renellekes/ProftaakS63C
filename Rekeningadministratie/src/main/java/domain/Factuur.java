@@ -66,6 +66,46 @@ public class Factuur implements Serializable {
         }
     }
 
+    public int getNummer() {
+        return nummer;
+    }
+
+    public void setNummer(int nummer) {
+        this.nummer = nummer;
+    }
+
+    public Cartracker getCartraker() {
+        return cartraker;
+    }
+
+    public void setCartraker(Cartracker cartraker) {
+        this.cartraker = cartraker;
+    }
+
+    public double getTotaalBedrag() {
+        return totaalBedrag;
+    }
+
+    public void setTotaalBedrag(double totaalBedrag) {
+        this.totaalBedrag = totaalBedrag;
+    }
+
+    public List<FactuurOnderdeel> getFactuuronderdelen() {
+        return factuuronderdelen;
+    }
+
+    public void setFactuuronderdelen(List<FactuurOnderdeel> factuuronderdelen) {
+        this.factuuronderdelen = factuuronderdelen;
+    }
+
+    public String getMaand() {
+        return maand;
+    }
+
+    public void setMaand(String maand) {
+        this.maand = maand;
+    }
+
     public int getSizeOnderdeelList(){
         return factuuronderdelen.size();
     }
@@ -80,6 +120,11 @@ public class Factuur implements Serializable {
 
     public void setBetaalStatus(String betaalStatus) {
         this.betaalStatus = betaalStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Factuur{" + "nummer=" + nummer + ", cartraker=" + cartraker + ", totaalBedrag=" + totaalBedrag + ", betaalStatus=" + betaalStatus + ", maand=" + maand + '}';
     }
     
     
