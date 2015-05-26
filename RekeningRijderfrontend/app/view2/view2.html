@@ -1,21 +1,23 @@
-<div ng-app="view1" ng-controller="View1Ctrl" ng-init="init()">
-    <p>Create or modify cartracker</p>
+
+<div ng-app="view2" ng-controller="View2Ctrl" ng-init="init()">
+    <p>NAW gegevens</p>
     <div class="border1">
-        <p ng-repeat="auto in cars">{{auto.kenteken}}</p>
     </div>
     <div class="border2">
-        <p style="margin: 5%">Nieuwe Cartraker toevoegen</p>
+        <p style="margin: 5%">NAW gegevens</p>
         <form style="margin: 5%" ng-submit="submit()">
-            kenteken:<br>
-            <input type="text" name="kenteken" ng-model="kenteken">
+            naam:<br>
+            <input type="text" name="naam" ng-model="naam">
             <br>
-            voertuig:<br>
-            <input type="text" name="voertuig" ng-model="voertuig"><br>
-            De aller eerste kleur van dit voertuig:<br>
-            <input type="text" name="eerstekleur" ng-model="eerstekleur"><br>
-            Het aantal zitplaatsen:<br>
-            <input type="text" name="aantalzitplaatsen" ng-model="aantalzitplaatsen"><br>
-            <button  type="submit" id="submit" value="Submit">Auto toevoegen</button>
+            adres:<br>
+            <input type="text" name="adres" ng-model="adres"><br>
+            woonplaats:<br>
+            <input type="text" name="woonplaats" ng-model="woonplaats"><br>  
+            username:<br>
+            <input type="text" name="user" ng-model="username"><br> 
+            password:<br>
+            <input type="password" name="pass" ng-model="password"><br> 
+            <button  type="submit" id="submit" value="Submit">wijziging opslaan</button>
             <pre>list={{list}}</pre>
         </form> 
          

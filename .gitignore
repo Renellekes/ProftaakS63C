@@ -1,4 +1,8 @@
 loginUnit/target
-Rekeningadministratie/target
-RekeningAdmfrontend/node_modules
+Rekeningadministratie/target/
+RekeningAdmfrontend/node_modules/
 RekeningAdmfrontend/nbproject/private/
+VerplaatsingenSysteem/target/
+RekeningRijderfrontend/nbproject/private/
+RekeningRijderfrontend/node_modules/
+RekeningRijderfrontend/target/

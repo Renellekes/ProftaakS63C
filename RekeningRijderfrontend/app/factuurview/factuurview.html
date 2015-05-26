@@ -1,22 +1,24 @@
-<div ng-app="view1" ng-controller="View1Ctrl" ng-init="init()">
-    <p>Create or modify cartracker</p>
+<div ng-app="factuurview" ng-controller="factuurviewCtrl" ng-init="init()">
+    <p>auto</p>
     <div class="border1">
         <p ng-repeat="auto in cars">{{auto.kenteken}}</p>
     </div>
     <div class="border2">
-        <p style="margin: 5%">Nieuwe Cartraker toevoegen</p>
-        <form style="margin: 5%" ng-submit="submit()">
+        <p style="margin: 5%">Auto's</p>
+        
+        <form style="margin: 5%">
+            <select data-ng-options="o.id for o in options" data-ng-model="selectedOption"></select>
+            <br>
             kenteken:<br>
-            <input type="text" name="kenteken" ng-model="kenteken">
+            <input type="text" name="kenteken" ng-model="selectedOption.kenteken">
             <br>
             voertuig:<br>
-            <input type="text" name="voertuig" ng-model="voertuig"><br>
+            <input type="text" name="voertuig" ng-model="selectedOption.voertuig"><br>
             De aller eerste kleur van dit voertuig:<br>
-            <input type="text" name="eerstekleur" ng-model="eerstekleur"><br>
+            <input type="text" name="eerstekleur" ng-model="selectedOption.kleur"><br>
             Het aantal zitplaatsen:<br>
-            <input type="text" name="aantalzitplaatsen" ng-model="aantalzitplaatsen"><br>
-            <button  type="submit" id="submit" value="Submit">Auto toevoegen</button>
-            <pre>list={{list}}</pre>
+            <input type="text" name="aantalzitplaatsen" ng-model="selectedOption.zitplaats"><br>            
+            <pre>list={{selectedOption.id}}</pre>
         </form> 
          
     </div>
