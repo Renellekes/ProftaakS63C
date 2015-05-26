@@ -65,7 +65,7 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
                 eerstekleur: $scope.eerstekleur,
                 zitplaatsen: $scope.aantalzitplaatsen
             };
-            var res = $http.post('http://localhost:24707/Rekeningadministratie/api/RekAdmin/addCartraker', Auto);
+            var res = $http.post('http://localhost:41136/Rekeningadministratie/api/RekAdmin/addCartraker', Auto);
             res.success(function (data, status, headers, config) {
                 $scope.cars = Cartraker.query();
             });
