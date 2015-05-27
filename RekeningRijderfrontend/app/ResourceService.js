@@ -8,11 +8,11 @@ restservice.factory('Cartraker', ['$resource', function ($resource) {
             'getFactuurs':{method: 'GET', isArray: true, url: 'http://localhost:8080/RekeningAdministratieBackend/api/RekAdmin/getAllFactuur'}
         });
     }]);
-//restservice.factory('restService', ['$resource', function ($resource) {
-//        return $resource('http://localhost:47010/Rekeningadministratie/api/RekAdmin',
-//        null, 
-//        {
-//            'getAlleFacturen': {method: 'GET', isArray: true, url: 'http://localhost:47010/Rekeningadministratie/api/RekAdmin/KilometerTarieven/All'}
-//            
-//        });
-//    }]);
+restservice.factory('restService', ['$resource', function ($resource) {
+        return $resource('http://localhost:8080/RekeningAdministratieBackend/api/RekAdmin',
+        null, 
+        {
+            'getEigenaar': {method: 'GET', isArray: true, url: 'http://localhost:8080/RekeningAdministratieBackend/api/RekAdmin/KilometerTarieven/1'}
+            
+        });
+    }]);

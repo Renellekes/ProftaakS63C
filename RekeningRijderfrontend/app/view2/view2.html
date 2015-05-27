@@ -5,20 +5,20 @@
     </div>
     <div class="border2">
         <p style="margin: 5%">NAW gegevens</p>
+        {{eigenaar}}
         <form style="margin: 5%" ng-submit="submit()">
             naam:<br>
-            <input type="text" name="naam" ng-model="naam">
+            <input type="text" name="naam" ng-model="owner.naam">
             <br>
             adres:<br>
-            <input type="text" name="adres" ng-model="adres"><br>
+            <input type="text" name="adres" ng-model="owner.adres"><br>
             woonplaats:<br>
-            <input type="text" name="woonplaats" ng-model="woonplaats"><br>  
+            <input type="text" name="woonplaats" ng-model="owner.woonplaats"><br>  
             username:<br>
             <input type="text" name="user" ng-model="username"><br> 
             password:<br>
             <input type="password" name="pass" ng-model="password"><br> 
             <button  type="submit" id="submit" value="Submit">wijziging opslaan</button>
-            <pre>list={{list}}</pre>
         </form> 
          
     </div>
