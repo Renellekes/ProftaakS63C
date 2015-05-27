@@ -6,7 +6,7 @@
     <div class="border2">
         <p style="margin: 5%">Auto's</p>
         
-        <form style="margin: 5%">
+        <form style="margin: 5%" ng-submit="modifyCar()">
             kenteken:<br>
             <select data-ng-options="o.kenteken for o in cars" data-ng-model="selectedOption"></select>
             <br>
@@ -16,11 +16,11 @@
             voertuig:<br>
             <input type="text" name="voertuig" ng-model="selectedOption.voertuig"><br>
             De aller eerste kleur van dit voertuig:<br>
-            <input type="text" name="eerstekleur" ng-model="selectedOption.eersteKleur"><br>
+            <input type="text" name="kleur" ng-model="selectedOption.eersteKleur"><br>
             Het aantal zitplaatsen:<br>
             <input type="text" name="aantalzitplaatsen" ng-model="selectedOption.zitplaatsen"><br>   
             <button  type="submit" id="submit" value="Submit">wijzigen</button>
-            <pre>list={{selectedOption.id}}</pre>
+            <pre>list={{list}}</pre>
         </form> 
          
     </div>
