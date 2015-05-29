@@ -46,6 +46,30 @@ public class Eigenaar implements Serializable {
         this.adres = adres;
         this.woonplaats = woonplaats;
     }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public String getAdres() {
+        return adres;
+    }
+
+    public void setAdres(String adres) {
+        this.adres = adres;
+    }
+
+    public String getWoonplaats() {
+        return woonplaats;
+    }
+
+    public void setWoonplaats(String woonplaats) {
+        this.woonplaats = woonplaats;
+    }
     
     
 }

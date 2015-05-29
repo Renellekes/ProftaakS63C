@@ -29,8 +29,8 @@ public class Factuur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int nummer;
-    @JoinColumn(name = "cartrakerID",referencedColumnName = "id")
-    private Cartracker cartraker;
+    @JoinColumn(name = "cartrackerID",referencedColumnName = "id")
+    private Cartracker cartracker;
     @Column
     private double totaalBedrag;
     @Column
@@ -43,16 +43,16 @@ public class Factuur implements Serializable {
     public Factuur() {
     }
 
-    public Factuur(Cartracker cartraker, double totaalBedrag, String maand) {
-        this.cartraker = cartraker;
+    public Factuur(Cartracker cartracker, double totaalBedrag, String maand) {
+        this.cartracker = cartracker;
         this.totaalBedrag = totaalBedrag;
         this.maand = maand;
         factuuronderdelen = new ArrayList<FactuurOnderdeel>();
     }
 
-    public Factuur(int nummer, Cartracker cartraker, double totaalBedrag, String betaalStatus, String maand) {
+    public Factuur(int nummer, Cartracker cartracker, double totaalBedrag, String betaalStatus, String maand) {
         this.nummer = nummer;
-        this.cartraker = cartraker;
+        this.cartracker = cartracker;
         this.totaalBedrag = totaalBedrag;
         this.betaalStatus = betaalStatus;
         this.maand = maand;
@@ -74,12 +74,12 @@ public class Factuur implements Serializable {
         this.nummer = nummer;
     }
 
-    public Cartracker getCartraker() {
-        return cartraker;
+    public Cartracker getCartracker() {
+        return cartracker;
     }
 
-    public void setCartraker(Cartracker cartraker) {
-        this.cartraker = cartraker;
+    public void setCartracker(Cartracker cartracker) {
+        this.cartracker = cartracker;
     }
 
     public double getTotaalBedrag() {
@@ -124,7 +124,7 @@ public class Factuur implements Serializable {
 
     @Override
     public String toString() {
-        return "Factuur{" + "nummer=" + nummer + ", cartraker=" + cartraker + ", totaalBedrag=" + totaalBedrag + ", betaalStatus=" + betaalStatus + ", maand=" + maand + '}';
+        return "Factuur{" + "nummer=" + nummer + ", cartracker=" + cartracker + ", totaalBedrag=" + totaalBedrag + ", betaalStatus=" + betaalStatus + ", maand=" + maand + '}';
     }
     
     

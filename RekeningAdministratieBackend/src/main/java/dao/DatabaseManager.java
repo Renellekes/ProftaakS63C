@@ -42,14 +42,14 @@ public class DatabaseManager {
     public DatabaseManager() {
     }
 
-    public List<Cartracker> findAllCartraker() {
+    public List<Cartracker> findAllCartracker() {
         Query query = em.createQuery("SELECT c FROM Cartracker c");
         List<Cartracker> cartrackers = query.getResultList();
         return cartrackers;
     }
 
     public List<FactuurOnderdeel> findOnderdelenForMonth(String Maand) {
-        Query query = em.createQuery("SELECT c FROM FactuurOnderdeel c WHERE c.MAAND = " + Maand);
+        Query query = em.createQuery("SELECT c FROM FactuurOnderdeel c WHERE c.maand = " + Maand);
         List<FactuurOnderdeel> facturen = query.getResultList();
         for (FactuurOnderdeel fo : facturen) {
             fo.setMonth();
@@ -61,7 +61,7 @@ public class DatabaseManager {
         em.persist(factuur);
     }
 
-    public void mergeCartraker(Cartracker c) {
+    public void mergeCartracker(Cartracker c) {
         em.merge(c);
     }
 
@@ -83,13 +83,13 @@ public class DatabaseManager {
         em.merge(factuur);
     }
 
-    public void addCartraker(Cartracker cartracker) {
+    public void addCartracker(Cartracker cartracker) {
         System.out.println(cartracker);
         em.persist(cartracker);
     }
 
-    public Cartracker findCartrakerWithId(int nummer) {
-        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + nummer);
+    public Cartracker findCartrackerWithId(int nummer) {
+        Query query = em.createQuery("SELECT c FROM Cartracker c WHERE c.id = " + nummer);
         List<Cartracker> cartrackers = query.getResultList();
         if (cartrackers.size() > 0) {
             return cartrackers.get(0);
@@ -98,8 +98,14 @@ public class DatabaseManager {
         }
     }
 
-    public List<Auto> getAutos(int i) {
+    public List<Auto> getAllAutos() {
         Query query = em.createQuery("SELECT c FROM Auto c ");//"SELECT c FROM Auto c WHERE c.id = " + i
+        List<Auto> autos = query.getResultList();
+        return autos;
+    }
+    
+    public List<Auto> getAuto(int i) {
+        Query query = em.createQuery("SELECT c FROM Auto c SELECT c FROM Auto c WHERE c.id = " + i);
         List<Auto> autos = query.getResultList();
         return autos;
     }
@@ -132,8 +138,8 @@ public class DatabaseManager {
         em.remove(id);
     }
 
-    public List<Factuur> getAlleFacturen(int id) {
-        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + id);
+    public List<Factuur> getAlleFacturen() {
+        Query query = em.createQuery("SELECT c FROM Factuur c");
         List<Factuur> factuurs = query.getResultList();
         return factuurs;
     }
@@ -142,10 +148,24 @@ public class DatabaseManager {
         em.persist(nieuweAuto);
     }
 
-    public List<Cartracker> getCartraker() {
-        Query query = em.createQuery("SELECT c FROM Cartraker c");
+    public List<Cartracker> getCartracker() {
+        Query query = em.createQuery("SELECT c FROM Cartracker c");
         List<Cartracker> c = query.getResultList();
         return c;
+    }
+
+    public Eigenaar getEigenaar(int id) {
+       Query query = em.createQuery("SELECT c FROM Eigenaar c WHERE c.id = " + id);
+         List<Eigenaar> eigenaar = query.getResultList();
+        if (eigenaar.size() > 0) {
+            return eigenaar.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    public void mergeAuto(Auto auto) {
+        em.merge(auto);
     }
 
 }
