@@ -1,0 +1,19 @@
+<div ng-app="factuurview" ng-controller="factuurviewCtrl" ng-init="init()">
+    <p>Facturen</p>
+    <div class="border1">
+        <p>Nummer || Kenteken || Maand || Bedrag</p>
+        <div ng-repeat="factuur in facturen"><p>{{factuur.nummer}} || {{factuur.cartraker.auto.kenteken}} || {{factuur.maand}} || {{factuur.totaalBedrag}} || {{factuur.betaalStatus}} </p>            
+            <div ng-show="{{factuur.betaalStatus == 'Open'}}">
+            <script async="async" src="paypal-button.min.js?merchant=mathijscox@gmail.com" 
+            data-button="buynow" 
+            data-name="{{factuur.maand}}" 
+            data-amount="{{factuur.totaalBedrag}}" 
+            data-currency="EUR" 
+            data-shipping="0" 
+            data-tax="0" 
+            data-callback="http://localhost:8383/index.html#/factuurview"
+            data-env="sandbox"
+            ></script>
+        </div>
+    </div>   
+</div>

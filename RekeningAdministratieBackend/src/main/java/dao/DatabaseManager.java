@@ -7,26 +7,26 @@ package dao;
 
 import domain.Auto;
 import domain.Cartracker;
+import domain.Eigenaar;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.ejb.Stateless;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.UserTransaction;
 
 /**
  *
  * @author kay de groot
  */
-@Stateless
+@Singleton
+@Startup
 public class DatabaseManager {
 
     //HIER MOETEN WE ECHT WAT AAN DOEN! CENTRALE DB ERGENS?
@@ -34,10 +34,16 @@ public class DatabaseManager {
 
     private EntityManager em;
 
+    @PostConstruct
+    private void init() {
+
+        this.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
+    }
+
     public DatabaseManager() {
     }
 
-    public List<Cartracker> findAllCartraker() {
+    public List<Cartracker> findAllCartracker() {
         Query query = em.createQuery("SELECT c FROM Cartracker c");
         List<Cartracker> cartrackers = query.getResultList();
         return cartrackers;
@@ -56,7 +62,7 @@ public class DatabaseManager {
         em.persist(factuur);
     }
 
-    public void mergeCartraker(Cartracker c) {
+    public void mergeCartracker(Cartracker c) {
         em.merge(c);
     }
 
@@ -78,13 +84,13 @@ public class DatabaseManager {
         em.merge(factuur);
     }
 
-    public void addCartraker(Cartracker cartracker) {
+    public void addCartracker(Cartracker cartracker) {
         System.out.println(cartracker);
         em.persist(cartracker);
     }
 
-    public Cartracker findCartrakerWithId(int nummer) {
-        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + nummer);
+    public Cartracker findCartrackerWithId(int nummer) {
+        Query query = em.createQuery("SELECT c FROM Cartracker c WHERE c.id = " + nummer);
         List<Cartracker> cartrackers = query.getResultList();
         if (cartrackers.size() > 0) {
             return cartrackers.get(0);
@@ -93,8 +99,14 @@ public class DatabaseManager {
         }
     }
 
-    public List<Auto> getAutos(int i) {
+    public List<Auto> getAllAutos() {
         Query query = em.createQuery("SELECT c FROM Auto c ");//"SELECT c FROM Auto c WHERE c.id = " + i
+        List<Auto> autos = query.getResultList();
+        return autos;
+    }
+
+    public List<Auto> getAuto(int i) {
+        Query query = em.createQuery("SELECT c FROM Auto c SELECT c FROM Auto c WHERE c.id = " + i);
         List<Auto> autos = query.getResultList();
         return autos;
     }
@@ -137,7 +149,7 @@ public class DatabaseManager {
         em.persist(nieuweAuto);
     }
 
-    public List<Cartracker> getCartraker() {
+    public List<Cartracker> getCartracker() {
         Query query = em.createQuery("SELECT c FROM Cartracker c");
         List<Cartracker> c = query.getResultList();
         return c;
@@ -145,6 +157,21 @@ public class DatabaseManager {
 
     public void modifyAuto(Auto a) {
         em.merge(a);
+
+    }
+
+    public Eigenaar getEigenaar(int id) {
+        Query query = em.createQuery("SELECT c FROM Eigenaar c WHERE c.id = " + id);
+        List<Eigenaar> eigenaar = query.getResultList();
+        if (eigenaar.size() > 0) {
+            return eigenaar.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    public void mergeAuto(Auto auto) {
+        em.merge(auto);
     }
 
 }

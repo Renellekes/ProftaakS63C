@@ -1,0 +1,27 @@
+<div ng-app="view1" ng-controller="View1Ctrl" ng-init="init()">
+    <p>auto</p>
+    <div class="border1">
+        <p ng-repeat="auto in cars">{{auto.kenteken}}</p>
+    </div>
+    <div class="border2">
+        <p style="margin: 5%">Auto's</p>
+        
+        <form style="margin: 5%" ng-submit="modifyCar()">
+            kenteken:<br>
+            <select data-ng-options="o.kenteken for o in cars" data-ng-model="selectedOption"></select>
+            <br>
+            ID:<br>
+            <input type="text" name="kenteken" ng-model="selectedOption.id">
+            <br>
+            voertuig:<br>
+            <input type="text" name="voertuig" ng-model="selectedOption.voertuig"><br>
+            De aller eerste kleur van dit voertuig:<br>
+            <input type="text" name="kleur" ng-model="selectedOption.eersteKleur"><br>
+            Het aantal zitplaatsen:<br>
+            <input type="text" name="aantalzitplaatsen" ng-model="selectedOption.zitplaatsen"><br>   
+            <button  type="submit" id="submit" value="Submit">wijzigen</button>
+            <pre>list={{list}}</pre>
+        </form> 
+         
+    </div>
+</div>

@@ -29,7 +29,7 @@ public class Auto implements Serializable {
     private int id;
     @Column
     private String kenteken;
-    @ManyToOne(cascade=CascadeType.PERSIST)
+    @ManyToOne(cascade=CascadeType.MERGE)
     private Eigenaar eigenaar;
     @Column
     private File fileInfo;

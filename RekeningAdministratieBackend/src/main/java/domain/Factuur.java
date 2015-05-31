@@ -31,6 +31,7 @@ public class Factuur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int nummer;
+    @Column
     private int cartrakerID;
     @Column
     private double totaalBedrag;

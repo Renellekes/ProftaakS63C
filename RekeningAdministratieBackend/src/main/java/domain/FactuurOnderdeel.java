@@ -31,7 +31,7 @@ public class FactuurOnderdeel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int FactuurOnderdeelID;
     @Column
-    private int CartrakerID;
+    private int CartrackerID;
     @JoinColumn(name = "kilometertariefID", referencedColumnName = "id")
     private Kilometertarief kilometertarief;
     @Column
@@ -51,8 +51,8 @@ public class FactuurOnderdeel implements Serializable {
 //        this.setMonth();
     }
 
-    public FactuurOnderdeel(int CartrakerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
-        this.CartrakerID = CartrakerID;
+    public FactuurOnderdeel(int CartrackerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
+        this.CartrackerID = CartrackerID;
         this.kilometertarief = kilometertarief;
         this.beginTijd = beginTijd;
         this.eindTijd = eindTijd;
@@ -119,8 +119,8 @@ public class FactuurOnderdeel implements Serializable {
         return bedrag;
     }
 
-    public int getCartrakerID() {
-        return CartrakerID;
+    public int getCartrackerID() {
+        return CartrackerID;
     }
 
     public int getFactuurOnderdeelID() {
@@ -164,7 +164,7 @@ public class FactuurOnderdeel implements Serializable {
     }
 
     public void setCartrakerID(int CartrakerID) {
-        this.CartrakerID = CartrakerID;
+        this.CartrackerID = CartrakerID;
     }
 
     public void setEindTijd(Date eindTijd) {

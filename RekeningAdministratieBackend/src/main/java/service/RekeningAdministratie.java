@@ -51,7 +51,7 @@ public class RekeningAdministratie {
         Auto a = new Auto("test", e, "test voertuig", "paars", 2);
         Cartracker c = new Cartracker(a);
         c.setId(999);
-        database.addCartraker(c);
+        database.addCartracker(c);
         Kilometertarief k = new Kilometertarief("testvill", "standaard", 5);
         database.addKilometerTarief(k);
         FactuurOnderdeel fo = new FactuurOnderdeel(999, k, new Date(), new Date(), 45);
@@ -82,18 +82,18 @@ public class RekeningAdministratie {
     public void removeAccount(int ID) {
     }
 
-    public void addCartraker(Cartracker cartracker) {
+    public void addCartracker(Cartracker cartracker) {
         System.out.println(cartracker);
-        database.addCartraker(cartracker);
+        database.addCartracker(cartracker);
     }
 
-    public void modifyCartraker(Cartracker cartracker) {
+    public void modifyCartracker(Cartracker cartracker) {
         System.out.println("rekenrijder 2");
-        database.mergeCartraker(cartracker);
+        database.mergeCartracker(cartracker);
 
     }
 
-    public void removeCartraker(int ID) {
+    public void removeCartracker(int ID) {
     }
 
     public void connectDatsbase(DatabaseManager db) {
@@ -102,21 +102,21 @@ public class RekeningAdministratie {
     /**
      * This method wil look through al the Factuuronderdelen for those who have
      * a enddate for this month then they wil be added to a factuur whish is
-     * added to the database and a cartraker.
+     * added to the database and a cartracker.
      */
     public void AutomaticFactuur() {
         System.out.println("Start timeout " + Maand[Calendar.getInstance().get(Calendar.MONTH)]);
         List<FactuurOnderdeel> onderdelen = database.findOnderdelenForMonth(Maand[Calendar.getInstance().get(Calendar.MONTH)]);
-        List<Cartracker> cs = database.findAllCartraker();
+        List<Cartracker> cs = database.findAllCartracker();
         Factuur factuur = null;
         System.out.println("Testing 1 "+cs.size() + " : " + onderdelen.size());
         for (Cartracker c : cs) {
             factuur = new Factuur(c.getId(), 0, Maand[Calendar.getInstance().get(Calendar.MONTH)]);
             factuur.setBetaalStatus("Nog te betalen.");
             for (FactuurOnderdeel fac : onderdelen) {
-                System.out.println("Testing 2 fac"+fac.getCartrakerID()+" : cartracker"+c.getId());
+                System.out.println("Testing 2 fac"+fac.getCartrackerID()+" : cartracker"+c.getId());
                 System.out.println("Testing 3 "+fac.getMaand());
-                if ((fac.getCartrakerID() == c.getId()) && (Maand[Calendar.getInstance().get(Calendar.MONTH)].equals(fac.getMaand()))) {
+                if ((fac.getCartrackerID() == c.getId()) && (Maand[Calendar.getInstance().get(Calendar.MONTH)].equals(fac.getMaand()))) {
                     factuur.addFactuurOnderdelen(fac);
                 }
             }
@@ -124,7 +124,7 @@ public class RekeningAdministratie {
                 factuur.calculateAmount();
                 database.addFactuur(factuur);
                 c.addFactuur(factuur);
-                database.mergeCartraker(c);
+                database.mergeCartracker(c);
             }
         }
     }
@@ -165,13 +165,18 @@ public class RekeningAdministratie {
         database.addOnderdeel(fo);
     }
 
-    public void addFactuurOnderdeel(int CartrakerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
-        FactuurOnderdeel factuurOnderdeel = new FactuurOnderdeel(CartrakerID, kilometertarief, beginTijd, eindTijd, aantalKilometers);
+    public void addFactuurOnderdeel(int CartrackerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
+        FactuurOnderdeel factuurOnderdeel = new FactuurOnderdeel(CartrackerID, kilometertarief, beginTijd, eindTijd, aantalKilometers);
         this.addFactuurOnderdeel(factuurOnderdeel);
     }
 
-    public List<Auto> getAutos(int i) {
-        List<Auto> autos = database.getAutos(i);
+    public List<Auto> getAllAutos() {
+        List<Auto> autos = database.getAllAutos();
+        return autos;
+    }
+    
+    public List<Auto> getAuto(int i) {
+        List<Auto> autos = database.getAuto(i);
         return autos;
     }
 
@@ -203,8 +208,12 @@ public class RekeningAdministratie {
         database.addAuto(nieuweAuto);
     }
 
-    public List<Cartracker> getCartraker() {
-        return database.getCartraker();
+    public List<Cartracker> getCartracker() {
+        return database.getCartracker();
+    }
+
+    public Eigenaar getEigenaar(int id) {
+        return database.getEigenaar(id);
     }
     
     public void modifyAuto(Auto a){
