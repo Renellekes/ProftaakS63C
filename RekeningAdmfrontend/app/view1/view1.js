@@ -10,70 +10,80 @@ rekadmin.config(['$routeProvider', function ($routeProvider) {
     }]);
 
 rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
-    $scope.cars = [];
-    var bewaarAuto;
+    $scope.cartrackers = [];
+    $scope.homefacturen = [];
+    $scope.hoemfileInfo = [];
+    var bewaarAutoInfo =null;
     $scope.initData = function ()
     {
-        $scope.cars = Cartraker.query();
-        console.log($scope.cars);
-        var Auto = {
-            kenteken: $scope.kenteken,
-            voertuig: $scope.voertuig,
-            eerstekleur: $scope.eerstekleur,
-            zitplaatsen: $scope.aantalzitplaatsen
-        };
+        $scope.cartrackers = Cartraker.query();
+        console.log($scope.cartrackers);
     };
 
-    $scope.clear = function(){
-        bewaarAuto = null;
+    $scope.clear = function () {
+        $scope.homefacturen = [];
+        $scope.hoemfileInfo = [];
     }
 
     $scope.list = [];
 
-    $scope.chooseCar = function (auto) {
-        $scope.kenteken = auto.kenteken;
-        $scope.voertuig = auto.voertuig;
-        $scope.eerstekleur = auto.eerstekleur;
-        $scope.aantalzitplaatsen = auto.aantalzitplaatsen;
-        console.log($scope.voertuig + $scope.eerstekleur + $scope.aantalzitplaatsen)
-        bewaarAuto = auto;
+    $scope.chooseCar = function (cartracker) {
+        $scope.Cartrackerid = cartracker.id;
+        $scope.kenteken = cartracker.auto.kenteken;
+        $scope.voertuig = cartracker.auto.voertuig;
+        $scope.eersteKleur = cartracker.auto.eersteKleur;
+        $scope.zitplaatsen = cartracker.auto.zitplaatsen;
+        $scope.website = cartracker.website;
+        $scope.homefacturen = cartracker.facturen;
+        $scope.homefileInfo = cartracker.fileInfo;
+        bewaarAutoInfo = cartracker.auto
     }
 
     $scope.addid = function () {
         if ($scope.kenteken) {
             console.log('testing');
             var Auto = {
-                id: bewaarAuto.id,
+                id: bewaarAutoInfo.id,
                 kenteken: $scope.kenteken,
                 voertuig: $scope.voertuig,
-                eerstekleur: $scope.eerstekleur,
-                zitplaatsen: $scope.aantalzitplaatsen
+                eersteKleur: $scope.eersteKleur,
+                zitplaatsen: $scope.zitplaatsen
             };
-            var res = $http.post('http://localhost:24707/Rekeningadministratie/api/RekAdmin/ModifyCartraker', Auto);
-            $scope.list.push(Auto.kenteken + Auto.voertuig + Auto.eerstekleur + Auto.zitplaatsen);
+            var res = $http.post('http://localhost:24707/RekeningAdministratieBackend/api/RekAdmin/ModifyCartraker', Auto);
             $scope.kenteken = '';
             $scope.voertuig = '';
-            $scope.eerstekleur = '';
-            $scope.aantalzitplaatsen = '';
+            $scope.eersteKleur = '';
+            $scope.zitplaatsen = '';
         }
-    }
+    };
     $scope.submit = function () {
         if ($scope.kenteken) {
             var Auto = {
+                id: bewaarAutoInfo.id,
                 kenteken: $scope.kenteken,
                 voertuig: $scope.voertuig,
-                eerstekleur: $scope.eerstekleur,
-                zitplaatsen: $scope.aantalzitplaatsen
+                eersteKleur: $scope.eersteKleur,
+                zitplaatsen: $scope.zitplaatsen,
+                fileInfo:bewaarAutoInfo.fileInfo,
+                eigenaar:bewaarAutoInfo.eigenaar,
+                gestolen:bewaarAutoInfo.gestolen
             };
-            var res = $http.post('http://localhost:41136/Rekeningadministratie/api/RekAdmin/addCartraker', Auto);
-//            res.success(function (data, status, headers, config) {
-//                $scope.cars = Cartraker.query();
-//            });
-            $scope.list.push(Auto.kenteken + Auto.voertuig + Auto.eerstekleur + Auto.zitplaatsen);
+            var cartracker = {
+                id: $scope.Cartrackerid,
+                auto: Auto,
+                website: $scope.website,
+                facturen: $scope.homefacturen,
+                fileInfo: $scope.homefileInfo
+            };
+            var res = $http.post('http://localhost:24707/RekeningAdministratieBackend/api/RekAdmin/modifyCartraker', cartracker);
+            $scope.Cartrackerid = '';
             $scope.kenteken = '';
             $scope.voertuig = '';
-            $scope.eerstekleur = '';
-            $scope.aantalzitplaatsen = '';
+            $scope.eersteKleur = '';
+            $scope.zitplaatsen = '';
+            $scope.website = '';
+            $scope.homefacturen = '';
+            $scope.homefileInfo = '';
 
         }
     };

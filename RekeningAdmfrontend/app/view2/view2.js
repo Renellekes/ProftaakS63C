@@ -11,12 +11,14 @@ angular.module('myApp.view2', ['ngRoute'])
 
         .controller('View2Ctrl', function ($scope, Cartraker, $http) {
             $scope.facturen = [];
+            $scope.onderdelen =[];
             $scope.list = [];
             $scope.tekst = "Geen uitgekozen";
             var chooseFactuur = null;
             $scope.init = function ()
             {
                 $scope.facturen = Cartraker.getFactuurs();
+                console.log($scope.facturen);
             }
 
             $scope.submit = function () {
@@ -30,6 +32,7 @@ angular.module('myApp.view2', ['ngRoute'])
 
             $scope.onClickRepeat = function (factuur) {
                 chooseFactuur = factuur;
+                $scope.onderdelen = factuur.factuuronderdelen;
                 $scope.Status = factuur.betaalStatus;
                 $scope.nummer = factuur.nummer;
             }
