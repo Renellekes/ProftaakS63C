@@ -37,7 +37,7 @@ public class Cartracker implements Serializable {
     @Column
     private boolean website;
     @OneToMany(cascade = CascadeType.PERSIST)
-    private Collection<Factuur> facturen;
+    private List<Factuur> facturen;
     private List<File> fileInfo;
 
     public Cartracker() {
@@ -54,6 +54,7 @@ public class Cartracker implements Serializable {
     }
 
     public void addFactuur(Factuur factuur) {
+        this.facturen = new ArrayList<Factuur>();
         this.facturen.add(factuur);
     }
 
@@ -65,4 +66,38 @@ public class Cartracker implements Serializable {
         this.auto = auto;
     }
 
+    public boolean isWebsite() {
+        return website;
+    }
+
+    public void setWebsite(boolean website) {
+        this.website = website;
+    }
+
+    public void setFacturen(List<Factuur> facturen) {
+        this.facturen = facturen;
+    }
+
+    public List<File> getFileInfo() {
+        return fileInfo;
+    }
+
+    public void setFileInfo(List<File> fileInfo) {
+        this.fileInfo = fileInfo;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCartracker(Cartracker c){
+        this.auto=c.getAuto();
+        this.website=c.isWebsite();
+    }
+
+    public List<Factuur> getFacturen() {
+        return facturen;
+    }
+    
+    
 }

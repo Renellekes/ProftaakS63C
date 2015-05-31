@@ -57,7 +57,7 @@ public class FactuurOnderdeel implements Serializable {
         this.beginTijd = beginTijd;
         this.eindTijd = eindTijd;
         this.aantalKilometers = aantalKilometers;
-//        this.setMonth();
+        this.setMonth();
     }
 
     public void setMonth() {
@@ -105,7 +105,7 @@ public class FactuurOnderdeel implements Serializable {
 
     public void calculateAmount() {
         if ("Stads".equals(kilometertarief.getTariefCategorie())) {
-            bedrag = aantalKilometers * kilometertarief.getBedrag();
+            bedrag = aantalKilometers * kilometertarief.getBedrag()+10;
         } else {
             bedrag = aantalKilometers * kilometertarief.getBedrag();
         }
@@ -123,4 +123,56 @@ public class FactuurOnderdeel implements Serializable {
         return CartrakerID;
     }
 
+    public int getFactuurOnderdeelID() {
+        return FactuurOnderdeelID;
+    }
+
+    public void setFactuurOnderdeelID(int FactuurOnderdeelID) {
+        this.FactuurOnderdeelID = FactuurOnderdeelID;
+    }
+
+    public Kilometertarief getKilometertarief() {
+        return kilometertarief;
+    }
+
+    public void setKilometertarief(Kilometertarief kilometertarief) {
+        this.kilometertarief = kilometertarief;
+    }
+
+    public Date getBeginTijd() {
+        return beginTijd;
+    }
+
+    public void setBeginTijd(Date beginTijd) {
+        this.beginTijd = beginTijd;
+    }
+
+    public String getMaand() {
+        return maand;
+    }
+
+    public void setMaand(String maand) {
+        this.maand = maand;
+    }
+
+    public long getAantalKilometers() {
+        return aantalKilometers;
+    }
+
+    public void setAantalKilometers(long aantalKilometers) {
+        this.aantalKilometers = aantalKilometers;
+    }
+
+    public void setCartrakerID(int CartrakerID) {
+        this.CartrakerID = CartrakerID;
+    }
+
+    public void setEindTijd(Date eindTijd) {
+        this.eindTijd = eindTijd;
+    }
+
+    public void setBedrag(double bedrag) {
+        this.bedrag = bedrag;
+    }
+    
 }

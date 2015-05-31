@@ -44,7 +44,7 @@ public class DatabaseManager {
     }
 
     public List<FactuurOnderdeel> findOnderdelenForMonth(String Maand) {
-        Query query = em.createQuery("SELECT c FROM FactuurOnderdeel c WHERE c.MAAND = " + Maand);
+        Query query = em.createQuery("SELECT c FROM FactuurOnderdeel c WHERE c.maand = '" + Maand + "'");
         List<FactuurOnderdeel> facturen = query.getResultList();
         for (FactuurOnderdeel fo : facturen) {
             fo.setMonth();
@@ -127,8 +127,8 @@ public class DatabaseManager {
         em.remove(id);
     }
 
-    public List<Factuur> getAlleFacturen(int id) {
-        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + id);
+    public List<Factuur> getAlleFacturen() {
+        Query query = em.createQuery("SELECT c FROM Factuur c");
         List<Factuur> factuurs = query.getResultList();
         return factuurs;
     }
@@ -138,9 +138,13 @@ public class DatabaseManager {
     }
 
     public List<Cartracker> getCartraker() {
-        Query query = em.createQuery("SELECT c FROM Cartraker c");
+        Query query = em.createQuery("SELECT c FROM Cartracker c");
         List<Cartracker> c = query.getResultList();
         return c;
+    }
+
+    public void modifyAuto(Auto a) {
+        em.merge(a);
     }
 
 }
