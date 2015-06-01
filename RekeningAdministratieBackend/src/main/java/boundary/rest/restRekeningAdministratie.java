@@ -49,9 +49,6 @@ public class restRekeningAdministratie {
     @Produces("application/json")
     public String getAllCars() {
         List<Auto> autos = ira.getAllAutos();
-        Auto a = new Auto("testing1", null, "testing1", 5);
-        a.setId(88);
-        autos.add(a);
         return new Gson().toJson(autos);
     }
     
@@ -68,9 +65,6 @@ public class restRekeningAdministratie {
     @Produces("application/json")
     public List<Factuur> getAllFactuur() {
         List<Factuur> facturen = ira.getAlleFacturen();
-        Factuur factuur= new Factuur(5, 325, "Maart");
-        factuur.setBetaalStatus("open");
-        facturen.add(factuur);
         return facturen;
     }
 
@@ -188,7 +182,7 @@ public class restRekeningAdministratie {
         }
     }
 
-    @PUT
+    @POST
     @Path("KilometerTarieven/Edit")
     @Consumes({"application/xml", "application/json"})
     public Boolean editKilometerTarief(Kilometertarief kt) {
