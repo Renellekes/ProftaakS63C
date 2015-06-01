@@ -21,7 +21,7 @@
             <button  type="submit" id="submit" value="Submit">Modfy current caretracker</button><br>
             <div class="border1">
                 <h4>Bijbehorende facturen</h4>
-                <p ng-repeat="factuur in homefacturen">{{factuur.nummer}} : {{factuur.totaalBedrag}} : {{factuur.betaalStatus}}</p>
+                <p ng-repeat="factuur in homefacturen">OnderdeelID: {{factuur.nummer}} : €{{factuur.totaalBedrag}}<br>betaalstatus: {{factuur.betaalStatus}}</p>
             </div>
         </form> 
 
