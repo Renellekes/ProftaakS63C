@@ -22,7 +22,7 @@ import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import service.RekeningAdministratie;
-
+import contstants.BetaalStatus;
 /**
  *
  * @author kay de groot
@@ -38,11 +38,17 @@ public class DataInit {
     
     @PostConstruct
     private void init() {
+<<<<<<< HEAD
         try {
             Thread.sleep(100);
         } catch (InterruptedException ex) {
             Logger.getLogger(DataInit.class.getName()).log(Level.SEVERE, null, ex);
         }
+=======
+        
+        database.addFactuur(new Factuur(0, 200, "Maart"));
+        
+>>>>>>> 8203de2154d7af7dce40148d17278606494ab425
         database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
         database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 422));
         Kilometertarief k = new Kilometertarief("testregio", "Stads", 42);
@@ -52,8 +58,9 @@ public class DataInit {
         Cartracker c = new Cartracker(a);
         c.setId(999);
         database.addCartracker(c);
-        
-        FactuurOnderdeel fo = new FactuurOnderdeel(999, k, new Date(), new Date(), 45);
+        Date date = new Date();
+        date.setMonth(new Date().getMonth()-1);
+        FactuurOnderdeel fo = new FactuurOnderdeel(999, k, date, date, 45);
         database.addOnderdeel(fo);
 
         System.out.println("Start timer");
@@ -91,7 +98,7 @@ public class DataInit {
         System.out.println("Testing 1 " + cs.size() + " : " + onderdelen.size());
         for (Cartracker c : cs) {
             factuur = new Factuur(c.getId(), 0, maand);
-            factuur.setBetaalStatus("open");
+            factuur.setBetaalStatus(BetaalStatus.OPEN);
             for (FactuurOnderdeel fac : onderdelen) {
                 System.out.println("Testing 2 fac" + fac.getCartrackerID() + " : cartracker" + c.getId());
                 System.out.println("Testing 3 " + fac.getMaand());

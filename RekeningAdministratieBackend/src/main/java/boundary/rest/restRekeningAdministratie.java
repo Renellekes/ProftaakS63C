@@ -51,6 +51,7 @@ public class restRekeningAdministratie {
     @Path("getAllCars")
     @Produces("application/json")
     public String getAllCars() {
+<<<<<<< HEAD
         List<Auto> autos = ira.getAllAutos();
         try {
             MovementSystemSockets s = new MovementSystemSockets("http://localhost:8080/VPSystem/MovementSystemEndpoint");
@@ -62,9 +63,21 @@ public class restRekeningAdministratie {
         } catch (URISyntaxException ex) {
             Logger.getLogger(restRekeningAdministratie.class.getName()).log(Level.SEVERE, null, ex);
         }
+=======
+        List<Auto> autos = ira.getAllAutos();       
+>>>>>>> 8203de2154d7af7dce40148d17278606494ab425
         return new Gson().toJson(autos);
     }
     
+
+     @GET
+    @Path("getAllEigenaars")
+     @Produces("application/json")
+    public List<Eigenaar> getAllEigenaars() {
+        List<Eigenaar> eigenaars = ira.getAllEigenaars();
+        return eigenaars;
+    }
+
     @GET
     @Path("getAllCartracker")
     @Produces("application/json")
@@ -77,8 +90,15 @@ public class restRekeningAdministratie {
     @Path("getAllFactuur")
     @Produces("application/json")
     public List<Factuur> getAllFactuur() {
-        List<Factuur> facturen = ira.getAlleFacturen();
+        List<Factuur> facturen = ira.getAlleFacturen();       
         return facturen;
+    }
+    
+    @GET
+    @Path("Facturen/{id}")
+    public Factuur getFactuur(@PathParam("id") int id) {
+        Factuur factuur = ira.getFactuur(id);
+        return factuur;
     }
 
     @PUT
@@ -102,6 +122,32 @@ public class restRekeningAdministratie {
         try {
             this.ira.modifyCartracker(cartracker);
             this.ira.modifyAuto(cartracker.getAuto());
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+     @POST
+    @Path("modifyAuto")
+    @Consumes({"application/json"})
+    public Boolean modifyAuto(Auto auto) {        
+        try {
+            this.ira.modifyAuto(auto);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+       @POST
+    @Path("modifyEigenaar")
+    @Consumes({"application/json"})
+    public Boolean modifyEigenaar(Eigenaar eigenaar) {        
+        try {
+            this.ira.modifyEigenaar(eigenaar);
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -147,6 +193,13 @@ public class restRekeningAdministratie {
     public Eigenaar getEigenaar(@PathParam("id") int id) {
         Eigenaar eigenaar = ira.getEigenaar(id);
         return eigenaar;
+    }
+    
+    @GET
+    @Path("Car/{id}")
+    public Auto getCar(@PathParam("id") int id) {
+        Auto auto = ira.getAuto(id);
+        return auto;
     }
 
     @POST

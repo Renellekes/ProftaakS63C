@@ -163,8 +163,8 @@ public class FactuurOnderdeel implements Serializable {
         this.aantalKilometers = aantalKilometers;
     }
 
-    public void setCartrakerID(int CartrakerID) {
-        this.CartrackerID = CartrakerID;
+    public void setCartrackerID(int CartrackerID) {
+        this.CartrackerID = CartrackerID;
     }
 
     public void setEindTijd(Date eindTijd) {
