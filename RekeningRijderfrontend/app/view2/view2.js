@@ -13,8 +13,8 @@ rekadmin.controller('View2Ctrl', function ($scope, restService, $http) {
     $scope.eigenaar = [];
     $scope.init = function ()
     {
-       $scope.eigenaar = [{naam:'hans', adres:"ja", woonplaats:"nee"}];
-        //$scope.eigenaar = restService.getEigenaar();
+       //$scope.eigenaar = [{naam:'hans', adres:"ja", woonplaats:"nee"}];
+       $scope.eigenaar = restService.getEigenaars();
         $scope.owner = $scope.eigenaar[0];
         
     };
