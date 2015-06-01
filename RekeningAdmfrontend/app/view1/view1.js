@@ -9,14 +9,14 @@ rekadmin.config(['$routeProvider', function ($routeProvider) {
         });
     }]);
 
-rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
+rekadmin.controller('View1Ctrl', function ($scope, Cartracker, $http) {
     $scope.cartrackers = [];
     $scope.homefacturen = [];
     $scope.hoemfileInfo = [];
-    var bewaarAutoInfo =null;
+    var bewaarAutoInfo = null;
     $scope.initData = function ()
     {
-        $scope.cartrackers = Cartraker.query();
+        $scope.cartrackers = Cartracker.query();
         console.log($scope.cartrackers);
     };
 
@@ -49,7 +49,8 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
                 eersteKleur: $scope.eersteKleur,
                 zitplaatsen: $scope.zitplaatsen
             };
-            var res = $http.post('http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/ModifyCartraker', Auto);
+            var res = $http.post('http://localhost:24707/RekeningAdministratieBackend/api/RekAdmin/ModifyCartracker', Auto);
+//            $scope.cartrackers = Cartracker.query();
             $scope.kenteken = '';
             $scope.voertuig = '';
             $scope.eersteKleur = '';
@@ -64,9 +65,9 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
                 voertuig: $scope.voertuig,
                 eersteKleur: $scope.eersteKleur,
                 zitplaatsen: $scope.zitplaatsen,
-                fileInfo:bewaarAutoInfo.fileInfo,
-                eigenaar:bewaarAutoInfo.eigenaar,
-                gestolen:bewaarAutoInfo.gestolen
+                fileInfo: bewaarAutoInfo.fileInfo,
+                eigenaar: bewaarAutoInfo.eigenaar,
+                gestolen: bewaarAutoInfo.gestolen
             };
             var cartracker = {
                 id: $scope.Cartrackerid,
@@ -75,7 +76,16 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
                 facturen: $scope.homefacturen,
                 fileInfo: $scope.homefileInfo
             };
-            var res = $http.post('http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/modifyCartraker', cartracker);
+            var res = $http.post('http://localhost:24707/RekeningAdministratieBackend/api/RekAdmin/modifyCartracker', cartracker)
+                    .success(function (data) {
+                        $scope.cartrackers = Cartracker.query();
+                    })
+                    .error(function (data, status) {
+                        console.error('Repos error', status, data);
+                    })
+                    .finally(function () {
+                        console.log("finally finished repos");
+                    });
             $scope.Cartrackerid = '';
             $scope.kenteken = '';
             $scope.voertuig = '';
@@ -84,7 +94,6 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
             $scope.website = '';
             $scope.homefacturen = '';
             $scope.homefileInfo = '';
-
         }
     };
 });

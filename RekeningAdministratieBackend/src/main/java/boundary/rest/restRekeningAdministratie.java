@@ -72,7 +72,6 @@ public class restRekeningAdministratie {
     @Path("addFactuurOnderdeel")
     @Consumes({"application/xml", "application/json"})
     public Boolean addFactuurOnderdeel(FactuurOnderdeel factuurOnderdeel) {
-        //Tweet t = new Tweet
         try {
             this.ira.addFactuurOnderdeel(factuurOnderdeel);
             return true;
@@ -83,41 +82,9 @@ public class restRekeningAdministratie {
     }
 
     @POST
-    @Path("addCartracker")
+    @Path("modifyCartracker")
     @Consumes({"application/json"})
-    public Boolean addCartraker(Auto auto) {
-        System.out.println(auto.toString());
-        try {
-            if (auto.getEigenaar() != null) {
-                List<Cartracker> cartrackers = this.ira.getCartracker();
-                for (Cartracker cartracker : cartrackers) {
-                    if (auto.getId() == cartracker.getAuto().getId()) {
-                        cartracker.setAuto(auto);
-                        this.ira.modifyCartracker(cartracker);
-                         return true;
-                    }
-                }
-                return false;
-            } else {
-                Eigenaar e = auto.getEigenaar();
-                if (e == null) {
-                    e = new Eigenaar("test", "test", "test");
-                }
-                auto.setEigenaar(e);
-                Cartracker tracker = new Cartracker(auto);
-                this.ira.addCartracker(tracker);
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-
-    @POST
-    @Path("modifyCartraker")
-    @Consumes({"application/json"})
-    public Boolean modifyCartraker(Cartracker cartracker) {
+    public Boolean modifyCartracker(Cartracker cartracker) {
         System.out.println(cartracker.getId() +  " : " + cartracker.getAuto().toString());
         try {
             this.ira.modifyCartracker(cartracker);
@@ -135,7 +102,7 @@ public class restRekeningAdministratie {
     public Boolean WijzigingBetaalStatus(Factuur factuur) {
         System.out.println("testing van dit " + factuur);
         try {
-            //this.ira.changeStatusFactuur(status, nummer);
+            this.ira.changeStatusFactuur(factuur.getBetaalStatus(), factuur.getNummer());
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
