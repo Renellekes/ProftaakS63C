@@ -33,7 +33,7 @@ import javax.inject.Inject;
 @Stateless
 public class RekeningAdministratie {
 
-    private String[] Maand = {"januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"};
+    
     private List<Account> accounts;
     private List<Cartracker> cartrackers;
 
@@ -44,40 +44,6 @@ public class RekeningAdministratie {
     private List<Eigenaar> eigenaren;
     private List<Medewerker> medewerkers;
     private Timer timer;
-
-    @PostConstruct
-    public void RekeningAdministratieInit() {
-        Eigenaar e = new Eigenaar("test data", "testing", "testvill");
-        Auto a = new Auto("test", e, "test voertuig", "paars", 2);
-        Cartracker c = new Cartracker(a);
-        c.setId(999);
-        database.addCartracker(c);
-        Kilometertarief k = new Kilometertarief("testvill", "standaard", 5);
-        database.addKilometerTarief(k);
-        FactuurOnderdeel fo = new FactuurOnderdeel(999, k, new Date(), new Date(), 45);
-        database.addOnderdeel(fo);
-
-        System.out.println("Start timer");
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        int noOfLastDay = cal.getActualMinimum(Calendar.DAY_OF_MONTH);
-        Calendar cal2 = Calendar.getInstance();
-        cal2.setTime(new Date());
-        int day = cal2.get(Calendar.DAY_OF_MONTH);
-        String testString = null;
-
-        int mndInt = Calendar.getInstance().get(Calendar.MONTH) - 1;
-        if (mndInt < 0) {
-            mndInt = 11;
-        }
-
-        if (day == noOfLastDay) {
-            this.AutomaticFactuur(Maand[mndInt]);
-        }
-        if ("test deze methode".equals(testString)) {
-            this.AutomaticFactuur(Maand[mndInt]);
-        }
-    }
 
     public void addAccount(Account account) {
     }
@@ -105,35 +71,7 @@ public class RekeningAdministratie {
     public void connectDatsbase(DatabaseManager db) {
     }
 
-    /**
-     * This method wil look through al the Factuuronderdelen for those who have
-     * a enddate for this month then they wil be added to a factuur whish is
-     * added to the database and a cartracker.
-     */
-    public void AutomaticFactuur(String maand) {
-        System.out.println("Start timeout " + Maand[Calendar.getInstance().get(Calendar.MONTH)] + maand);
-        List<FactuurOnderdeel> onderdelen = database.findOnderdelenForMonth(maand);
-        List<Cartracker> cs = database.findAllCartracker();
-        Factuur factuur = null;
-        System.out.println("Testing 1 " + cs.size() + " : " + onderdelen.size());
-        for (Cartracker c : cs) {
-            factuur = new Factuur(c.getId(), 0, maand);
-            factuur.setBetaalStatus("Open");
-            for (FactuurOnderdeel fac : onderdelen) {
-                System.out.println("Testing 2 fac" + fac.getCartrackerID() + " : cartracker" + c.getId());
-                System.out.println("Testing 3 " + fac.getMaand());
-                if ((fac.getCartrackerID() == c.getId()) && (maand.equals(fac.getMaand()))) {
-                    factuur.addFactuurOnderdelen(fac);
-                }
-            }
-            if (factuur.getSizeOnderdeelList() > 0) {
-                factuur.calculateAmount();
-                database.addFactuur(factuur);
-                c.addFactuur(factuur);
-                database.mergeCartracker(c);
-            }
-        }
-    }
+    
 
     public void addFactuur(Factuur factuur) {
     }

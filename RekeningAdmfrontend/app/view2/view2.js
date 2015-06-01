@@ -9,7 +9,7 @@ angular.module('myApp.view2', ['ngRoute'])
                 });
             }])
 
-        .controller('View2Ctrl', function ($scope, Cartraker, $http) {
+        .controller('View2Ctrl', function ($scope, Cartracker, $http) {
             $scope.facturen = [];
             $scope.onderdelen =[];
             $scope.list = [];
@@ -17,14 +17,23 @@ angular.module('myApp.view2', ['ngRoute'])
             var chooseFactuur = null;
             $scope.init = function ()
             {
-                $scope.facturen = Cartraker.getFactuurs();
+                $scope.facturen = Cartracker.getFactuurs();
                 console.log($scope.facturen);
             }
 
             $scope.submit = function () {
                 if (chooseFactuur) {
                     chooseFactuur.betaalStatus = $scope.Status;
-                    var res = $http.post('http://localhost:24707/Rekeningadministratie/api/RekAdmin/WijzigingBetaalStatus', chooseFactuur);
+                    var res = $http.post('http://localhost:24707/Rekeningadministratie/api/RekAdmin/WijzigingBetaalStatus', chooseFactuur)
+                    .success(function (data) {
+                        $scope.facturen = Cartracker.getFactuurs();
+                    })
+                    .error(function (data, status) {
+                        console.error('Repos error', status, data);
+                    })
+                    .finally(function () {
+                        console.log("finally finished repos");
+                    });
                 } else {
                     $scope.tekst = "foute waarde";
                 }
