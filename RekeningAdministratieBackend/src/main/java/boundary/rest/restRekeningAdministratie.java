@@ -81,7 +81,6 @@ public class restRekeningAdministratie {
     @Path("addFactuurOnderdeel")
     @Consumes({"application/xml", "application/json"})
     public Boolean addFactuurOnderdeel(FactuurOnderdeel factuurOnderdeel) {
-        //Tweet t = new Tweet
         try {
             this.ira.addFactuurOnderdeel(factuurOnderdeel);
             return true;
@@ -92,7 +91,7 @@ public class restRekeningAdministratie {
     }
 
     @POST
-    @Path("addCartracker")
+    @Path("modifyCartracker")
     @Consumes({"application/json"})
     public Boolean addCartracker(Auto auto) {
         System.out.println(auto.toString());
@@ -170,7 +169,7 @@ public class restRekeningAdministratie {
     public Boolean WijzigingBetaalStatus(Factuur factuur) {
         System.out.println("testing van dit " + factuur);
         try {
-            //this.ira.changeStatusFactuur(status, nummer);
+            this.ira.changeStatusFactuur(factuur.getBetaalStatus(), factuur.getNummer());
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -217,7 +216,7 @@ public class restRekeningAdministratie {
         }
     }
 
-    @PUT
+    @POST
     @Path("KilometerTarieven/Edit")
     @Consumes({"application/xml", "application/json"})
     public Boolean editKilometerTarief(Kilometertarief kt) {

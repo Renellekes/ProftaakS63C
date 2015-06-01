@@ -1,0 +1,12 @@
+domain\Road.class
+domain\CartrackerMovement.class
+domain\Request_.class
+dao\movementDAO_JPAImpl.class
+xml\XMLReader.class
+domain\CartrackerMovement_.class
+dao\roadsDAO_JPAImpl.class
+domain\Road_.class
+domain\Request.class
+dao\movementDAO.class
+sockets\MovementSystemEndpoint.class
+dao\roadsDAO.class
