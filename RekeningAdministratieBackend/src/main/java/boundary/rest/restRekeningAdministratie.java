@@ -69,7 +69,7 @@ public class restRekeningAdministratie {
     public List<Factuur> getAllFactuur() {
         List<Factuur> facturen = ira.getAlleFacturen();
         Factuur factuur= new Factuur(5, 325, "Maart");
-        factuur.setBetaalStatus("Nog te betalen.");
+        factuur.setBetaalStatus("open");
         facturen.add(factuur);
         return facturen;
     }

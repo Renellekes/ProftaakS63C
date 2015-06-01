@@ -112,7 +112,7 @@ public class RekeningAdministratie {
         System.out.println("Testing 1 "+cs.size() + " : " + onderdelen.size());
         for (Cartracker c : cs) {
             factuur = new Factuur(c.getId(), 0, Maand[Calendar.getInstance().get(Calendar.MONTH)]);
-            factuur.setBetaalStatus("Nog te betalen.");
+            factuur.setBetaalStatus("open");
             for (FactuurOnderdeel fac : onderdelen) {
                 System.out.println("Testing 2 fac"+fac.getCartrackerID()+" : cartracker"+c.getId());
                 System.out.println("Testing 3 "+fac.getMaand());
