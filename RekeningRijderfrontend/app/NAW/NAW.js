@@ -1,11 +1,11 @@
 'use strict';
 
-var rekadmin = angular.module('myApp.view2', ['ngRoute']);
+var rekadmin = angular.module('myApp.NAW', ['ngRoute']);
 
 rekadmin.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view2', {
-            templateUrl: 'view2/view2.html',
-            controller: 'View2Ctrl'
+        $routeProvider.when('/NAW', {
+            templateUrl: 'NAW/NAW.html',
+            controller: 'NAWCtrl'
         });
     }]);
 
