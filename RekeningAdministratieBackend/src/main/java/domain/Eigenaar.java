@@ -7,7 +7,6 @@ package domain;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -70,6 +69,15 @@ public class Eigenaar implements Serializable {
     public void setWoonplaats(String woonplaats) {
         this.woonplaats = woonplaats;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
+        
     
 }

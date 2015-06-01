@@ -48,16 +48,14 @@ public class restRekeningAdministratie {
     @Path("getAllCars")
     @Produces("application/json")
     public String getAllCars() {
-        List<Auto> autos = ira.getAllAutos();
-        Auto a = new Auto("testing1", null, "testing1", 5);
-        a.setId(88);
-        autos.add(a);
+        List<Auto> autos = ira.getAllAutos();       
         return new Gson().toJson(autos);
     }
     
 
      @GET
     @Path("getAllEigenaars")
+     @Produces("application/json")
     public List<Eigenaar> getAllEigenaars() {
         List<Eigenaar> eigenaars = ira.getAllEigenaars();
         return eigenaars;
@@ -75,10 +73,7 @@ public class restRekeningAdministratie {
     @Path("getAllFactuur")
     @Produces("application/json")
     public List<Factuur> getAllFactuur() {
-        List<Factuur> facturen = ira.getAlleFacturen();
-        Factuur factuur= new Factuur(5, 325, "Maart");
-        factuur.setBetaalStatus("open");
-        facturen.add(factuur);
+        List<Factuur> facturen = ira.getAlleFacturen();       
         return facturen;
     }
 
@@ -136,6 +131,32 @@ public class restRekeningAdministratie {
         try {
             this.ira.modifyCartracker(cartracker);
             this.ira.modifyAuto(cartracker.getAuto());
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+     @POST
+    @Path("modifyAuto")
+    @Consumes({"application/json"})
+    public Boolean modifyAuto(Auto auto) {        
+        try {
+            this.ira.modifyAuto(auto);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+       @POST
+    @Path("modifyEigenaar")
+    @Consumes({"application/json"})
+    public Boolean modifyEigenaar(Eigenaar eigenaar) {        
+        try {
+            this.ira.modifyEigenaar(eigenaar);
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
