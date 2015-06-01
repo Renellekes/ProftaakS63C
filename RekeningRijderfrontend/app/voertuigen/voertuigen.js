@@ -1,11 +1,11 @@
 'use strict';
 
-var rekadmin = angular.module('myApp.view1', ['ngRoute']);
+var rekadmin = angular.module('myApp.voertuigen', ['ngRoute']);
 
 rekadmin.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view1', {
-            templateUrl: 'view1/view1.html',
-            controller: 'View1Ctrl'
+        $routeProvider.when('/voertuigen', {
+            templateUrl: 'voertuigen/voertuigen.html',
+            controller: 'voertuigenCtrl'
         });
     }]);
 

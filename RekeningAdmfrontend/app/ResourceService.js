@@ -1,7 +1,7 @@
 var restservice = angular.module('restservice', ['ngResource']);
 
 restservice.factory('Cartracker', ['$resource', function ($resource) {
-        return $resource('http://localhost:47010/Rekeningadministratie/api/RekAdmin',
+        return $resource('http://localhost:5051/Rekeningadministratie/api/RekAdmin',
         null, 
         {
             'query': {method: 'GET', isArray: true, url: 'http://localhost:24707/RekeningAdministratieBackend/api/RekAdmin/getAllCartracker'},

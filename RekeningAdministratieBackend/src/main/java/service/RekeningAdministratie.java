@@ -169,19 +169,12 @@ public class RekeningAdministratie {
     public void modifyAuto(Auto a) {
         Auto b = (Auto) database.getAuto(a.getId());
         b.setEersteKleur(a.getEersteKleur());
-        b.setVoertuig(a.getVoertuig());
         b.setZitplaatsen(a.getZitplaatsen());
+        b.setVoertuig(a.getVoertuig());
         database.modifyAuto(b);
     }
 
-    public void createFactuurOnderdelen(List<Object> informatie) {
-        for (Object o : informatie) {
-            for (Cartracker c : database.getCartracker()) {
-                if (c.getId() == 0) {
-                    FactuurOnderdeel onderdeel = new FactuurOnderdeel(c.getId(), null, null, null,0);
-                    database.addOnderdeel(onderdeel);
-                }
-            }
-        }
+    public Factuur getFactuur(int id) {
+       return database.getFactuur(id);
     }
 }

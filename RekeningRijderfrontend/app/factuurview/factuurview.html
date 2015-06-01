@@ -1,10 +1,16 @@
 <div ng-app="factuurview" ng-controller="factuurviewCtrl" ng-init="init()">
     <p>Facturen</p>
-    <div class="border1">
-        <p>Nummer || Kenteken || Maand || Bedrag</p>
-        <div ng-repeat="factuur in facturen"><p>{{factuur.nummer}} || {{factuur.cartraker.auto.kenteken}} || {{factuur.maand}} || {{factuur.totaalBedrag}} || {{factuur.betaalStatus}} </p>            
-            <div ng-show="{{factuur.betaalStatus.toUpperCase() == 'OPEN'}}">
-            <script async="async" src="paypal-button.min.js?merchant=mathijscox@gmail.com" 
+    <label>Search: <input ng-model="searchText"></label>
+<table id="searchTextResults">
+    <tr><th>Nummer</th><th>Kenteken</th><th>Maand</th><th>Bedrag</th><th>BetaalStatus</th></tr>
+  <tr ng-repeat="factuur in facturen | filter:searchText">
+    <td>{{factuur.nummer}}</td>
+    <td>{{kenteken(factuur.cartrackerID)}}</td>
+    <td>{{factuur.maand}}</td>
+    <td>{{factuur.totaalBedrag}}</td>
+    <td>{{factuur.betaalStatus}}</td>
+    <td ng-show="{{factuur.betaalStatus.toUpperCase() == 'OPEN'}}">
+        <script async="async" src="paypal-button.min.js?merchant=mathijscox@gmail.com" 
             data-button="buynow" 
             data-name="{{factuur.maand}}" 
             data-amount="{{factuur.totaalBedrag}}" 
@@ -13,7 +19,6 @@
             data-tax="0" 
             data-callback="http://localhost:8383/index.html#/factuurview"
             data-env="sandbox"
-            ></script>
-        </div>
-    </div>   
-</div>
+            ></script></td>
+  </tr>
+</table>

@@ -76,6 +76,13 @@ public class restRekeningAdministratie {
         List<Factuur> facturen = ira.getAlleFacturen();       
         return facturen;
     }
+    
+    @GET
+    @Path("Facturen/{id}")
+    public Factuur getFactuur(@PathParam("id") int id) {
+        Factuur factuur = ira.getFactuur(id);
+        return factuur;
+    }
 
     @PUT
     @Path("addFactuurOnderdeel")
@@ -169,6 +176,13 @@ public class restRekeningAdministratie {
     public Eigenaar getEigenaar(@PathParam("id") int id) {
         Eigenaar eigenaar = ira.getEigenaar(id);
         return eigenaar;
+    }
+    
+    @GET
+    @Path("Car/{id}")
+    public Auto getCar(@PathParam("id") int id) {
+        Auto auto = ira.getAuto(id);
+        return auto;
     }
 
     @POST

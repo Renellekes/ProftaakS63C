@@ -183,4 +183,14 @@ public class DatabaseManager {
         return c;
     }
 
+    public Factuur getFactuur(int id) {
+        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.id = " + id);
+        List<Factuur> facturen = query.getResultList();
+        if (facturen.size() > 0) {
+            return facturen.get(0);
+        } else {
+            return null;
+        }
+    }
+
 }
