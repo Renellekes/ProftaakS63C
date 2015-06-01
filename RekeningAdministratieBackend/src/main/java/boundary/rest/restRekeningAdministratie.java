@@ -76,9 +76,9 @@ public class restRekeningAdministratie {
     @Produces("application/json")
     public List<Factuur> getAllFactuur() {
         List<Factuur> facturen = ira.getAlleFacturen();
-        //Factuur factuur= new Factuur(5, 325, "Maart");
-        //factuur.setBetaalStatus("Nog te betalen.");
-        //facturen.add(factuur);
+        Factuur factuur= new Factuur(5, 325, "Maart");
+        factuur.setBetaalStatus("open");
+        facturen.add(factuur);
         return facturen;
     }
 

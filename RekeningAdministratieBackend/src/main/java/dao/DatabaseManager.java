@@ -25,21 +25,13 @@ import javax.persistence.Query;
  *
  * @author kay de groot
  */
-@Singleton
-@Startup
+@Stateless
 public class DatabaseManager {
 
     //HIER MOETEN WE ECHT WAT AAN DOEN! CENTRALE DB ERGENS?
     @PersistenceContext(unitName = "MooieUnit")
 
     private EntityManager em;
-
-    @PostConstruct
-    private void init() {
-
-
-        //this.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
-    }     
 
     public DatabaseManager() {
     }
