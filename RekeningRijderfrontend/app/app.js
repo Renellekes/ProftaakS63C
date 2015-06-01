@@ -5,8 +5,7 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.voertuigen',
   'myApp.NAW',
-  'myApp.factuurview',
-  'myApp.factuurdetailsview',
+  'myApp.factuurview',  
   'myApp.version',
   'restservice'
 ]).
