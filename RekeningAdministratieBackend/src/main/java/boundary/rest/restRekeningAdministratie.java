@@ -76,9 +76,9 @@ public class restRekeningAdministratie {
     @Produces("application/json")
     public List<Factuur> getAllFactuur() {
         List<Factuur> facturen = ira.getAlleFacturen();
-        Factuur factuur= new Factuur(5, 325, "Maart");
-        factuur.setBetaalStatus("Nog te betalen.");
-        facturen.add(factuur);
+        //Factuur factuur= new Factuur(5, 325, "Maart");
+        //factuur.setBetaalStatus("Nog te betalen.");
+        //facturen.add(factuur);
         return facturen;
     }
 
@@ -99,7 +99,7 @@ public class restRekeningAdministratie {
     @POST
     @Path("addCartracker")
     @Consumes({"application/json"})
-    public Boolean addCartraker(Auto auto) {
+    public Boolean addCartracker(Auto auto) {
         System.out.println(auto.toString());
         try {
             if (auto.getEigenaar() != null) {
@@ -129,9 +129,9 @@ public class restRekeningAdministratie {
     }
 
     @POST
-    @Path("modifyCartraker")
+    @Path("modifyCartracker")
     @Consumes({"application/json"})
-    public Boolean modifyCartraker(Cartracker cartracker) {
+    public Boolean modifyCartracker(Cartracker cartracker) {
         System.out.println(cartracker.getId() +  " : " + cartracker.getAuto().toString());
         try {
             this.ira.modifyCartracker(cartracker);

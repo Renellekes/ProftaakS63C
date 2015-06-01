@@ -107,7 +107,7 @@ public class DatabaseManager {
     }
 
     public List<Auto> getAuto(int i) {
-        Query query = em.createQuery("SELECT c FROM Auto c SELECT c FROM Auto c WHERE c.id = " + i);
+        Query query = em.createQuery("SELECT c FROM Auto c WHERE c.id = " + i);
         List<Auto> autos = query.getResultList();
         return autos;
     }

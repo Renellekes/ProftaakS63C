@@ -51,11 +51,11 @@ public class RekeningAdministratie {
         Auto a = new Auto("test", e, "test voertuig", "paars", 2);
         Cartracker c = new Cartracker(a);
         c.setId(999);
-        database.addCartracker(c);
+        //database.addCartracker(c);
         Kilometertarief k = new Kilometertarief("testvill", "standaard", 5);
-        database.addKilometerTarief(k);
+        //database.addKilometerTarief(k);
         FactuurOnderdeel fo = new FactuurOnderdeel(999, k, new Date(), new Date(), 45);
-        database.addOnderdeel(fo);
+        //database.addOnderdeel(fo);
 
         System.out.println("Start timer");
         Calendar cal = Calendar.getInstance();
