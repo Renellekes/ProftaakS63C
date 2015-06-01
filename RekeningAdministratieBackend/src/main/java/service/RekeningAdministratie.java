@@ -213,4 +213,9 @@ public class RekeningAdministratie {
     public Eigenaar getEigenaar(int id) {
         return database.getEigenaar(id);
     }
+
+    public List<Eigenaar> getAllEigenaars() {
+        List<Eigenaar> eigenaars = database.getAllEigenaars();
+        return eigenaars;
+    }
 }

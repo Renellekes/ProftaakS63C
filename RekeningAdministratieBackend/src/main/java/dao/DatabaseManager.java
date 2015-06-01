@@ -36,7 +36,7 @@ public class DatabaseManager {
     @PostConstruct
     private void init() {
 
-        this.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
+        //this.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
     } 
     
     public DatabaseManager() {
@@ -166,6 +166,12 @@ public class DatabaseManager {
 
     public void mergeAuto(Auto auto) {
         em.merge(auto);
+    }
+
+    public List<Eigenaar> getAllEigenaars() {
+        Query query = em.createQuery("SELECT c FROM Eigenaar c");
+        List<Eigenaar> c = query.getResultList();
+        return c;
     }
 
 }

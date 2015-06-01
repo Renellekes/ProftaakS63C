@@ -50,6 +50,13 @@ public class restRekeningAdministratie {
         List<Auto> autos = ira.getAllAutos();
         return new Gson().toJson(autos);
     }
+    
+     @GET
+    @Path("getAllEigenaars")
+    public List<Eigenaar> getAllEigenaars() {
+        List<Eigenaar> eigenaars = ira.getAllEigenaars();
+        return eigenaars;
+    }
 
     @GET
     @Path("getAllFactuur")
