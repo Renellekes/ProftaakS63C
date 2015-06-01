@@ -2,7 +2,20 @@
     <p>Modify factuur</p>
     <div class="border1">
         <h3>Alle Facturen</h3>
-        <p ng-repeat="factuur in facturen" ng-click="onClickRepeat(factuur)">Factuur voor {{factuur.nummer}} : {{factuur.betaalStatus}} : {{factuur.maand}}</p>
+        <p ng-repeat="factuur in facturen" ng-click="onClickRepeat(factuur)">
+            ---------------------------------------------------------------------------------------------------------------
+            Factuurid: {{factuur.nummer}}<br> 
+            Betaal status: {{factuur.betaalStatus}}<br>
+            Voor maand {{factuur.maand}}<br>
+            Totaal kosten: {{factuur.totaalBedrag}}
+        </p>
+    </div>
+    <div class="border2">
+        <p ng-repeat="onderdeel in onderdelen">
+            Factuur onderdeel ID:{{onderdeel.factuurOnderdeelID}}<br> bedrag:{{onderdeel.bedrag}} aantal Kilometers:{{onderdeel.aantalKilometers}} cartraker: {{onderdeel.cartrakerID}}<br>
+            beginTijd: {{onderdeel.beginTijd}} eindTijd:{{onderdeel.eindTijd}}<br>
+            ---------------------------------------------------------------------------------------------------------------
+        </p>
     </div>
     <div class="border2">
         <h3 style="margin: 5%">De betaalstatus van gekozen factuur aanpassen</h3>

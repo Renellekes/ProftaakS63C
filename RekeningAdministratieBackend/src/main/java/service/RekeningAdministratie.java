@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.annotation.PostConstruct;
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -46,37 +47,30 @@ public class RekeningAdministratie {
 
     @PostConstruct
     public void RekeningAdministratieInit() {
-        timer = new Timer();
-        final Calendar cal = Calendar.getInstance(); // creates calendar
-        cal.setTime(new Date()); // sets calendar time/date
-        cal.add(Calendar.MINUTE, 5); // adds one hour
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                List<FactuurOnderdeel> onderdelen = database.findOnderdelenForMonth(Maand[Calendar.MONTH]);
-                List<Cartracker> cs = database.findAllCartracker();
-                for (Cartracker c : cs) {
-                    Factuur factuur = new Factuur(c, 0, Maand[Calendar.MONTH]);
-                    for (FactuurOnderdeel fac : onderdelen) {
-                        if ((fac.getCartrackerID() == c.getId()) && (Maand[fac.getEindTijd().getMonth()].equals(Maand[Calendar.MONTH]))) {
-                            factuur.addFactuurOnderdelen(fac);
-                            onderdelen.remove(fac);
-                        }
-                    }
-                    if (factuur.getSizeOnderdeelList() > 0) {
-                        factuur.calculateAmount();
-                        c.addFactuur(factuur);
-                        database.mergeCartracker(c);
-                    }
-                }
-                //Dit moet worden verandert worden naar maand wanneer er niet meer hoeft te worden getest.
-                cal.clear();
-                cal.setTime(new Date());
-                cal.add(Calendar.HOUR_OF_DAY, 1);
-                timer.schedule(this, cal.getTime());
-            }
-        };
-        timer.schedule(task, cal.getTime());
+        Eigenaar e = new Eigenaar("test data", "testing", "testvill");
+        Auto a = new Auto("test", e, "test voertuig", "paars", 2);
+        Cartracker c = new Cartracker(a);
+        c.setId(999);
+        database.addCartracker(c);
+        Kilometertarief k = new Kilometertarief("testvill", "standaard", 5);
+        database.addKilometerTarief(k);
+        FactuurOnderdeel fo = new FactuurOnderdeel(999, k, new Date(), new Date(), 45);
+        database.addOnderdeel(fo);
+
+        System.out.println("Start timer");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        int noOfLastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(new Date());
+        int day = cal2.get(Calendar.DAY_OF_MONTH);
+        String testString = null;
+        if (day == noOfLastDay) {
+            this.AutomaticFactuur();
+        }
+        if ("test deze methode".equals(testString)) {
+            this.AutomaticFactuur();
+        }
     }
 
     public void addAccount(Account account) {
@@ -94,21 +88,8 @@ public class RekeningAdministratie {
     }
 
     public void modifyCartracker(Cartracker cartracker) {
-        List<Cartracker> cartrackers = database.findAllCartracker();
-        for (Cartracker c : cartrackers) {
-            if (c.getId() == cartracker.getId()) {
-                database.mergeCartracker(cartracker);
-            }
-        }
-
-    }
-    public void modifyAuto(Auto auto) {
-        List<Auto> autos = database.getAllAutos();
-        for (Auto c : autos) {
-            if (c.getId() == auto.getId()) {
-                database.mergeAuto(auto);
-            }
-        }
+        System.out.println("rekenrijder 2");
+        database.mergeCartracker(cartracker);
 
     }
 
@@ -124,7 +105,28 @@ public class RekeningAdministratie {
      * added to the database and a cartracker.
      */
     public void AutomaticFactuur() {
-
+        System.out.println("Start timeout " + Maand[Calendar.getInstance().get(Calendar.MONTH)]);
+        List<FactuurOnderdeel> onderdelen = database.findOnderdelenForMonth(Maand[Calendar.getInstance().get(Calendar.MONTH)]);
+        List<Cartracker> cs = database.findAllCartracker();
+        Factuur factuur = null;
+        System.out.println("Testing 1 "+cs.size() + " : " + onderdelen.size());
+        for (Cartracker c : cs) {
+            factuur = new Factuur(c.getId(), 0, Maand[Calendar.getInstance().get(Calendar.MONTH)]);
+            factuur.setBetaalStatus("Nog te betalen.");
+            for (FactuurOnderdeel fac : onderdelen) {
+                System.out.println("Testing 2 fac"+fac.getCartrackerID()+" : cartracker"+c.getId());
+                System.out.println("Testing 3 "+fac.getMaand());
+                if ((fac.getCartrackerID() == c.getId()) && (Maand[Calendar.getInstance().get(Calendar.MONTH)].equals(fac.getMaand()))) {
+                    factuur.addFactuurOnderdelen(fac);
+                }
+            }
+            if (factuur.getSizeOnderdeelList() > 0) {
+                factuur.calculateAmount();
+                database.addFactuur(factuur);
+                c.addFactuur(factuur);
+                database.mergeCartracker(c);
+            }
+        }
     }
 
     public void addFactuur(Factuur factuur) {
@@ -214,8 +216,14 @@ public class RekeningAdministratie {
         return database.getEigenaar(id);
     }
 
+
     public List<Eigenaar> getAllEigenaars() {
         List<Eigenaar> eigenaars = database.getAllEigenaars();
         return eigenaars;
+    }
+
+    
+    public void modifyAuto(Auto a){
+        database.modifyAuto(a);
     }
 }

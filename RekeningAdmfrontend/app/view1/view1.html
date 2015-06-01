@@ -1,24 +1,29 @@
 <div ng-app="view1" ng-controller="View1Ctrl" >
     <p>Create or modify cartracker</p>
     <div class="border1" ng-init="initData()">
-        <p ng-click="chooseCar(auto)" ng-repeat="auto in cars">{{auto.kenteken}}</p>
+        <p ng-click="chooseCar(cartracker)" ng-repeat="cartracker in cartrackers">{{cartracker.id}} voor {{cartracker.auto.kenteken}}</p>
     </div>
     <div class="border2">
-        <p style="margin: 5%">Nieuwe Cartraker toevoegen</p>
+        <p style="margin: 5%">Cartraker aanpassen</p>
         <form style="margin: 5%" ng-submit="submit()">
-            kenteken:<br>
-            <input type="text" name="kenteken" ng-model="kenteken">
-            <br>
-            voertuig:<br>
-            <input type="text" name="voertuig" ng-model="voertuig"><br>
-            De aller eerste kleur van dit voertuig:<br>
-            <input type="text" name="eerstekleur" ng-model="eerstekleur"><br>
-            Het aantal zitplaatsen:<br>
-            <input type="text" name="aantalzitplaatsen" ng-model="aantalzitplaatsen"><br>
-            <button  type="submit" id="submit" value="Submit">Auto toevoegen</button>
-            <button  type="submit" ng-click="addid()">Auto aanpassen</button>
-            <pre>list={{list}}</pre>
+            Cartracker id:<input type="text" readonly="true" name="Cartrackerid" ng-model="Cartrackerid"><br>
+            <div class="border1">
+                kenteken:
+                <input type="text" readonly="true" name="kenteken" ng-model="kenteken"><br>
+                voertuig:
+                <input type="text" name="voertuig" ng-model="voertuig"><br>
+                De aller eerste kleur van dit voertuig:
+                <input type="text" name="eersteKleur" ng-model="eersteKleur"><br>
+                Het aantal zitplaatsen:
+                <input type="text" name="zitplaatsen" ng-model="zitplaatsen"><br>
+            </div><br><br>
+            Website:<input type="checkbox" name="website" ng-model="website"><br>
+            <button  type="submit" id="submit" value="Submit">Modfy current caretracker</button><br>
+            <div class="border1">
+                <h4>Bijbehorende facturen</h4>
+                <p ng-repeat="factuur in homefacturen">{{factuur.nummer}} : {{factuur.totaalBedrag}} : {{factuur.betaalStatus}}</p>
+            </div>
         </form> 
-         
+
     </div>
 </div>

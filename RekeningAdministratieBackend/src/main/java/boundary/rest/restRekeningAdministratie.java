@@ -46,11 +46,16 @@ public class restRekeningAdministratie {
     
     @GET
     @Path("getAllCars")
+    @Produces("application/json")
     public String getAllCars() {
         List<Auto> autos = ira.getAllAutos();
+        Auto a = new Auto("testing1", null, "testing1", 5);
+        a.setId(88);
+        autos.add(a);
         return new Gson().toJson(autos);
     }
     
+
      @GET
     @Path("getAllEigenaars")
     public List<Eigenaar> getAllEigenaars() {
@@ -59,12 +64,22 @@ public class restRekeningAdministratie {
     }
 
     @GET
+    @Path("getAllCartracker")
+    @Produces("application/json")
+    public String getAllCartracker() {
+        List<Cartracker> cartrackers = ira.getCartracker();
+        return new Gson().toJson(cartrackers);
+    }
+
+    @GET
     @Path("getAllFactuur")
     @Produces("application/json")
     public List<Factuur> getAllFactuur() {
-        List<Factuur> factuur = ira.getAlleFacturen();
-        //factuur.add(new Factuur(null, 325, "Maart"));
-        return factuur;
+        List<Factuur> facturen = ira.getAlleFacturen();
+        Factuur factuur= new Factuur(5, 325, "Maart");
+        factuur.setBetaalStatus("Nog te betalen.");
+        facturen.add(factuur);
+        return facturen;
     }
 
     @PUT
@@ -84,7 +99,8 @@ public class restRekeningAdministratie {
     @POST
     @Path("addCartracker")
     @Consumes({"application/json"})
-    public Boolean addCartracker(Auto auto) {
+    public Boolean addCartraker(Auto auto) {
+        System.out.println(auto.toString());
         try {
             if (auto.getEigenaar() != null) {
                 List<Cartracker> cartrackers = this.ira.getCartracker();
@@ -101,8 +117,8 @@ public class restRekeningAdministratie {
                 if (e == null) {
                     e = new Eigenaar("test", "test", "test");
                 }
-                Auto nieuweAuto = new Auto(auto.getKenteken(), e, auto.getVoertuig(), auto.getEersteKleur(), auto.getZitplaatsen());
-                Cartracker tracker = new Cartracker(nieuweAuto);
+                auto.setEigenaar(e);
+                Cartracker tracker = new Cartracker(auto);
                 this.ira.addCartracker(tracker);
                 return true;
             }
@@ -112,25 +128,14 @@ public class restRekeningAdministratie {
         }
     }
 
-    @PUT
-    @Path("modifyCartracker")
-    @Consumes({"application/xml", "application/json"})
-    public Boolean modifyCartracker(Cartracker cartracker) {
+    @POST
+    @Path("modifyCartraker")
+    @Consumes({"application/json"})
+    public Boolean modifyCartraker(Cartracker cartracker) {
+        System.out.println(cartracker.getId() +  " : " + cartracker.getAuto().toString());
         try {
             this.ira.modifyCartracker(cartracker);
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    
-    @PUT
-    @Path("modifyCar")
-    @Consumes({"application/json"})
-    public Boolean modifyCar(Auto auto) {
-        try {
-            this.ira.modifyAuto(auto);
+            this.ira.modifyAuto(cartracker.getAuto());
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());

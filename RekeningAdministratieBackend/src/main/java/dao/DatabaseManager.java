@@ -16,6 +16,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -32,13 +33,14 @@ public class DatabaseManager {
     @PersistenceContext(unitName = "MooieUnit")
 
     private EntityManager em;
-    
+
     @PostConstruct
     private void init() {
 
+
         //this.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
-    } 
-    
+    }     
+
     public DatabaseManager() {
     }
 
@@ -49,7 +51,7 @@ public class DatabaseManager {
     }
 
     public List<FactuurOnderdeel> findOnderdelenForMonth(String Maand) {
-        Query query = em.createQuery("SELECT c FROM FactuurOnderdeel c WHERE c.maand = " + Maand);
+        Query query = em.createQuery("SELECT c FROM FactuurOnderdeel c WHERE c.maand = '" + Maand + "'");
         List<FactuurOnderdeel> facturen = query.getResultList();
         for (FactuurOnderdeel fo : facturen) {
             fo.setMonth();
@@ -103,7 +105,7 @@ public class DatabaseManager {
         List<Auto> autos = query.getResultList();
         return autos;
     }
-    
+
     public List<Auto> getAuto(int i) {
         Query query = em.createQuery("SELECT c FROM Auto c SELECT c FROM Auto c WHERE c.id = " + i);
         List<Auto> autos = query.getResultList();
@@ -154,9 +156,14 @@ public class DatabaseManager {
         return c;
     }
 
+    public void modifyAuto(Auto a) {
+        em.merge(a);
+
+    }
+
     public Eigenaar getEigenaar(int id) {
-       Query query = em.createQuery("SELECT c FROM Eigenaar c WHERE c.id = " + id);
-         List<Eigenaar> eigenaar = query.getResultList();
+        Query query = em.createQuery("SELECT c FROM Eigenaar c WHERE c.id = " + id);
+        List<Eigenaar> eigenaar = query.getResultList();
         if (eigenaar.size() > 0) {
             return eigenaar.get(0);
         } else {

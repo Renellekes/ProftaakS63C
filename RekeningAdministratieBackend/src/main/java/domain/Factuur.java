@@ -8,6 +8,7 @@ package domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,13 +31,13 @@ public class Factuur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int nummer;
-    @JoinColumn(name = "cartrackerID",referencedColumnName = "id")
-    private Cartracker cartracker;
+    @Column
+    private int cartrakerID;
     @Column
     private double totaalBedrag;
     @Column
     private String betaalStatus;
-    @ManyToOne(targetEntity = FactuurOnderdeel.class)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<FactuurOnderdeel> factuuronderdelen;
     @Column
     private String maand;
@@ -43,16 +45,16 @@ public class Factuur implements Serializable {
     public Factuur() {
     }
 
-    public Factuur(Cartracker cartracker, double totaalBedrag, String maand) {
-        this.cartracker = cartracker;
+    public Factuur(int cartrakerID, double totaalBedrag, String maand) {
+        this.cartrakerID = cartrakerID;
         this.totaalBedrag = totaalBedrag;
         this.maand = maand;
         factuuronderdelen = new ArrayList<FactuurOnderdeel>();
     }
 
-    public Factuur(int nummer, Cartracker cartracker, double totaalBedrag, String betaalStatus, String maand) {
+    public Factuur(int nummer, int cartrakerID, double totaalBedrag, String betaalStatus, String maand) {
         this.nummer = nummer;
-        this.cartracker = cartracker;
+        this.cartrakerID = cartrakerID;
         this.totaalBedrag = totaalBedrag;
         this.betaalStatus = betaalStatus;
         this.maand = maand;
@@ -72,14 +74,6 @@ public class Factuur implements Serializable {
 
     public void setNummer(int nummer) {
         this.nummer = nummer;
-    }
-
-    public Cartracker getCartracker() {
-        return cartracker;
-    }
-
-    public void setCartracker(Cartracker cartracker) {
-        this.cartracker = cartracker;
     }
 
     public double getTotaalBedrag() {
@@ -122,9 +116,17 @@ public class Factuur implements Serializable {
         this.betaalStatus = betaalStatus;
     }
 
+    public int getCartrakerID() {
+        return cartrakerID;
+    }
+
+    public void setCartrakerID(int cartrakerID) {
+        this.cartrakerID = cartrakerID;
+    }
+
     @Override
     public String toString() {
-        return "Factuur{" + "nummer=" + nummer + ", cartracker=" + cartracker + ", totaalBedrag=" + totaalBedrag + ", betaalStatus=" + betaalStatus + ", maand=" + maand + '}';
+        return "Factuur{" + "nummer=" + nummer + ", cartrakerID=" + cartrakerID + ", totaalBedrag=" + totaalBedrag + ", betaalStatus=" + betaalStatus + ", maand=" + maand + '}';
     }
     
     
