@@ -5,6 +5,7 @@
  */
 package domain;
 
+import contstants.BetaalStatus;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,9 @@ public class Factuur implements Serializable {
     private List<FactuurOnderdeel> factuuronderdelen;
     @Column
     private String maand;
-
+    
+ 
+    
     public Factuur() {
     }
 
@@ -50,13 +53,14 @@ public class Factuur implements Serializable {
         this.totaalBedrag = totaalBedrag;
         this.maand = maand;
         factuuronderdelen = new ArrayList<FactuurOnderdeel>();
+        this.betaalStatus = BetaalStatus.OPEN;
     }
 
-    public Factuur(int nummer, int cartrakerID, double totaalBedrag, String betaalStatus, String maand) {
+    public Factuur(int nummer, int cartrakerID, double totaalBedrag, String maand) {
         this.nummer = nummer;
         this.cartrakerID = cartrakerID;
         this.totaalBedrag = totaalBedrag;
-        this.betaalStatus = betaalStatus;
+        this.betaalStatus = BetaalStatus.OPEN;
         this.maand = maand;
         factuuronderdelen = new ArrayList<FactuurOnderdeel>();
     }
