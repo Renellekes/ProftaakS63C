@@ -13,7 +13,8 @@ restservice.factory('restService', ['$resource', function ($resource) {
         return $resource('http://localhost:8080/RekeningAdministratieBackend/api/RekAdmin',
         null, 
         {
-            'getEigenaars': {method: 'GET', isArray: true, url: 'http://localhost:8080/RekeningAdministratieBackend/api/RekAdmin/getAllEigenaars'}
+            'getEigenaars': {method: 'GET', isArray: true, url: 'http://localhost:8080/RekeningAdministratieBackend/api/RekAdmin/getAllEigenaars'},
+            'getFactuur':{method: 'GET', isArray: true, url: 'http://localhost:8080/RekeningAdministratieBackend/api/RekAdmin/getAllFactuur'}
             
         });
     }]);

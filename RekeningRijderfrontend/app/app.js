@@ -6,6 +6,7 @@ angular.module('myApp', [
   'myApp.voertuigen',
   'myApp.NAW',
   'myApp.factuurview',
+  'myApp.factuurdetailsview',
   'myApp.version',
   'restservice'
 ]).
