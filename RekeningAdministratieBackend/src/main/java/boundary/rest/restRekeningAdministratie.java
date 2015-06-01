@@ -170,6 +170,13 @@ public class restRekeningAdministratie {
         Eigenaar eigenaar = ira.getEigenaar(id);
         return eigenaar;
     }
+    
+    @GET
+    @Path("Car/{id}")
+    public Auto getCar(@PathParam("id") int id) {
+        Auto auto = ira.getAuto(id);
+        return auto;
+    }
 
     @POST
     @Path("KilometerTarieven/Add")
