@@ -1,29 +1,74 @@
-<div ng-app="view1" ng-controller="View1Ctrl" >
-    <p>Create or modify cartracker</p>
-    <div class="border1" ng-init="initData()">
-        <p ng-click="chooseCar(cartracker)" ng-repeat="cartracker in cartrackers">{{cartracker.id}} voor {{cartracker.auto.kenteken}}</p>
-    </div>
-    <div class="border2">
-        <p style="margin: 5%">Cartraker aanpassen</p>
-        <form style="margin: 5%" ng-submit="submit()">
-            Cartracker id:<input type="text" ng-disabled="true" name="Cartrackerid" ng-model="Cartrackerid"><br>
-            <div class="border1">
-                kenteken:
-                <input type="text" ng-disabled="true" name="kenteken" ng-model="kenteken"><br>
-                voertuig:
-                <input type="text" name="voertuig" ng-model="voertuig"><br>
-                De aller eerste kleur van dit voertuig:
-                <input type="text" name="eersteKleur" ng-model="eersteKleur"><br>
-                Het aantal zitplaatsen:
-                <input type="text" name="zitplaatsen" ng-model="zitplaatsen"><br>
-            </div><br><br>
-            Website:<input type="checkbox" name="website" ng-model="website"><br>
-            <button  type="submit" id="submit" value="Submit">Modfy current caretracker</button><br>
-            <div class="border1">
-                <h4>Bijbehorende facturen</h4>
-                <p ng-repeat="factuur in homefacturen">{{factuur.nummer}} : {{factuur.totaalBedrag}} : {{factuur.betaalStatus}}</p>
+<div ng-app="view1" ng-controller="View1Ctrl" ng-init="initData()">
+    <h1>Create or modify cartracker</h1>
+    <h2>All cartrackers</h2>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="list-group">
+                <a class="list-group-item" ng-click="chooseCar(cartracker)" ng-repeat="cartracker in cartrackers">Kenteken: {{cartracker.auto.kenteken}}</a>
             </div>
-        </form> 
-
+        </div>
     </div>
+
+    <hr>
+    <h2>Cartraker aanpassen</h2>
+    <form class="form-horizontal" role="form" ng-submit="submit()">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="cartrackeridid">Cartracker id:</label>
+            <div class="col-sm-10">
+                <input type="text" ng-disabled="true" id="cartrackeridid" name="Cartrackerid" ng-model="Cartrackerid">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="kentekenid">Kenteken:</label>
+            <div class="col-sm-10">
+                <input type="text" ng-disabled="true" id="kentekenid" name="kenteken" ng-model="kenteken">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="voertuigid">Voertuig:</label>
+            <div class="col-sm-10">
+                <input type="text" name="voertuig" id="voertuigid" ng-model="voertuig">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="kleurid">Kleur:</label>
+            <div class="col-sm-10">
+                <input type="text" name="eersteKleur" id="kleurid" ng-model="eersteKleur">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="zitplaatsenid">Het aantal zitplaatsen:</label>
+            <div class="col-sm-10">
+                <input type="text" name="zitplaatsen" id="zitplaatsenid" ng-model="zitplaatsen">
+            </div>
+        </div>
+        <div class="form-group"> 
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label><input type="checkbox" name="website" ng-model="website"> Website</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group"> 
+            <div class="col-sm-offset-2 col-sm-10">
+                <button  type="submit" class="btn btn-default" value="Submit">Modify current cartracker</button>
+            </div>
+        </div>
+        <hr>
+        <h2>Bijbehorende facturen</h2>
+        <div class="row">
+            <div class="col-sm-4">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="factuur in homefacturen">Factuur: {{factuur.nummer}}                     
+                        <ul class="list-group">
+                            <li class="list-group-item">Totaalbedrag: {{factuur.totaalBedrag}}</li>
+                            <li class="list-group-item">Status: {{factuur.betaalStatus}}</li>
+                        </ul>
+                    </li>  
+                </ul>
+            </div></div>
+
+
+
+    </form> 
 </div>

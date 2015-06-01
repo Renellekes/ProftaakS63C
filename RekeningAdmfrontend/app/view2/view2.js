@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.factuurdetailsview', ['ngRoute'])
+angular.module('myApp.view2', ['ngRoute'])
 
         .config(['$routeProvider', function ($routeProvider) {
-                $routeProvider.when('/factuurview', {
-                    templateUrl: 'factuurview/factuurdetailsview.html',
-                    controller: 'factuurdetailsviewCtrl'
+                $routeProvider.when('/view2', {
+                    templateUrl: 'view2/view2.html',
+                    controller: 'View2Ctrl'
                 });
             }])
 
-        .controller('factuurdetailsviewCtrl', function ($scope, Cartracker, $http) {
+        .controller('View2Ctrl', function ($scope, Cartracker, $http) {
             $scope.facturen = [];
             $scope.onderdelen =[];
             $scope.list = [];
@@ -20,6 +20,24 @@ angular.module('myApp.factuurdetailsview', ['ngRoute'])
                 $scope.facturen = Cartracker.getFactuurs();
                 console.log($scope.facturen);
             }
+
+            $scope.submit = function () {
+                if (chooseFactuur) {
+                    chooseFactuur.betaalStatus = $scope.Status;
+                    var res = $http.post('http://localhost:5051/Rekeningadministratie/api/RekAdmin/WijzigingBetaalStatus', chooseFactuur)
+                    .success(function (data) {
+                        $scope.facturen = Cartracker.getFactuurs();
+                    })
+                    .error(function (data, status) {
+                        console.error('Repos error', status, data);
+                    })
+                    .finally(function () {
+                        console.log("finally finished repos");
+                    });
+                } else {
+                    $scope.tekst = "foute waarde";
+                }
+            };
 
             $scope.onClickRepeat = function (factuur) {
                 chooseFactuur = factuur;
