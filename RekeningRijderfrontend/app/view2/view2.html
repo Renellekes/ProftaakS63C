@@ -8,12 +8,12 @@
         <p style="margin: 5%">NAW gegevens</p>
         <form style="margin: 5%" ng-submit="submit()">
             naam:<br>
-            <select data-ng-options="o.naam for o in eigenaars" data-ng-model="selectedOption"></select>
+            <select data-ng-options="o.naam for o in eigenaars" data-ng-model="selectedOption"ng-change="update()"></select>
             <br>
             adres:<br>
-            <input type="text" name="adres" ng-model="selectedOption.adres"><br>
+            <input type="text" name="adres" ng-model="adres"><br>
             woonplaats:<br>
-            <input type="text" name="woonplaats" ng-model="selectedOption.woonplaats"><br>  
+            <input type="text" name="woonplaats" ng-model="woonplaats"><br>  
             <!-- username:<br>
             <input type="text" name="user" ng-model="username"><br> 
             password:<br>
