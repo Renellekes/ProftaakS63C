@@ -10,11 +10,11 @@ rekadmin.config(['$routeProvider', function ($routeProvider) {
     }]);
 
 rekadmin.controller('View2Ctrl', function ($scope, restService, $http) {
-    $scope.eigenaar = [];
+    $scope.eigenaars = [];
     $scope.init = function ()
     {
        //$scope.eigenaar = [{naam:'hans', adres:"ja", woonplaats:"nee"}];
-       $scope.eigenaar = restService.getEigenaars();
+       $scope.eigenaars = restService.getEigenaars();
         $scope.owner = $scope.eigenaar[0];
         
     };
