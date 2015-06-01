@@ -29,8 +29,7 @@ rekadmin.controller('KilometerTariefCtrl', function($scope, restService, $http) 
             $scope.regio = '';
             $scope.tariefCategorie = '';
             $scope.bedrag = '';
-    };
-    
+    };    
     
     $scope.chooseTarief = function (tarief) {
         $scope.wijzigid = tarief.id;
