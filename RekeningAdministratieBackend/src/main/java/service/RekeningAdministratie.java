@@ -174,6 +174,8 @@ public class RekeningAdministratie {
     public void modifyAuto(Auto a){
         Auto b = (Auto) database.getAuto(a.getId());
         b.setEersteKleur(a.getEersteKleur());
+        b.setVoertuig(a.getVoertuig());
+        b.setZitplaatsen(a.getZitplaatsen());
         database.modifyAuto(b);
     }
 }

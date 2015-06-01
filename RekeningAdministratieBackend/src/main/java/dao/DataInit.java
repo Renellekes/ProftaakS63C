@@ -45,8 +45,9 @@ public class DataInit {
         Cartracker c = new Cartracker(a);
         c.setId(999);
         database.addCartracker(c);
-        
-        FactuurOnderdeel fo = new FactuurOnderdeel(999, k, new Date(), new Date(), 45);
+        Date date = new Date();
+        date.setMonth(new Date().getMonth()-1);
+        FactuurOnderdeel fo = new FactuurOnderdeel(999, k, date, date, 45);
         database.addOnderdeel(fo);
 
         System.out.println("Start timer");
