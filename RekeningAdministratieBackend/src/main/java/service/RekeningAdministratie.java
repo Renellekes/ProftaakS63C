@@ -178,4 +178,8 @@ public class RekeningAdministratie {
         b.setZitplaatsen(a.getZitplaatsen());
         database.modifyAuto(b);
     }
+
+    public Factuur getFactuur(int id) {
+       return database.getFactuur(id);
+    }
 }

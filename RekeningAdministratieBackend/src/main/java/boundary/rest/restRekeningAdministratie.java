@@ -76,6 +76,13 @@ public class restRekeningAdministratie {
         List<Factuur> facturen = ira.getAlleFacturen();       
         return facturen;
     }
+    
+    @GET
+    @Path("Facturen/{id}")
+    public Factuur getFactuur(@PathParam("id") int id) {
+        Factuur factuur = ira.getFactuur(id);
+        return factuur;
+    }
 
     @PUT
     @Path("addFactuurOnderdeel")
