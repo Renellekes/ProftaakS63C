@@ -93,38 +93,6 @@ public class restRekeningAdministratie {
     @POST
     @Path("modifyCartracker")
     @Consumes({"application/json"})
-    public Boolean addCartracker(Auto auto) {
-        System.out.println(auto.toString());
-        try {
-            if (auto.getEigenaar() != null) {
-                List<Cartracker> cartrackers = this.ira.getCartracker();
-                for (Cartracker cartracker : cartrackers) {
-                    if (auto.getId() == cartracker.getAuto().getId()) {
-                        cartracker.setAuto(auto);
-                        this.ira.modifyCartracker(cartracker);
-                         return true;
-                    }
-                }
-                return false;
-            } else {
-                Eigenaar e = auto.getEigenaar();
-                if (e == null) {
-                    e = new Eigenaar("test", "test", "test");
-                }
-                auto.setEigenaar(e);
-                Cartracker tracker = new Cartracker(auto);
-                this.ira.addCartracker(tracker);
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-
-    @POST
-    @Path("modifyCartracker")
-    @Consumes({"application/json"})
     public Boolean modifyCartracker(Cartracker cartracker) {
         System.out.println(cartracker.getId() +  " : " + cartracker.getAuto().toString());
         try {
