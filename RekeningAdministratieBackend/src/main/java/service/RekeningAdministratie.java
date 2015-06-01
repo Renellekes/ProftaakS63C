@@ -90,7 +90,11 @@ public class RekeningAdministratie {
     public void addeigenaar(Eigenaar eigenaar) {
     }
 
-    public void modifyEigenaar(int ID, Eigenaar eigenaar) {
+    public void modifyEigenaar(Eigenaar eigenaar) {
+        Eigenaar b = (Eigenaar) database.getEigenaar(eigenaar.getId());
+        b.setAdres(eigenaar.getAdres());
+        b.setWoonplaats(eigenaar.getWoonplaats());        
+        database.modifyEigenaar(b);
     }
 
     public void removeEigenaar(int ID) {
@@ -119,8 +123,8 @@ public class RekeningAdministratie {
         return autos;
     }
 
-    public List<Auto> getAuto(int i) {
-        List<Auto> autos = database.getAuto(i);
+    public Auto getAuto(int i) {
+        Auto autos = database.getAuto(i);
         return autos;
     }
 
@@ -160,7 +164,18 @@ public class RekeningAdministratie {
         return database.getEigenaar(id);
     }
 
-    public void modifyAuto(Auto a) {
-        database.modifyAuto(a);
+
+    public List<Eigenaar> getAllEigenaars() {
+        List<Eigenaar> eigenaars = database.getAllEigenaars();
+        return eigenaars;
+    }
+
+    
+    public void modifyAuto(Auto a){
+        Auto b = (Auto) database.getAuto(a.getId());
+        b.setEersteKleur(a.getEersteKleur());
+        b.setVoertuig(a.getVoertuig());
+        b.setZitplaatsen(a.getZitplaatsen());
+        database.modifyAuto(b);
     }
 }

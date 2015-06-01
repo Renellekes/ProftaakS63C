@@ -33,7 +33,7 @@ public class Factuur implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int nummer;
     @Column
-    private int cartrakerID;
+    private int cartrackerID;
     @Column
     private double totaalBedrag;
     @Column
@@ -48,8 +48,8 @@ public class Factuur implements Serializable {
     public Factuur() {
     }
 
-    public Factuur(int cartrakerID, double totaalBedrag, String maand) {
-        this.cartrakerID = cartrakerID;
+    public Factuur(int cartrackerID, double totaalBedrag, String maand) {
+        this.cartrackerID = cartrackerID;
         this.totaalBedrag = totaalBedrag;
         this.maand = maand;
         factuuronderdelen = new ArrayList<FactuurOnderdeel>();
@@ -58,7 +58,7 @@ public class Factuur implements Serializable {
 
     public Factuur(int nummer, int cartrakerID, double totaalBedrag, String maand) {
         this.nummer = nummer;
-        this.cartrakerID = cartrakerID;
+        this.cartrackerID = cartrackerID;
         this.totaalBedrag = totaalBedrag;
         this.betaalStatus = BetaalStatus.OPEN;
         this.maand = maand;
@@ -120,17 +120,17 @@ public class Factuur implements Serializable {
         this.betaalStatus = betaalStatus;
     }
 
-    public int getCartrakerID() {
-        return cartrakerID;
+    public int getCartrackerID() {
+        return cartrackerID;
     }
 
-    public void setCartrakerID(int cartrakerID) {
-        this.cartrakerID = cartrakerID;
+    public void setCartrackerID(int cartrackerID) {
+        this.cartrackerID = cartrackerID;
     }
 
     @Override
     public String toString() {
-        return "Factuur{" + "nummer=" + nummer + ", cartrakerID=" + cartrakerID + ", totaalBedrag=" + totaalBedrag + ", betaalStatus=" + betaalStatus + ", maand=" + maand + '}';
+        return "Factuur{" + "nummer=" + nummer + ", cartrackerID=" + cartrackerID + ", totaalBedrag=" + totaalBedrag + ", betaalStatus=" + betaalStatus + ", maand=" + maand + '}';
     }
     
     

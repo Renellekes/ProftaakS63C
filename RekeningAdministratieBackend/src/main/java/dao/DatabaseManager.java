@@ -98,10 +98,15 @@ public class DatabaseManager {
         return autos;
     }
 
-    public List<Auto> getAuto(int i) {
-        Query query = em.createQuery("SELECT c FROM Auto c SELECT c FROM Auto c WHERE c.id = " + i);
+    public Auto getAuto(int i) {
+        Query query = em.createQuery("SELECT c FROM Auto c WHERE c.id = " + i);
         List<Auto> autos = query.getResultList();
-        return autos;
+        if (autos.size() > 0) {
+            return autos.get(0);
+        } else {
+            return null;
+        }
+        
     }
 
     public List<Kilometertarief> getAlleKilometerTarieven() {
@@ -152,6 +157,11 @@ public class DatabaseManager {
         em.merge(a);
 
     }
+    
+    public void modifyEigenaar(Eigenaar a) {
+        em.merge(a);
+
+    }
 
     public Eigenaar getEigenaar(int id) {
         Query query = em.createQuery("SELECT c FROM Eigenaar c WHERE c.id = " + id);
@@ -165,6 +175,12 @@ public class DatabaseManager {
 
     public void mergeAuto(Auto auto) {
         em.merge(auto);
+    }
+
+    public List<Eigenaar> getAllEigenaars() {
+        Query query = em.createQuery("SELECT c FROM Eigenaar c");
+        List<Eigenaar> c = query.getResultList();
+        return c;
     }
 
 }
