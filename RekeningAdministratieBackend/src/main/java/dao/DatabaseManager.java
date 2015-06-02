@@ -60,7 +60,7 @@ public class DatabaseManager {
 
     public void addOnderdeel(FactuurOnderdeel fo) {
         em.persist(fo);
-    }
+    }    
 
     public Factuur findFactuurWithID(int nummer) {
         Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + nummer);
@@ -193,7 +193,7 @@ public class DatabaseManager {
     }
 
     public Factuur getFactuur(int id) {
-        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.id = " + id);
+        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + id);
         List<Factuur> facturen = query.getResultList();
         if (facturen.size() > 0) {
             return facturen.get(0);
