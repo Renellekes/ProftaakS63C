@@ -19,3 +19,6 @@ restservice.factory('restService', ['$resource', function ($resource) {
             
         });
     }]);
+restservice.factory("Post", function($resource) {
+  return $resource("http://localhost:8080/RekeningAdministratieBackend/api/RekAdmin/Facturen/:id");
+});

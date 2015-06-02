@@ -9,7 +9,8 @@
     <td>{{factuur.maand}}</td>
     <td>{{factuur.totaalBedrag}}</td>
     <td>{{factuur.betaalStatus}}</td>
-    <td ng-show="{{factuur.betaalStatus.toUpperCase() == 'OPEN'}}">
+    <td><a href="#factuurdetailsview/{{factuur.nummer}}">Bekijk Details</a></td>
+    <td ng-show="(factuur.betaalStatus.toUpperCase() == 'OPEN')">
         <script async="async" src="paypal-button.min.js?merchant=mathijscox@gmail.com" 
             data-button="buynow" 
             data-name="{{factuur.maand}}" 
