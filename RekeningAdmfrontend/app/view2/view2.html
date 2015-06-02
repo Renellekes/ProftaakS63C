@@ -21,8 +21,12 @@
         <h3 style="margin: 5%">De betaalstatus van gekozen factuur aanpassen</h3>
         <form style="margin: 5%" ng-submit="submit()">
             
-            Nummer: <input type="text" ng-readonly="true" value="5" name="nummer"><br>
-            Status: <input type="text" name="Status" ng-model="Status"><br>
+            Nummer: <input type="text" ng-readonly="true" data-ng-model="nummer" name="nummer"><br>
+            Status: <select data-ng-model="Status" name="Status" ng-disabled="{{selectedOption != 'Open'}}">
+                <option>Open</option>
+                <option>Betaald</option>
+                <option>Geanuleerd</option>
+            </select><br>
             <button  type="submit" id="submit" value="Submit">factuur status aanpassen</button>
         </form> 
     </div>

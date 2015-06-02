@@ -24,7 +24,7 @@ angular.module('myApp.view2', ['ngRoute'])
             $scope.submit = function () {
                 if (chooseFactuur) {
                     chooseFactuur.betaalStatus = $scope.Status;
-                    var res = $http.post('http://localhost:5051/Rekeningadministratie/api/RekAdmin/WijzigingBetaalStatus', chooseFactuur)
+                    var res = $http.post('http://localhost:8080/Rekeningadministratie/api/RekAdmin/WijzigingBetaalStatus', chooseFactuur)
                     .success(function (data) {
                         $scope.facturen = Cartracker.getFactuurs();
                     })
