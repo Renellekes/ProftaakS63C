@@ -13,6 +13,7 @@ angular.module('myApp.view2', ['ngRoute'])
             $scope.facturen = [];
             $scope.onderdelen =[];
             $scope.list = [];
+            $scope.enabled = false;
             $scope.tekst = "Geen uitgekozen";
             var chooseFactuur = null;
             $scope.init = function ()
@@ -44,5 +45,12 @@ angular.module('myApp.view2', ['ngRoute'])
                 $scope.onderdelen = factuur.factuuronderdelen;
                 $scope.Status = factuur.betaalStatus;
                 $scope.nummer = factuur.nummer;
+                if (factuur.betaalStatus.toUpperCase() !== 'OPEN'){
+                    $scope.enabled = true;
+                }
+                else{
+                    $scope.enabled = false;
+                }
+                
             }
         });

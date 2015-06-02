@@ -22,11 +22,12 @@
         <form style="margin: 5%" ng-submit="submit()">
             
             Nummer: <input type="text" ng-readonly="true" data-ng-model="nummer" name="nummer"><br>
-            Status: <select data-ng-model="Status" name="Status" ng-disabled="{{selectedOption != 'Open'}}">
+            Status: <select data-ng-model="Status" name="Status" ng-disabled="enabled">
                 <option>Open</option>
                 <option>Betaald</option>
                 <option>Geanuleerd</option>
             </select><br>
+            
             <button  type="submit" id="submit" value="Submit">factuur status aanpassen</button>
         </form> 
     </div>
