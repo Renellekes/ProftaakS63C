@@ -19,9 +19,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
-import service.RekeningAdministratie;
 import contstants.BetaalStatus;
 /**
  *
@@ -38,17 +36,14 @@ public class DataInit {
     
     @PostConstruct
     private void init() {
-<<<<<<< HEAD
+
         try {
-            Thread.sleep(100);
+            Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(DataInit.class.getName()).log(Level.SEVERE, null, ex);
         }
-=======
         
         database.addFactuur(new Factuur(0, 200, "Maart"));
-        
->>>>>>> 8203de2154d7af7dce40148d17278606494ab425
         database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
         database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 422));
         Kilometertarief k = new Kilometertarief("testregio", "Stads", 42);

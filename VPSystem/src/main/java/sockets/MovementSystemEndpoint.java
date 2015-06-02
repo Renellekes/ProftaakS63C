@@ -5,6 +5,7 @@
  */
 package sockets;
 
+import com.google.gson.Gson;
 import dao.movementDAO;
 import domain.CartrackerMovement;
 import domain.Request;
@@ -44,14 +45,14 @@ public class MovementSystemEndpoint {
             switch(request.get("method").toString()){
                 case "GetAllMovement":
                     try {
-                            GetAllMovement(client, new SimpleDateFormat("yyyy-MM-dd").parse(request.get("start").toString()), new SimpleDateFormat("yyyy-MM-dd").parse(request.get("end").toString()));
+                            GetAllMovement(client, new SimpleDateFormat("yyyy-MM-dd").parse(request.get("start").toString()), new SimpleDateFormat("yyyy-MM-dd").parse(request.get("end").toString()), request.getInt("callId"));
                         } catch (ParseException ex) {
                             ex.printStackTrace();
                         }
                     break;
                 case "GetMovementForUser":
                     try {
-                            GetMovementForUser(client, request.get("cartrackerId").toString(),new SimpleDateFormat("yyyy-MM-dd").parse(request.get("start").toString()), new SimpleDateFormat("yyyy-MM-dd").parse(request.get("end").toString()));
+                            GetMovementForUser(client, request.get("cartrackerId").toString(),new SimpleDateFormat("yyyy-MM-dd").parse(request.get("start").toString()), new SimpleDateFormat("yyyy-MM-dd").parse(request.get("end").toString()), request.getInt("callId"));
                         } catch (ParseException ex) {
                             ex.printStackTrace();
                         }
@@ -98,40 +99,27 @@ public class MovementSystemEndpoint {
         }
     }
     
-    public void GetAllMovement(Session client, Date start, Date end){
+    public void GetAllMovement(Session client, Date start, Date end, int callId){
         List<CartrackerMovement> movements = movementdao.getAllMovements(start, end);
-        String json = "";
-        JsonArrayBuilder builder = Json.createArrayBuilder();
+        Gson gson = new Gson();
+        sendMessage(client, "__start " + callId);
         for (CartrackerMovement m : movements){
-            builder.add(m.getMovementId());
-            builder.add(m.getCartrackerId());
-            builder.add(m.getSpeed());
-            builder.add(m.getPosition());
-            builder.add(m.getDateOfMovement().toString());
-            json += builder.build();
-            json += System.getProperty("line.separator");
+            sendMessage(client, gson.toJson(m));
         }
-        
-        SendMessage(client, json);
+        sendMessage(client, "__end");
     }
     
-    public void GetMovementForUser(Session client, String cartrackerId, Date start, Date end){
+    public void GetMovementForUser(Session client, String cartrackerId, Date start, Date end, int callId){
         List<CartrackerMovement> movements = movementdao.getAllMovementsForUser(cartrackerId, start, end); 
-        String json = "";
-        JsonArrayBuilder builder = Json.createArrayBuilder();
+        Gson gson = new Gson();
+        sendMessage(client, "__start " + callId);
         for (CartrackerMovement m : movements){
-            builder.add(m.getMovementId());
-            builder.add(m.getCartrackerId());
-            builder.add(m.getSpeed());
-            builder.add(m.getPosition());
-            builder.add(m.getDateOfMovement().toString());
-            json += builder.build();
-            json += System.getProperty("line.separator");
+            sendMessage(client, gson.toJson(m));
         }
-        
-        SendMessage(client, json);
+        sendMessage(client, "__end");
     }
     
+    @Deprecated
     public void GetLastMovementForUser(Session client, String cartrackerId){
         CartrackerMovement m = movementdao.getLastMovement(cartrackerId);
         String json = "";
@@ -142,10 +130,10 @@ public class MovementSystemEndpoint {
         builder.add(m.getPosition());
         builder.add(m.getDateOfMovement().toString());
         json += builder.build();
-        SendMessage(client, json);
+        sendMessage(client, json);
     }
     
-    public void SendMessage(Session client, String message){
+    public void sendMessage(Session client, String message){
         try{
             if (client.isOpen()){
                 client.getAsyncRemote().sendObject(message);
