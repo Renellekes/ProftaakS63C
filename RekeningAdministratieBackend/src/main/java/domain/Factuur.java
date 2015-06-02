@@ -42,9 +42,9 @@ public class Factuur implements Serializable {
     private List<FactuurOnderdeel> factuuronderdelen;
     @Column
     private String maand;
+
     
- 
-    
+
     public Factuur() {
     }
 

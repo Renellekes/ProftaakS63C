@@ -62,10 +62,10 @@ public class restRekeningAdministratie {
     }
 
     @GET
-    @Path("getAllCartracker")
+    @Path("getAllCartrackers")
     @Produces("application/json")
-    public String getAllCartracker() {
-        List<Cartracker> cartrackers = ira.getCartracker();
+    public String getAllCartrackers() {
+        List<Cartracker> cartrackers = ira.getCartrackers();
         return new Gson().toJson(cartrackers);
     }
 
@@ -183,6 +183,13 @@ public class restRekeningAdministratie {
     public Auto getCar(@PathParam("id") int id) {
         Auto auto = ira.getAuto(id);
         return auto;
+    }
+    
+    @GET
+    @Path("Cartracker/{id}")
+    public Cartracker getCartracker(@PathParam("id") int id) {
+        Cartracker cartracker = ira.getCartracker(id);
+        return cartracker;
     }
 
     @POST

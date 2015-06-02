@@ -156,8 +156,12 @@ public class RekeningAdministratie {
         database.addAuto(nieuweAuto);
     }
 
-    public List<Cartracker> getCartracker() {
-        return database.getCartracker();
+    public List<Cartracker> getCartrackers() {
+        return database.getCartrackers();
+    }
+    
+    public Cartracker getCartracker(int id) {
+        return database.getCartracker(id);
     }
 
     public Eigenaar getEigenaar(int id) {

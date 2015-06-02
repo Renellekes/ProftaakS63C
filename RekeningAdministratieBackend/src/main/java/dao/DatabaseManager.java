@@ -147,10 +147,20 @@ public class DatabaseManager {
         em.persist(nieuweAuto);
     }
 
-    public List<Cartracker> getCartracker() {
+    public List<Cartracker> getCartrackers() {
         Query query = em.createQuery("SELECT c FROM Cartracker c");
         List<Cartracker> c = query.getResultList();
         return c;
+    }
+    
+     public Cartracker getCartracker(int id) {
+        Query query = em.createQuery("SELECT c FROM Cartracker c WHERE c.id =" + id);
+        List<Cartracker> c = query.getResultList();
+        if (c.size() > 0) {
+            return c.get(0);
+        } else {
+            return null;
+        }        
     }
 
     public void modifyAuto(Auto a) {
