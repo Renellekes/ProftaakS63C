@@ -30,7 +30,6 @@ public class DatabaseManager {
 
     //HIER MOETEN WE ECHT WAT AAN DOEN! CENTRALE DB ERGENS?
     @PersistenceContext(unitName = "MooieUnit")
-
     private EntityManager em;
 
     public DatabaseManager() {
@@ -106,7 +105,7 @@ public class DatabaseManager {
         } else {
             return null;
         }
-        
+
     }
 
     public List<Kilometertarief> getAlleKilometerTarieven() {
@@ -167,7 +166,7 @@ public class DatabaseManager {
         em.merge(a);
 
     }
-    
+
     public void modifyEigenaar(Eigenaar a) {
         em.merge(a);
 
