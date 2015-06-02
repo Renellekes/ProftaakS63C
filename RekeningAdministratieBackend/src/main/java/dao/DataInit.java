@@ -42,7 +42,7 @@ public class DataInit {
         } catch (InterruptedException ex) {
             Logger.getLogger(DataInit.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+       
         database.addFactuur(new Factuur(0, 200, "Maart"));
         database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
         database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 422));
@@ -58,6 +58,8 @@ public class DataInit {
         FactuurOnderdeel fo = new FactuurOnderdeel(999, k, date, date, 45);
         database.addOnderdeel(fo);
 
+        this.createData();
+
         System.out.println("Start timer");
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -65,7 +67,7 @@ public class DataInit {
         Calendar cal2 = Calendar.getInstance();
         cal2.setTime(new Date());
         int day = cal2.get(Calendar.DAY_OF_MONTH);
-        String testString = null;
+        String testString = "test deze methode";
 
         int mndInt = Calendar.getInstance().get(Calendar.MONTH) - 1;
         if (mndInt < 0) {
@@ -78,6 +80,47 @@ public class DataInit {
         if ("test deze methode".equals(testString)) {
             this.AutomaticFactuur(Maand[mndInt]);
         }
+    }
+    
+    public void createData(){
+        database.addFactuur(new Factuur(0, 200, "Maart"));
+        
+        database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
+        database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 422));
+        Kilometertarief k = new Kilometertarief("testregio", "Stads", 42);
+        database.addKilometerTarief(k);
+        Eigenaar e = new Eigenaar("test data", "testing", "testvill");
+        Auto a = new Auto("test", e, "test voertuig", "paars", 2);
+        Cartracker c = new Cartracker(a);
+        c.setId(999);
+        database.addCartracker(c);
+        
+        e = new Eigenaar("Henk", "Braag", "Eindhoven");
+        a = new Auto("1234", e, "Ferrarie", "rood", 2);
+        c = new Cartracker(a);
+        c.setId(45);
+        database.addCartracker(c);
+        
+         e = new Eigenaar("Rick", "Denver", "maastricht");
+         a = new Auto("qwerty", e, "Volvo", "grijs", 5);
+         c = new Cartracker(a);
+        c.setId(78);
+        database.addCartracker(c);
+        
+         e = new Eigenaar("Mathijs", "Harlen", "Haarlem");
+         a = new Auto("0000", e, "Lamerginie", "Oranje", 2);
+         c = new Cartracker(a);
+        c.setId(97);
+        database.addCartracker(c);
+        
+        Date date = new Date();
+        date.setMonth(new Date().getMonth()-1);
+        FactuurOnderdeel fo = new FactuurOnderdeel(999, k, date, date, 45);
+        database.addOnderdeel(fo);
+        fo = new FactuurOnderdeel(999, k, date, date, 7);
+        database.addOnderdeel(fo);
+        fo = new FactuurOnderdeel(999, k, date, date, 100);
+        database.addOnderdeel(fo);
     }
     
     /**
@@ -107,6 +150,18 @@ public class DataInit {
                 c.addFactuur(factuur);
                 database.mergeCartracker(c);
             }
+        }
+    }
+    
+    public void addOnderdelen(List<Object> informatie){
+        List<Cartracker> cte =database.findAllCartracker();
+        for(Object o :informatie){
+            for(Cartracker c : cte){
+                if(c.getId() == 0){
+                    
+                }
+            }
+            
         }
     }
 }
