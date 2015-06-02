@@ -7,9 +7,9 @@ rekadmin.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'voertuigen/voertuigen.html',
             controller: 'voertuigenCtrl'
         });
-    }]);
 
-rekadmin.controller('View1Ctrl', function ($scope, Cartraker, $http) {
+    }]);
+rekadmin.controller('voertuigenCtrl', function ($scope, Cartraker, $http) {
     $scope.cars = [];
     var bewaarAutoInfo = null;
     $scope.init = function ()

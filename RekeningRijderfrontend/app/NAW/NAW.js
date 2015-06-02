@@ -9,7 +9,7 @@ rekadmin.config(['$routeProvider', function ($routeProvider) {
         });
     }]);
 
-rekadmin.controller('View2Ctrl', function ($scope, restService, $http) {
+rekadmin.controller('NAWCtrl', function ($scope, restService, $http) {
     $scope.eigenaars = [];
     var bewaarEigenaarInfo = null;
     $scope.init = function ()
