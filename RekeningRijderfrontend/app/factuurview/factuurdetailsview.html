@@ -1,29 +1,30 @@
-<div ng-app="view1" ng-controller="View2Ctrl" ng-init="init()">
-    <p>Modify factuur</p>
+<div ng-app="factuurdetailsview" ng-controller="factuurdetailsviewCtrl" ng-init="init()">
+    <p>Detaillekes</p>
     <div class="border1">
         <h3>Alle Facturen</h3>
-        <p ng-repeat="factuur in facturen" ng-click="onClickRepeat(factuur)">
-            ---------------------------------------------------------------------------------------------------------------
+        <p>
             Factuurid: {{factuur.nummer}}<br> 
             Betaal status: {{factuur.betaalStatus}}<br>
             Voor maand {{factuur.maand}}<br>
             Totaal kosten: {{factuur.totaalBedrag}}
         </p>
+        <div ng-show="(factuur.betaalStatus.toUpperCase() == 'OPEN')">
+            <script async="async" src="paypal-button.min.js?merchant=mathijscox@gmail.com" 
+            data-button="buynow" 
+            data-name="{{factuur.maand}}" 
+            data-amount="{{factuur.totaalBedrag}}" 
+            data-currency="EUR" 
+            data-shipping="0" 
+            data-tax="0" 
+            data-callback="http://localhost:8383/index.html#/factuurview"
+            data-env="sandbox"
+            ></script>
+        
     </div>
     <div class="border2">
-        <p ng-repeat="onderdeel in onderdelen">
+        <p ng-repeat="onderdeel in factuur.onderdelen">
             Factuur onderdeel ID:{{onderdeel.factuurOnderdeelID}}<br> bedrag:{{onderdeel.bedrag}} aantal Kilometers:{{onderdeel.aantalKilometers}} cartraker: {{onderdeel.cartrakerID}}<br>
             beginTijd: {{onderdeel.beginTijd}} eindTijd:{{onderdeel.eindTijd}}<br>
-            ---------------------------------------------------------------------------------------------------------------
         </p>
-    </div>
-    <div class="border2">
-        <h3 style="margin: 5%">De betaalstatus van gekozen factuur aanpassen</h3>
-        <form style="margin: 5%" ng-submit="submit()">
-            
-            Nummer: <input type="text" ng-readonly="true" value="5" name="nummer"><br>
-            Status: <input type="text" name="Status" ng-model="Status"><br>
-            <button  type="submit" id="submit" value="Submit">factuur status aanpassen</button>
-        </form> 
     </div>
 </div>

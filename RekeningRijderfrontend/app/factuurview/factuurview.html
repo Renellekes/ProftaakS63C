@@ -2,8 +2,8 @@
     <p>Facturen</p>
     <div class="border1">
         <p>Nummer || Kenteken || Maand || Bedrag</p>
-        <div ng-repeat="factuur in facturen"><p>{{factuur.nummer}} || {{factuur.cartraker.auto.kenteken}} || {{factuur.maand}} || {{factuur.totaalBedrag}} || {{factuur.betaalStatus}} </p>            
-            <div ng-show="{{factuur.betaalStatus.toUpperCase() == 'OPEN'}}">
+        <div ng-repeat="factuur in facturen"><p>{{factuur.nummer}} || {{factuur.cartraker.auto.kenteken}} || {{factuur.maand}} || {{factuur.totaalBedrag}} || {{factuur.betaalStatus}} || <a href="#factuurdetailsview/{{factuur.nummer}}">Bekijk Details</a></p>            
+            <div ng-show="(factuur.betaalStatus.toUpperCase() == 'OPEN')">
             <script async="async" src="paypal-button.min.js?merchant=mathijscox@gmail.com" 
             data-button="buynow" 
             data-name="{{factuur.maand}}" 
