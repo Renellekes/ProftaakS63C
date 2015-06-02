@@ -14,6 +14,8 @@ import domain.Kilometertarief;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -36,6 +38,12 @@ public class DataInit {
     
     @PostConstruct
     private void init() {
+        try {
+            Thread.sleep(1000);
+            System.out.println("sleping");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(DataInit.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         database.addFactuur(new Factuur(0, 200, "Maart"));
         

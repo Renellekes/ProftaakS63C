@@ -61,7 +61,7 @@ public class movementDAO_JPAImpl implements movementDAO {
 
     @Override
     public List<CartrackerMovement> getAllMovementsForId(int id) {
-        List<CartrackerMovement> movements = em.createQuery("SELECT u FROM CARTRACKERMOVEMENT u WHERE u.CARTRACKERID = :Id")
+        List<CartrackerMovement> movements = em.createQuery("SELECT u FROM CartrackerMovement u WHERE u.cartrackerId = :Id")
                 .setParameter("Id", id)
                 .getResultList();
         return movements;
@@ -69,7 +69,7 @@ public class movementDAO_JPAImpl implements movementDAO {
 
     @Override
     public List<CartrackerMovement> getAllMovements(Date start, Date end) {
-        List<CartrackerMovement> movements = em.createQuery("SELECT u FROM CARTRACKERMOVEMENT u WHERE u.DATEOFMOVEMENT BETWEEN :start AND :end")
+        List<CartrackerMovement> movements = em.createQuery("SELECT u FROM CartrackerMovement u WHERE u.dateOfMovement BETWEEN :start AND :end")
                 .setParameter("start", start)
                 .setParameter("end", end)
                 .getResultList();
@@ -78,7 +78,7 @@ public class movementDAO_JPAImpl implements movementDAO {
 
     @Override
     public List<CartrackerMovement> getAllMovementsForUser(String cartrackerId, Date start, Date end) {
-                List<CartrackerMovement> movements = em.createQuery("SELECT u FROM CARTRACKERMOVEMENT u WHERE u.CARTRACKERID = :id AND u.DATEOFMOVEMENT BETWEEN :start AND :end")
+                List<CartrackerMovement> movements = em.createQuery("SELECT u FROM CartrackerMovement u WHERE u.cartrackerId = :id AND u.dateOfMovement BETWEEN :start AND :end")
                 .setParameter("id", cartrackerId)
                 .setParameter("start", start, TemporalType.DATE)
                 .setParameter("end", end, TemporalType.DATE)

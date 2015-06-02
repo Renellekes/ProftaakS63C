@@ -33,7 +33,6 @@ import javax.inject.Inject;
 @Stateless
 public class RekeningAdministratie {
 
-    
     private List<Account> accounts;
     private List<Cartracker> cartrackers;
 
@@ -71,8 +70,6 @@ public class RekeningAdministratie {
     public void connectDatsbase(DatabaseManager db) {
     }
 
-    
-
     public void addFactuur(Factuur factuur) {
     }
 
@@ -93,7 +90,7 @@ public class RekeningAdministratie {
     public void modifyEigenaar(Eigenaar eigenaar) {
         Eigenaar b = (Eigenaar) database.getEigenaar(eigenaar.getId());
         b.setAdres(eigenaar.getAdres());
-        b.setWoonplaats(eigenaar.getWoonplaats());        
+        b.setWoonplaats(eigenaar.getWoonplaats());
         database.modifyEigenaar(b);
     }
 
@@ -168,14 +165,12 @@ public class RekeningAdministratie {
         return database.getEigenaar(id);
     }
 
-
     public List<Eigenaar> getAllEigenaars() {
         List<Eigenaar> eigenaars = database.getAllEigenaars();
         return eigenaars;
     }
 
-    
-    public void modifyAuto(Auto a){
+    public void modifyAuto(Auto a) {
         Auto b = (Auto) database.getAuto(a.getId());
         b.setEersteKleur(a.getEersteKleur());
         b.setZitplaatsen(a.getZitplaatsen());
