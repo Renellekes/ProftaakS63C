@@ -17,14 +17,19 @@ import java.util.Calendar;
 import java.util.Date;
 import dao.DatabaseManager;
 import domain.Auto;
+import domain.CartrackerMovement;
+import java.net.URISyntaxException;
 import service.File;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import sockets.MovementSystemSockets;
 
 /**
  *
@@ -180,5 +185,54 @@ public class RekeningAdministratie {
 
     public Factuur getFactuur(int id) {
        return database.getFactuur(id);
+    }
+    
+    public List<CartrackerMovement> getAllMovements(Date start, Date end){
+        try {
+            final MovementSystemSockets ms = new MovementSystemSockets("http://localhost:8080/VPSystem/MovementSystemEndpoint");
+            final int callId = ms.getAllMovement(start, end);
+            final List<CartrackerMovement> whothefuckcares = new ArrayList<>();
+            
+            Timer tmr = new Timer();
+            tmr.schedule(new TimerTask(){
+
+                @Override
+                public void run() {
+                   for (CartrackerMovement m : ms.getCartrackersForCallId(callId)){
+                       whothefuckcares.add(m);
+                   }
+                }
+            }, 2000);
+
+            return whothefuckcares;
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(RekeningAdministratie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    public List<CartrackerMovement> getAllMovementsForCartracker(String cartrackerId, Date start, Date end){
+        try {
+            final MovementSystemSockets ms = new MovementSystemSockets("http://localhost:8080/VPSystem/MovementSystemEndpoint");
+            final int callId = ms.getMovementForUser(cartrackerId, start, end);
+            final List<CartrackerMovement> whothefuckcares = new ArrayList<>();
+            
+            Timer tmr = new Timer();
+            tmr.schedule(new TimerTask(){
+
+                @Override
+                public void run() {
+                   for (CartrackerMovement m : ms.getCartrackersForCallId(callId)){
+                       whothefuckcares.add(m);
+                   }
+                }
+            }, 2000);
+
+            return whothefuckcares;
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(RekeningAdministratie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

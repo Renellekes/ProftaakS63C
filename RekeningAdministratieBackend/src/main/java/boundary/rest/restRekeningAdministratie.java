@@ -8,11 +8,11 @@ package boundary.rest;
 import com.google.gson.Gson;
 import domain.Auto;
 import domain.Cartracker;
+import domain.CartrackerMovement;
 import domain.Eigenaar;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,9 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -32,7 +29,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import service.RekeningAdministratie;
-import sockets.MovementSystemSockets;
 
 /**
  *
@@ -51,18 +47,7 @@ public class restRekeningAdministratie {
     @Path("getAllCars")
     @Produces("application/json")
     public String getAllCars() {
-
         List<Auto> autos = ira.getAllAutos();
-        try {
-            MovementSystemSockets s = new MovementSystemSockets("http://localhost:8080/VPSystem/MovementSystemEndpoint");
-            Date start = new Date();
-            start.setMonth(start.getMonth() - 1);
-            Date end = new Date();
-            end.setDate(end.getDate() + 1);
-            s.getAllMovement(start, end);
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(restRekeningAdministratie.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return new Gson().toJson(autos);
     }
     

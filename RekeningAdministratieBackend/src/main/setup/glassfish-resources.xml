@@ -41,5 +41,4 @@
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="RekeningAdministratie" object-type="user" pool-name="derby_net_RekeningAdministratie_rekPool"/>
-    <jdbc-resource enabled="true" jndi-name="Rekenrijdendatabase2-6-2015" object-type="user" pool-name="derby_net_rekenrijdendatabase_Pool"/>
 </resources>

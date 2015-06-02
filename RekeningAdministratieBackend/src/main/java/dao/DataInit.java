@@ -19,9 +19,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
-import service.RekeningAdministratie;
 import contstants.BetaalStatus;
 /**
  *
@@ -38,15 +36,29 @@ public class DataInit {
     
     @PostConstruct
     private void init() {
+
         try {
             Thread.sleep(1000);
-            System.out.println("sleping");
         } catch (InterruptedException ex) {
             Logger.getLogger(DataInit.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+       
+        database.addFactuur(new Factuur(0, 200, "Maart"));
+        database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
+        database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 422));
+        Kilometertarief k = new Kilometertarief("testregio", "Stads", 42);
+        database.addKilometerTarief(k);
+        Eigenaar e = new Eigenaar("test data", "testing", "testvill");
+        Auto a = new Auto("test", e, "test voertuig", "paars", 2);
+        Cartracker c = new Cartracker(a);
+        c.setId(999);
+        database.addCartracker(c);
+        Date date = new Date();
+        date.setMonth(new Date().getMonth()-1);
+        FactuurOnderdeel fo = new FactuurOnderdeel(999, k, date, date, 45);
+        database.addOnderdeel(fo);
+
         this.createData();
-        
 
         System.out.println("Start timer");
         Calendar cal = Calendar.getInstance();
