@@ -12,13 +12,8 @@ import domain.Eigenaar;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -141,6 +136,9 @@ public class DatabaseManager {
     public List<Factuur> getAlleFacturen() {
         Query query = em.createQuery("SELECT c FROM Factuur c");
         List<Factuur> factuurs = query.getResultList();
+        for (Factuur factuur : factuurs){
+            factuur.setFactuuronderdelen(this.getFactuurOnderdelen(factuur.getNummer()));
+        }
         return factuurs;
     }
 
