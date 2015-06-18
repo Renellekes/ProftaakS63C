@@ -113,8 +113,8 @@ public class RekeningAdministratie {
         database.addOnderdeel(fo);
     }
 
-    public void addFactuurOnderdeel(int CartrackerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
-        FactuurOnderdeel factuurOnderdeel = new FactuurOnderdeel(CartrackerID, kilometertarief, beginTijd, eindTijd, aantalKilometers);
+    public void addFactuurOnderdeel(int factuurID, int CartrackerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
+        FactuurOnderdeel factuurOnderdeel = new FactuurOnderdeel(factuurID, CartrackerID, kilometertarief, beginTijd, eindTijd, aantalKilometers);
         this.addFactuurOnderdeel(factuurOnderdeel);
     }
 
@@ -179,5 +179,13 @@ public class RekeningAdministratie {
 
     public Factuur getFactuur(int id) {
        return database.getFactuur(id);
+    }
+
+    public String init() {
+        return database.init();
+    }
+
+    public void factuurBetaald(int id) {
+        database.factuurBetaald(id);
     }
 }

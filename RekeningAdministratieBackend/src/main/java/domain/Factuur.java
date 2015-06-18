@@ -38,7 +38,7 @@ public class Factuur implements Serializable {
     private double totaalBedrag;
     @Column
     private String betaalStatus;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    
     private List<FactuurOnderdeel> factuuronderdelen;
     @Column
     private String maand;
@@ -109,7 +109,7 @@ public class Factuur implements Serializable {
     }
     
     public void addFactuurOnderdelen(FactuurOnderdeel factuurOnderdeel){
-        this.factuuronderdelen.add(factuurOnderdeel);
+        factuurOnderdeel.setFactuurID(this.nummer);
     }
 
     public String getBetaalStatus() {

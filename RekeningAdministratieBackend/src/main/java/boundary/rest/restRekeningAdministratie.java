@@ -45,6 +45,13 @@ public class restRekeningAdministratie {
     RekeningAdministratie ira;
     
     @GET
+    @Path("init")
+    @Produces("application/json")
+    public String init() {
+        return ira.init();
+    }
+    
+    @GET
     @Path("getAllCars")
     @Produces("application/json")
     public String getAllCars() {
@@ -82,6 +89,12 @@ public class restRekeningAdministratie {
     public Factuur getFactuur(@PathParam("id") int id) {
         Factuur factuur = ira.getFactuur(id);
         return factuur;
+    }
+    
+    @POST
+    @Path("Facturen/{id}/Betaald")
+    public void factuurBetaald(@PathParam("id") int id) {
+        ira.factuurBetaald(id);
     }
 
     @PUT
@@ -125,7 +138,7 @@ public class restRekeningAdministratie {
         }
     }
     
-       @POST
+    @POST
     @Path("modifyEigenaar")
     @Consumes({"application/json"})
     public Boolean modifyEigenaar(Eigenaar eigenaar) {        
@@ -214,5 +227,12 @@ public class restRekeningAdministratie {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+    
+    @POST
+    @Path("PaypalCallback")
+    @Consumes({"application/xml", "application/json"})
+    public void paypalCallback(String post) {
+            System.out.println("AAAAAH PAYPAL STUFF!!! " + post);
     }
 }

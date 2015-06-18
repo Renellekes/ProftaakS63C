@@ -1,4 +1,4 @@
-<div ng-app="factuurview" ng-controller="factuurviewCtrl" ng-init="init()">
+<div ng-app="factuurview" ng-controller="factuurviewCtrl" ng-init="init()"> 
     <p>Facturen</p>
     <div class="border1">
         <p>Nummer || Kenteken || Maand || Bedrag</p>
@@ -11,7 +11,7 @@
             data-currency="EUR" 
             data-shipping="0" 
             data-tax="0" 
-            data-callback="http://localhost:8383/index.html#/factuurview"
+            data-return="http://localhost:8383/success.html?facid={{factuur.nummer}}"
             data-env="sandbox"
             ></script>
         </div>

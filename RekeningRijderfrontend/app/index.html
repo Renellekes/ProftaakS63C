@@ -13,18 +13,22 @@
         <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
         <link rel="stylesheet" href="app.css">
         <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="koekjes.js"></script>
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
 
-    <ul class="menu">
-        <li><a href="#/voertuigen">voertuigen</a></li>
-        <li><a href="#/NAW">NAW</a></li>
-        <li><a href="#/factuurview">facturen</a></li>
+    <ul class="list-group list-inline">
+        <li><a href="#/voertuigen" class="list-group-item right">voertuigen</a></li>
+        <li><a href="#/NAW" class="list-group-item right">NAW</a></li>
+        <li><a href="#/factuurview" class="list-group-item right">facturen</a></li>            
+        <li><a href="#" onclick="logout()" class="list-group-item">Logout</a></li>
     </ul>
 
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
+     <script>checkCookie()</script>
     <div ng-view></div>
    
     
@@ -46,5 +50,6 @@
     <script src="components/version/version.js"></script>
     <script src="components/version/version-directive.js"></script>
     <script src="components/version/interpolate-filter.js"></script>
+    
 
 </html>

@@ -9,7 +9,7 @@ rekadmin.config(['$routeProvider', function ($routeProvider) {
         });
     }]);
 
-rekadmin.controller('View2Ctrl', function ($scope, restService, $http) {
+rekadmin.controller('NAWCtrl', function ($scope, restService, $http) {
     $scope.eigenaars = [];
     var bewaarEigenaarInfo = null;
     $scope.init = function ()
@@ -34,7 +34,7 @@ rekadmin.controller('View2Ctrl', function ($scope, restService, $http) {
                 woonplaats: $scope.woonplaats,
                 adres: $scope.adres               
             };
-            var res = $http.post('http://localhost:8080/RekeningAdministratieBackend/api/RekAdmin/modifyEigenaar', Eigenaar);
+            var res = $http.post('http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/modifyEigenaar', Eigenaar);
             res.success(function (data, status, headers, config) {
                 $scope.eigenaars = restService.getEigenaars();
             });

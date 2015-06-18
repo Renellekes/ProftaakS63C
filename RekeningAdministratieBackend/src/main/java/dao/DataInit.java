@@ -25,18 +25,14 @@ import contstants.BetaalStatus;
  *
  * @author kay de groot
  */
-@Singleton
-@Startup
 public class DataInit {
     
     private String[] Maand = {"januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"};
     
-    @Inject
     DatabaseManager database;
     
-    @PostConstruct
-    private void init() {
-        
+    public String init(DatabaseManager db) {
+        database = db;
         database.addFactuur(new Factuur(0, 200, "Maart"));
         
         database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
@@ -50,7 +46,7 @@ public class DataInit {
         database.addCartracker(c);
         Date date = new Date();
         date.setMonth(new Date().getMonth()-1);
-        FactuurOnderdeel fo = new FactuurOnderdeel(999, k, date, date, 45);
+        FactuurOnderdeel fo = new FactuurOnderdeel(1,999, k, date, date, 45);
         database.addOnderdeel(fo);
 
         System.out.println("Start timer");
@@ -60,7 +56,7 @@ public class DataInit {
         Calendar cal2 = Calendar.getInstance();
         cal2.setTime(new Date());
         int day = cal2.get(Calendar.DAY_OF_MONTH);
-        String testString = null;
+        String testString = "test deze methode";
 
         int mndInt = Calendar.getInstance().get(Calendar.MONTH) - 1;
         if (mndInt < 0) {
@@ -73,6 +69,7 @@ public class DataInit {
         if ("test deze methode".equals(testString)) {
             this.AutomaticFactuur(Maand[mndInt]);
         }
+        return "Hoppa!";    
     }
     
     /**
@@ -89,13 +86,7 @@ public class DataInit {
         for (Cartracker c : cs) {
             factuur = new Factuur(c.getId(), 0, maand);
             factuur.setBetaalStatus(BetaalStatus.OPEN);
-            for (FactuurOnderdeel fac : onderdelen) {
-                System.out.println("Testing 2 fac" + fac.getCartrackerID() + " : cartracker" + c.getId());
-                System.out.println("Testing 3 " + fac.getMaand());
-                if ((fac.getCartrackerID() == c.getId()) && (maand.equals(fac.getMaand()))) {
-                    factuur.addFactuurOnderdelen(fac);
-                }
-            }
+            factuur.setFactuuronderdelen(onderdelen);
             if (factuur.getSizeOnderdeelList() > 0) {
                 factuur.calculateAmount();
                 database.addFactuur(factuur);

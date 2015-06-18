@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import static javax.persistence.TemporalType.DATE;
@@ -46,17 +45,20 @@ public class FactuurOnderdeel implements Serializable {
     private long aantalKilometers;
     @Column
     private double bedrag;
+    @Column
+    private int factuurID;
 
     public FactuurOnderdeel() {
 //        this.setMonth();
     }
 
-    public FactuurOnderdeel(int CartrackerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
+    public FactuurOnderdeel(int factuurID,int CartrackerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
         this.CartrackerID = CartrackerID;
         this.kilometertarief = kilometertarief;
         this.beginTijd = beginTijd;
         this.eindTijd = eindTijd;
         this.aantalKilometers = aantalKilometers;
+        this.factuurID = factuurID;
         this.setMonth();
     }
 
@@ -105,10 +107,18 @@ public class FactuurOnderdeel implements Serializable {
 
     public void calculateAmount() {
         if ("Stads".equals(kilometertarief.getTariefCategorie())) {
-            bedrag = aantalKilometers * kilometertarief.getBedrag()+10;
+            bedrag = aantalKilometers * kilometertarief.getBedrag() + 10;
         } else {
             bedrag = aantalKilometers * kilometertarief.getBedrag();
         }
+    }
+
+    public int getFactuurID() {
+        return factuurID;
+    }
+
+    public void setFactuurID(int factuurID) {
+        this.factuurID = factuurID;
     }
 
     public Date getEindTijd() {
@@ -174,5 +184,5 @@ public class FactuurOnderdeel implements Serializable {
     public void setBedrag(double bedrag) {
         this.bedrag = bedrag;
     }
-    
+
 }

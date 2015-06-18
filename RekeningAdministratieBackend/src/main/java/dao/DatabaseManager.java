@@ -5,12 +5,14 @@
  */
 package dao;
 
+import contstants.BetaalStatus;
 import domain.Auto;
 import domain.Cartracker;
 import domain.Eigenaar;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -25,7 +27,7 @@ import javax.persistence.Query;
  *
  * @author kay de groot
  */
-@Stateless
+@Singleton
 public class DatabaseManager {
 
     //HIER MOETEN WE ECHT WAT AAN DOEN! CENTRALE DB ERGENS?
@@ -35,7 +37,7 @@ public class DatabaseManager {
 
     public DatabaseManager() {
     }
-
+    
     public List<Cartracker> findAllCartracker() {
         Query query = em.createQuery("SELECT c FROM Cartracker c");
         List<Cartracker> cartrackers = query.getResultList();
@@ -184,13 +186,35 @@ public class DatabaseManager {
     }
 
     public Factuur getFactuur(int id) {
-        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.id = " + id);
+        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + id);
         List<Factuur> facturen = query.getResultList();
         if (facturen.size() > 0) {
-            return facturen.get(0);
+            Factuur factuur = facturen.get(0);
+            factuur.setFactuuronderdelen(getFactuurOnderdelen(id));
+            return factuur;
         } else {
             return null;
         }
+    }
+    
+     public List<FactuurOnderdeel> getFactuurOnderdelen(int id) {
+        Query query = em.createQuery("SELECT o FROM FactuurOnderdeel o where o.factuurID = " + id);
+        List<FactuurOnderdeel> factuuronderdelen = query.getResultList();
+        return factuuronderdelen;
+    }
+
+    void MergeFactuurOnderdeel(FactuurOnderdeel fac) {
+        em.merge(fac);
+    }
+
+    public String init() {
+        return new DataInit().init(this);
+    }
+
+    public void factuurBetaald(int id) {
+        Factuur factuur = this.getFactuur(id);
+        factuur.setBetaalStatus(BetaalStatus.BETAALD);
+        em.merge(factuur);
     }
 
 }

@@ -1,6 +1,6 @@
 var restservice = angular.module('restservice', ['ngResource']);
 
-restservice.factory('Cartraker', ['$resource', function ($resource) {
+restservice.factory('Cartracker', ['$resource', function ($resource) {
         return $resource('http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin',
         null, 
         {

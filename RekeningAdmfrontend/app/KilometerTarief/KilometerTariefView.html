@@ -1,5 +1,6 @@
 <div ng-app="KilometerTariefView" ng-controller="KilometerTariefCtrl" ng-init="init()">
-    <p>Hier kende spele met kilometertarieven</p>
+<script>checkCookie()</script>
+<h1>Alle kilometertarieven</h1>
     <div class="border1">
         <p ng-click="chooseTarief(tarief)" ng-repeat="tarief in kilometerTarieven">{{tarief.regio}} || {{tarief.tariefCategorie}} || {{tarief.bedrag}}</p>
     </div>

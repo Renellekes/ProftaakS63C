@@ -17,13 +17,29 @@
             ---------------------------------------------------------------------------------------------------------------
         </p>
     </div>
-    <div class="border2">
-        <h3 style="margin: 5%">De betaalstatus van gekozen factuur aanpassen</h3>
-        <form style="margin: 5%" ng-submit="submit()">
-            
-            Nummer: <input type="text" ng-readonly="true" value="5" name="nummer"><br>
-            Status: <input type="text" name="Status" ng-model="Status"><br>
-            <button  type="submit" id="submit" value="Submit">factuur status aanpassen</button>
+    <hr>    
+    <div class="row">
+        <div class="col-md-5 col-sm-offset-1">
+        <h3>De betaalstatus van gekozen factuur aanpassen</h3>
+        <form class="form-horizontal" role="form" ng-submit="submit()">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="nummer">Nummer:</label>   
+                <div class="col-sm-10">
+                    <input type="text" id="nummer" value="5" name="nummer" ng-readonly="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="status">Status:</label>   
+                <div class="col-sm-10">
+                    <input type="text" name="Status" id="status" ng-model="Status">
+                </div>
+            </div>
+            <div class="form-group"> 
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button  type="submit" id="submit" class="btn btn-default" value="Submit">factuur status aanpassen</button>                
+                </div>
+            </div>
         </form> 
+        </div>
     </div>
 </div>

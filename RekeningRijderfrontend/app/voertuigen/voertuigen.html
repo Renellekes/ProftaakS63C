@@ -1,9 +1,15 @@
 <div ng-app="voertuigen" ng-controller="voertuigenCtrl" ng-init="init()">
+    <script>
+        if (!isAdmin()) {
+                            var adminpart = document.getElementById('admin');
+                            adminpart.style.visibility = 'hidden';
+                        }
+    </script>
     <p>auto</p>
     <div class="border1">
         <p ng-repeat="auto in cars">{{auto.kenteken}}</p>
     </div>
-    <div class="border2">
+    <div id="admin">
         <p style="margin: 5%">Auto's</p>
         
         <form style="margin: 5%" ng-submit="submit()">
