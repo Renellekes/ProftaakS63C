@@ -5,7 +5,9 @@ restservice.factory('Cartracker', ['$resource', function ($resource) {
         null, 
         {
             'query': {method: 'GET', isArray: true, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/getAllCars'},
-            'getFactuurs':{method: 'GET', isArray: true, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/getAllFactuur'}
+            'getFactuurs':{method: 'GET', isArray: true, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/getAllFactuur'},
+            'getCartracker':{method: 'GET', isArray: false, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/Cartracker/:id'},
+            'getCartrackers':{method: 'GET', isArray: true, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/getAllCartrackers'}
         });
     }]);
 restservice.factory('restService', ['$resource', function ($resource) {
@@ -17,7 +19,6 @@ restservice.factory('restService', ['$resource', function ($resource) {
             
         });
     }]);
-
 restservice.factory("Post", function($resource) {
   return $resource("http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/Facturen/:id");
 });

@@ -8,19 +8,18 @@ package boundary.rest;
 import com.google.gson.Gson;
 import domain.Auto;
 import domain.Cartracker;
+import domain.CartrackerMovement;
 import domain.Eigenaar;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -55,7 +54,7 @@ public class restRekeningAdministratie {
     @Path("getAllCars")
     @Produces("application/json")
     public String getAllCars() {
-        List<Auto> autos = ira.getAllAutos();       
+        List<Auto> autos = ira.getAllAutos();
         return new Gson().toJson(autos);
     }
     
@@ -69,10 +68,10 @@ public class restRekeningAdministratie {
     }
 
     @GET
-    @Path("getAllCartracker")
+    @Path("getAllCartrackers")
     @Produces("application/json")
-    public String getAllCartracker() {
-        List<Cartracker> cartrackers = ira.getCartracker();
+    public String getAllCartrackers() {
+        List<Cartracker> cartrackers = ira.getCartrackers();
         return new Gson().toJson(cartrackers);
     }
 
@@ -189,6 +188,20 @@ public class restRekeningAdministratie {
     public Eigenaar getEigenaar(@PathParam("id") int id) {
         Eigenaar eigenaar = ira.getEigenaar(id);
         return eigenaar;
+    }
+    
+    @GET
+    @Path("Car/{id}")
+    public Auto getCar(@PathParam("id") int id) {
+        Auto auto = ira.getAuto(id);
+        return auto;
+    }
+    
+    @GET
+    @Path("Cartracker/{id}")
+    public Cartracker getCartracker(@PathParam("id") int id) {
+        Cartracker cartracker = ira.getCartracker(id);
+        return cartracker;
     }
 
     @POST

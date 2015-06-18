@@ -14,12 +14,12 @@ import domain.Kilometertarief;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
-import service.RekeningAdministratie;
 import contstants.BetaalStatus;
 /**
  *
@@ -34,7 +34,6 @@ public class DataInit {
     public String init(DatabaseManager db) {
         database = db;
         database.addFactuur(new Factuur(0, 200, "Maart"));
-        
         database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
         database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 422));
         Kilometertarief k = new Kilometertarief("testregio", "Stads", 42);
@@ -93,6 +92,18 @@ public class DataInit {
                 c.addFactuur(factuur);
                 database.mergeCartracker(c);
             }
+        }
+    }
+    
+    public void addOnderdelen(List<Object> informatie){
+        List<Cartracker> cte =database.findAllCartracker();
+        for(Object o :informatie){
+            for(Cartracker c : cte){
+                if(c.getId() == 0){
+                    
+                }
+            }
+            
         }
     }
 }

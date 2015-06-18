@@ -4,7 +4,7 @@ restservice.factory('Cartracker', ['$resource', function ($resource) {
         return $resource('http://localhost:5051/Rekeningadministratie/api/RekAdmin',
         null, 
         {
-            'query': {method: 'GET', isArray: true, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/getAllCartracker'},
+            'query': {method: 'GET', isArray: true, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/getAllCartrackers'},
             'getFactuurs':{method: 'GET', isArray: true, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/getAllFactuur'}
         });
     }]);

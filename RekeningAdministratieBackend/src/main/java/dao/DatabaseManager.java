@@ -32,7 +32,6 @@ public class DatabaseManager {
 
     //HIER MOETEN WE ECHT WAT AAN DOEN! CENTRALE DB ERGENS?
     @PersistenceContext(unitName = "MooieUnit")
-
     private EntityManager em;
 
     public DatabaseManager() {
@@ -63,7 +62,7 @@ public class DatabaseManager {
 
     public void addOnderdeel(FactuurOnderdeel fo) {
         em.persist(fo);
-    }
+    }    
 
     public Factuur findFactuurWithID(int nummer) {
         Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + nummer);
@@ -108,7 +107,7 @@ public class DatabaseManager {
         } else {
             return null;
         }
-        
+
     }
 
     public List<Kilometertarief> getAlleKilometerTarieven() {
@@ -149,17 +148,27 @@ public class DatabaseManager {
         em.persist(nieuweAuto);
     }
 
-    public List<Cartracker> getCartracker() {
+    public List<Cartracker> getCartrackers() {
         Query query = em.createQuery("SELECT c FROM Cartracker c");
         List<Cartracker> c = query.getResultList();
         return c;
+    }
+    
+     public Cartracker getCartracker(int id) {
+        Query query = em.createQuery("SELECT c FROM Cartracker c WHERE c.id =" + id);
+        List<Cartracker> c = query.getResultList();
+        if (c.size() > 0) {
+            return c.get(0);
+        } else {
+            return null;
+        }        
     }
 
     public void modifyAuto(Auto a) {
         em.merge(a);
 
     }
-    
+
     public void modifyEigenaar(Eigenaar a) {
         em.merge(a);
 
