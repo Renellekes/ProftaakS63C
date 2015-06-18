@@ -1,9 +1,15 @@
 <div ng-app="KilometerTariefView" ng-controller="KilometerTariefCtrl" ng-init="init()">
-<script>checkCookie()</script>
+<script>
+        if (!isAdmin()) {
+                            var adminpart = document.getElementById('admin');
+                            adminpart.style.visibility = 'hidden';
+                        }
+    </script>
 <h1>Alle kilometertarieven</h1>
     <div class="border1">
         <p ng-click="chooseTarief(tarief)" ng-repeat="tarief in kilometerTarieven">{{tarief.regio}} || {{tarief.tariefCategorie}} || {{tarief.bedrag}}</p>
     </div>
+    <div id="admin">
     <div class="border2">
         <p style="margin: 5%">Nieuwe kilometertarief toevoegen</p>
         <form style="margin: 5%" ng-submit="voegKilometerTariefToe()">
@@ -32,5 +38,6 @@
             <button  type="submit" id="submit" value="Submit">Kilometertarief wijzigen</button>
         </form> 
          
+    </div>
     </div>
 </div>
