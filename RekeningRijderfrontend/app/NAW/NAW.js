@@ -15,7 +15,7 @@ rekadmin.controller('NAWCtrl', function ($scope, restService, $http) {
     $scope.init = function ()
     {
        $scope.eigenaars = restService.getEigenaars();
-        $scope.owner = $scope.eigenaar[0];
+        $scope.owner = $scope.eigenaars[0];
         
     };
     
