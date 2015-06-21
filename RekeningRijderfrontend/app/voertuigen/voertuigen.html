@@ -1,32 +1,62 @@
-<div ng-app="voertuigen" ng-controller="voertuigenCtrl" ng-init="init()">
+<div ng-app="voertuigen" ng-controller="voertuigenCtrl" ng-init="init()" style="margin: 0 50px;">
     <script>
         if (!isAdmin()) {
-                            var adminpart = document.getElementById('admin');
-                            adminpart.style.visibility = 'hidden';
-                        }
+            var adminpart = document.getElementById('admin');
+            adminpart.style.visibility = 'hidden';
+        }
     </script>
-    <p>auto</p>
-    <div class="border1">
-        <p ng-repeat="auto in cars">{{auto.kenteken}}</p>
+    <h1>auto's</h1>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="list-group"> 
+                <a class="list-group-item" ng-repeat="auto in cars">{{auto.kenteken}}</a>
+            </div>
+        </div>
     </div>
     <div id="admin">
-        <p style="margin: 5%">Auto's</p>
-        
-        <form style="margin: 5%" ng-submit="submit()">
-            kenteken:<br>
-            <select data-ng-options="o.kenteken for o in cars" data-ng-model="selectedOption" ng-change="update()"></select>
-            <br>
-            ID:<br>
-            <input type="test" name="id" ng-model="id" ng-disabled="true">
-            <br>
-            voertuig:<br>
-            <input type="text" name="voertuig" ng-model="voertuig" ng-disabled="true"><br>
-            De aller eerste kleur van dit voertuig:<br>
-            <input type="text" name="kleur" ng-model="eersteKleur"><br>
-            Het aantal zitplaatsen:<br>
-            <input type="text" name="aantalzitplaatsen" ng-model="zitplaatsen" ng-disabled="true"><br>   
-            <button  type="submit" id="submit" value="Submit">wijzigen</button>
-        </form> 
-         
+        <div class="row">
+            <div class="col-md-4">
+                <h1>Kleur aanpassen</h1>
+
+                <form ng-submit="submit()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="kenteken">Kenteken: </label>   
+                        <div class="col-sm-10">
+                            <select class="form-control"  data-ng-options="o.kenteken for o in cars" data-ng-model="selectedOption" id="kenteken" name="kenteken"  ng-change="update()">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="id">ID: </label>   
+                        <div class="col-sm-10">
+                            <input type="text" ng-disabled="true" id="id" name="id" ng-model="id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="voertuig">Voertuig: </label>   
+                        <div class="col-sm-10">
+                            <input type="text" ng-disabled="true" id="voertuig" name="voertuig" ng-model="voertuig">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="eersteKleur">Kleur: </label>   
+                        <div class="col-sm-10">
+                            <input type="text"  id="eersteKleur" name="kleur" ng-model="eersteKleur">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="aantalzitplaatsen">Zitplaatsen: </label>   
+                        <div class="col-sm-10">
+                            <input type="text" ng-disabled="true" id="aantalzitplaatsen" name="aantalzitplaatsen" ng-model="zitplaatsen">
+                        </div>
+                    </div>
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button  type="submit" class="btn btn-default" id="submit" value="Submit">Wijzigen</button>
+                        </div>
+                    </div>
+                </form> 
+            </div>
+        </div>
     </div>
 </div>

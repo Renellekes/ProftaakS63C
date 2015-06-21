@@ -1,27 +1,37 @@
 <div ng-app="factuurview" ng-controller="factuurviewCtrl" ng-init="init()"> 
     <h2>Facturen</h2>
     <label>Search: <input ng-model="searchText"></label>
-<table id="searchTextResults" class="table table-striped">
-    <thead><tr><th>Nummer</th><th>CartrackerID</th><th>Maand</th><th>Bedrag</th><th>BetaalStatus</th><th></th><th></th></tr></thead>
-  <tr ng-repeat="factuur in facturen | filter:searchText">
-    <td>{{factuur.nummer}}</td>
-    <td>{{factuur.cartrackerID}}</td>
-    <td>{{factuur.maand}}</td>
-    <td>{{factuur.totaalBedrag}}</td>
-    <td>{{factuur.betaalStatus}}</td>
-    <td><a href="#factuurdetailsview/{{factuur.nummer}}">Bekijk Details</a></td>
-    <td>
-        <span ng-show="(factuur.betaalStatus.toUpperCase() == 'OPEN')">
-        <script async="async" src="paypal-button.min.js?merchant=mathijscox@gmail.com" 
-            data-button="buynow" 
-            data-name="{{factuur.maand}}" 
-            data-amount="{{factuur.totaalBedrag}}" 
-            data-currency="EUR" 
-            data-shipping="0" 
-            data-tax="0" 
-            data-return="http://localhost:8383/success.html?facid={{factuur.nummer}}"
-            data-env="sandbox"
-            ></script>
-        </span></td>
-  </tr>
-</table>
+    <table id="searchTextResults" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nummer</th>
+                <th>CartrackerID</th>
+                <th>Maand</th>
+                <th>Bedrag</th>
+                <th>BetaalStatus</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr ng-repeat="factuur in facturen| filter:searchText">
+            <td>{{factuur.nummer}}</td>
+            <td>{{factuur.cartrackerID}}</td>
+            <td>{{factuur.maand}}</td>
+            <td>{{factuur.totaalBedrag}}</td>
+            <td>{{factuur.betaalStatus}}</td>
+            <td><a href="#factuurdetailsview/{{factuur.nummer}}">Bekijk Details</a></td>
+            <td>
+                <span ng-show="(factuur.betaalStatus.toUpperCase() == 'OPEN')">
+                    <script async="async" src="paypal-button.min.js?merchant=mathijscox@gmail.com" 
+                            data-button="buynow" 
+                            data-name="{{factuur.maand}}" 
+                            data-amount="{{factuur.totaalBedrag}}" 
+                            data-currency="EUR" 
+                            data-shipping="0" 
+                            data-tax="0" 
+                            data-return="http://localhost:8383/success.html?facid={{factuur.nummer}}"
+                            data-env="sandbox"
+                    ></script>
+                </span></td>
+        </tr>
+    </table>

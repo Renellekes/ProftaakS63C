@@ -1,43 +1,83 @@
-<div ng-app="KilometerTariefView" ng-controller="KilometerTariefCtrl" ng-init="init()">
-<script>
-        if (!isAdmin()) {
-                            var adminpart = document.getElementById('admin');
-                            adminpart.style.visibility = 'hidden';
-                        }
+<div ng-app="KilometerTariefView" ng-controller="KilometerTariefCtrl" ng-init="init()" style="margin: 0 50px;">
+    <script>
+                if (!isAdmin()) {
+        var adminpart = document.getElementById('admin');
+                adminpart.style.visibility = 'hidden';
+        }
     </script>
-<h1>Alle kilometertarieven</h1>
-    <div class="border1">
-        <p ng-click="chooseTarief(tarief)" ng-repeat="tarief in kilometerTarieven">{{tarief.regio}} || {{tarief.tariefCategorie}} || {{tarief.bedrag}}</p>
+    <h1>Alle kilometertarieven</h1>
+    <div class="row">
+        <div class="col-md-3">
+            <table class="table table-striped">   
+                <thead><tr><th>Regio</th><th>TariefCategorie</th><th>Bedrag</th></tr></thead>
+                <tr ng-click="chooseTarief(tarief)" ng-repeat="tarief in kilometerTarieven">
+                    <td>{{tarief.regio}}</td>
+                    <td>{{tarief.tariefCategorie}}</td>
+                    <td>{{tarief.bedrag}}</td>
+                </tr>
+            </table>    
+        </div>    
     </div>
+    <hr>
     <div id="admin">
-    <div class="border2">
-        <p style="margin: 5%">Nieuwe kilometertarief toevoegen</p>
-        <form style="margin: 5%" ng-submit="voegKilometerTariefToe()">
-            regio:<br>
-            <input type="text" name="regio" ng-model="regio">
-            <br>
-            tarief categorie:<br>
-            <input type="text" name="tariefCategorie" ng-model="tariefCategorie"><br>
-            bedrag:<br>
-            <input type="number" name="bedrag" ng-model="bedrag"><br>
-            <button  type="submit" id="submit" value="Submit">kilometertarief toevoegen</button>
-        </form> 
-         
+        <div class="row">
+            <div class="col-md-5">
+                <h1>Kilometertarief toevoegen</h1>
+                <form class="form-horizontal" role="form" ng-submit="voegKilometerTariefToe()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="nieuwregio">regio: </label>   
+                        <div class="col-sm-4">
+                            <input type="text" id="nieuwregio" name="regio" ng-model="regio">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="nieuwtariefCategorie">Tariefcategorie: </label>   
+                        <div class="col-sm-4">
+                            <input type="text" id="nieuwtariefCategorie" name="tariefCategorie" ng-model="tariefCategorie">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="nieuwbedrag">Bedrag: </label>   
+                        <div class="col-sm-4">
+                            <input type="number"  step="any"  id="nieuwbedrag" name="bedrag" ng-model="bedrag">
+                        </div>
+                    </div>
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <button  type="submit" class="btn btn-default" id="submit" value="Submit">Kilometertarief toevoegen</button>
+                        </div>
+                    </div>
+                </form> 
+
+            </div>
+            <div class="col-md-5">
+                <h1>Kilometertarief wijzigen</h1>
+                <form class="form-horizontal" role="form" ng-submit="wijzigKilometerTarief()">
+                    <input type="hidden" name="wijzigid" ng-model="wijzigid">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="wijzigregio">regio: </label>   
+                        <div class="col-sm-4">
+                            <input type="text" id="wijzigregio" name="wijzigregio" ng-model="wijzigregio">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="wijzigcategorie">Tariefcategorie: </label>   
+                        <div class="col-sm-4">
+                            <input type="text" id="wijzigcategorie" name="wijzigcategorie" ng-model="wijzigcategorie">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="wijzigbedrag">Bedrag: </label>   
+                        <div class="col-sm-4">
+                            <input type="number"  step="any"  id="wijzigbedrag" name="wijzigbedrag" ng-model="wijzigbedrag">
+                        </div>
+                    </div>
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <button  type="submit" class="btn btn-default" id="submit" value="Submit">Kilometertarief wijzigen</button>
+                        </div>
+                    </div>
+                </form> 
+            </div>
+        </div>
     </div>
-     <div class="border2">
-        <p style="margin: 5%">Kilometertarief wijzigen</p>
-        <form style="margin: 5%" ng-submit="wijzigKilometerTarief()">
-            <input type="hidden" name="wijzigid" ng-model="wijzigid">
-            regio:<br>
-            <input type="text" name="wijzigregio" ng-model="wijzigregio">
-            <br>
-            tarief categorie:<br>
-            <input type="text" name="wijzigcategorie" ng-model="wijzigcategorie"><br>
-            bedrag:<br>
-            <input type="text" name="wijzigbedrag" ng-model="wijzigbedrag"><br>
-            <button  type="submit" id="submit" value="Submit">Kilometertarief wijzigen</button>
-        </form> 
-         
-    </div>
-    </div>
-</div>
