@@ -21,10 +21,25 @@
             ></script>
         
     </div>
-    <div class="border2">
-        <p ng-repeat="onderdeel in factuur.onderdelen">
-            Factuur onderdeel ID:{{onderdeel.factuurOnderdeelID}}<br> bedrag:{{onderdeel.bedrag}} aantal Kilometers:{{onderdeel.aantalKilometers}} cartraker: {{onderdeel.cartrakerID}}<br>
-            beginTijd: {{onderdeel.beginTijd}} eindTijd:{{onderdeel.eindTijd}}<br>
-        </p>
-    </div>
+         <div class="col-sm-4 col-sm-offset-1" >
+            <h3>Factuuronderdelen</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>CartrackerID</th>
+                        <th>Bedrag</th>
+                        <th>Aantal Kilometers</th>
+                        <th>Begin tijd</th>
+                        <th>Eind tijd</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="onderdeel in factuur.factuuronderdelen">
+                    <td>{{onderdeel.cartrackerID}}</td>
+                    <td>{{onderdeel.bedrag}}</td>
+                    <td>{{onderdeel.aantalKilometers}}</td>
+                    <td>{{onderdeel.beginTijd}}</td>
+                    <td>{{onderdeel.eindTijd}}</td>
+                </tr>
+            </table>
+        </div>    
 </div>

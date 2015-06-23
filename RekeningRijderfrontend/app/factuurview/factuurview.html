@@ -1,7 +1,7 @@
 <div ng-app="factuurview" ng-controller="factuurviewCtrl" ng-init="init()"> 
     <h2>Facturen</h2>
     <label>Search: <input ng-model="searchText"></label>
-    <label>page: <input type="number" step="1" ng-model="page"></label>
+    <label>page: <input min="1" type="number" step="1" ng-model="page"></label>
     <table id="searchTextResults" class="table table-striped">
         <thead>
             <tr>
@@ -14,7 +14,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tr ng-repeat="factuur in facturen| filter:searchText | limitTo:page | limitTo:-10">
+        <tr ng-repeat="factuur in facturen| filter:searchText | limitTo:page*10 | limitTo:-10">
             <td>{{factuur.nummer}}</td>
             <td>{{factuur.cartrackerID}}</td>
             <td>{{factuur.maand}}</td>
