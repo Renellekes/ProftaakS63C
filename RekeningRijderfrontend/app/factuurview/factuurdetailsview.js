@@ -14,7 +14,6 @@ angular.module('myApp.factuurdetailsview', ['ngRoute'])
             $scope.init = function ()
             {
                 $scope.factuur = Post.get({id: $routeParams.id}, function (data) {
-                    $scope.harry = data;
                 });
                 console.log($scope.factuur);
             }

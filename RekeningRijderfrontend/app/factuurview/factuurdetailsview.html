@@ -1,45 +1,53 @@
 <div ng-app="factuurdetailsview" ng-controller="factuurdetailsviewCtrl" ng-init="init()">
-    <p>Detaillekes</p>
-    <div class="border1">
-        <h3>Alle Facturen</h3>
-        <p>
-            Factuurid: {{factuur.nummer}}<br> 
-            Betaal status: {{factuur.betaalStatus}}<br>
-            Voor maand {{factuur.maand}}<br>
-            Totaal kosten: {{factuur.totaalBedrag}}
-        </p>
-        <div ng-show="(factuur.betaalStatus.toUpperCase() == 'OPEN')">
-            <script async="async" src="paypal-button.min.js?merchant=mathijscox@gmail.com" 
-            data-button="buynow" 
-            data-name="{{factuur.maand}}" 
-            data-amount="{{factuur.totaalBedrag}}" 
-            data-currency="EUR" 
-            data-shipping="0" 
-            data-tax="0" 
-            data-return="http://localhost:8383/success.html?facid={{factuur.nummer}}"
-            data-env="sandbox"
-            ></script>
-        
-    </div>
-         <div class="col-sm-4 col-sm-offset-1" >
-            <h3>Factuuronderdelen</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>CartrackerID</th>
-                        <th>Bedrag</th>
-                        <th>Aantal Kilometers</th>
-                        <th>Begin tijd</th>
-                        <th>Eind tijd</th>
-                    </tr>
-                </thead>
-                <tr ng-repeat="onderdeel in factuur.factuuronderdelen">
-                    <td>{{onderdeel.cartrackerID}}</td>
-                    <td>{{onderdeel.bedrag}}</td>
-                    <td>{{onderdeel.aantalKilometers}}</td>
-                    <td>{{onderdeel.beginTijd}}</td>
-                    <td>{{onderdeel.eindTijd}}</td>
-                </tr>
-            </table>
-        </div>    
+    <h1>Factuur details</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nummer</th>
+                <th>CartrackerID</th>
+                <th>Maand</th>
+                <th>Bedrag</th>
+                <th>BetaalStatus</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr>
+            <td>{{factuur.nummer}}</td>
+            <td>{{factuur.cartrackerID}}</td>
+            <td>{{factuur.maand}}</td>
+            <td>{{factuur.totaalBedrag}}</td>
+            <td>{{factuur.betaalStatus}}</td>
+            <td>
+                <span ng-show="(factuur.betaalStatus.toUpperCase() == 'OPEN')">
+                    <script async="async" src="paypal-button.min.js?merchant=mathijscox@gmail.com" 
+                            data-button="buynow" 
+                            data-name="{{factuur.maand}}" 
+                            data-amount="{{factuur.totaalBedrag}}" 
+                            data-currency="EUR" 
+                            data-shipping="0" 
+                            data-tax="0" 
+                            data-return="http://localhost:8383/success.html?facid={{factuur.nummer}}"
+                            data-env="sandbox"
+                    ></script>
+                </span></td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Factuuronderdelen</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Bedrag</th>
+                <th>Aantal Kilometers</th>
+                <th>Begin tijd</th>
+                <th>Eind tijd</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="onderdeel in factuur.factuuronderdelen">
+            <td>{{onderdeel.bedrag}}</td>
+            <td>{{onderdeel.aantalKilometers}}</td>
+            <td>{{onderdeel.beginTijd}}</td>
+            <td>{{onderdeel.eindTijd}}</td>
+        </tr>
+    </table>
 </div>

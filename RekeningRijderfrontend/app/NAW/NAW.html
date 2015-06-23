@@ -1,24 +1,41 @@
-<div ng-app="NAW" ng-controller="NAWCtrl" ng-init="init()">
-    <p>NAW gegevens</p>
-    <div class="border1">
-         <p ng-repeat="e in eigenaars">{{e.naam}}</p>
-    </div>
-    <div class="border2">
-        <p style="margin: 5%">NAW gegevens</p>
-        <form style="margin: 5%" ng-submit="submit()">
-            naam:<br>
-            <select data-ng-options="o.naam for o in eigenaars" data-ng-model="selectedOption"ng-change="update()"></select>
-            <br>
-            adres:<br>
-            <input type="text" name="adres" ng-model="adres"><br>
-            woonplaats:<br>
-            <input type="text" name="woonplaats" ng-model="woonplaats"><br>  
-            <!-- username:<br>
-            <input type="text" name="user" ng-model="username"><br> 
-            password:<br>
-            <input type="password" name="pass" ng-model="password"><br> -->
-            <button  type="submit" id="submit" value="Submit">wijziging opslaan</button>
-        </form> 
-         
+<div ng-app="NAW" ng-controller="NAWCtrl" ng-init="init()" style="margin: 0 50px;">
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <h1>NAW gegevens</h1>
+            <div class="list-group"> 
+                <a class="list-group-item" ng-repeat="e in eigenaars">{{e.naam}}</a>
+            </div>
+        </div>
+        <div class="col-md-offset-2 col-md-4">
+            <h1>Gegevens aanpassen</h1>
+            <form class="form-horizontal" role="form" ng-submit="submit()">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="naam">Naam: </label>   
+                    <div class="col-sm-4">
+                        <select class="form-control"  data-ng-options="o.naam for o in eigenaars" data-ng-model="selectedOption" id="naam" name="naam"  ng-change="update()">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="adres">Adres: </label>   
+                    <div class="col-sm-10">
+                        <input type="text" id="adres" name="adres" ng-model="adres">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="woonplaats">Woonplaats: </label>   
+                    <div class="col-sm-10">
+                        <input type="text" id="woonplaats" name="woonplaats" ng-model="woonplaats">
+                    </div>
+                </div>
+                <div class="form-group"> 
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button  type="submit" class="btn btn-default" id="submit" value="Submit">Wijziging opslaan</button>
+                    </div>
+                </div>
+            </form> 
+        </div>
     </div>
 </div>
