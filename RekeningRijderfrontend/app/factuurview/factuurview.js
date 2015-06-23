@@ -14,6 +14,7 @@ rekadmin.controller('factuurviewCtrl', function ($scope, Cartracker) {
     $scope.init = function ()
     {
         $scope.facturen = Cartracker.getFactuurs();
+        $scope.page = 1;
     };
 
     $scope.list = [];    
