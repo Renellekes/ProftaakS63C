@@ -3,20 +3,49 @@
     <div class="row">
         <div class="col-sm-4">
             <h2>All cartrackers</h2>
-            <div class="list-group">
-                <a class="list-group-item" ng-click="chooseCar(cartracker)" ng-repeat="cartracker in cartrackers">Kenteken: {{cartracker.auto.kenteken}}</a>
-            </div>
+            <p>Zoeken:<input style="margin: 15px;width: 300px" type="text" ng-model="search" ></p>
+            <table id="searchTextResults" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cartracker id:</th>
+                        <th>Kenteken:</th>
+                        <th>Voertuig:</th>
+                        <th>Kleur:</th>
+                        <th>zitplaatsen</th>
+                        <th>Website</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="cartracker in cartrackers| filter:search | limitTo:page * 10 | limitTo:-10" ng-click="chooseCar(cartracker)">
+                    <td>{{cartracker.id}}</td>
+                    <td>{{cartracker.auto.kenteken}}</td>
+                    <td>{{cartracker.auto.voertuig}}</td>
+                    <td>{{cartracker.auto.eersteKleur}}</td>
+                    <td>{{cartracker.auto.zitplaatsen}}</td>
+                    <td>{{cartracker.auto.website}}</td>
+                </tr>
+            </table>
         </div>
         <div class="col-sm-4 col-sm-offset-1">
             <h2>Bijbehorende facturen</h2>
-            <ul class="list-group">
-                <li class="list-group-item" ng-repeat="factuur in homefacturen">Factuur: {{factuur.nummer}}                     
-                    <ul class="list-group">
-                        <li class="list-group-item">Totaalbedrag: {{factuur.totaalBedrag}}</li>
-                        <li class="list-group-item">Status: {{factuur.betaalStatus}}</li>
-                    </ul>
-                </li>  
-            </ul>
+            <p>Zoeken:<input style="margin: 15px;width: 300px" type="text" ng-model="searchText" ></p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nummer</th>
+                        <th>CartrackerID</th>
+                        <th>Maand</th>
+                        <th>Bedrag</th>
+                        <th>BetaalStatus</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="factuur in homefacturen | filter:searchText">
+                    <td>{{factuur.nummer}}</td>
+                    <td>{{factuur.cartrackerID}}</td>
+                    <td>{{factuur.maand}}</td>
+                    <td>{{factuur.totaalBedrag}}</td>
+                    <td>{{factuur.betaalStatus}}</td>
+                </tr>
+            </table>
         </div>
     </div>
 

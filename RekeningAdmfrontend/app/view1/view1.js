@@ -18,6 +18,7 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartracker, $http) {
     {
         $scope.cartrackers = Cartracker.query();
         console.log($scope.cartrackers);
+        $scope.page = 1;
     };
 
     $scope.clear = function () {
@@ -49,7 +50,7 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartracker, $http) {
                 eersteKleur: $scope.eersteKleur,
                 zitplaatsen: $scope.zitplaatsen
             };
-            var res = $http.post('http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/ModifyCartracker', Auto);
+            var res = $http.post('http://localhost:24707/RekeningAdministratieBackend/api/RekAdmin/ModifyCartracker', Auto);
 //            $scope.cartrackers = Cartracker.query();
             $scope.kenteken = '';
             $scope.voertuig = '';
@@ -76,7 +77,7 @@ rekadmin.controller('View1Ctrl', function ($scope, Cartracker, $http) {
                 facturen: $scope.homefacturen,
                 fileInfo: $scope.homefileInfo
             };
-            var res = $http.post('http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/modifyCartracker', cartracker)
+            var res = $http.post('http://localhost:24707/RekeningAdministratieBackend/api/RekAdmin/modifyCartracker', cartracker)
                     .success(function (data) {
                         $scope.cartrackers = Cartracker.query();
                     })
