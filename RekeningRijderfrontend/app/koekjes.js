@@ -11,9 +11,20 @@ function login(){
         setCookie("username", username, 365);
         alert("Welcome again " + username);
         document.location = "index.html";
-    }else{ 
+    }
+    else if("YES" == getCookie("register").split("-")[0]){
+        setCookie("username", username, 365);
+            alert("Welcome " + username);
+        document.location = "index.html";        
+    }else{         
         alert("Wrong credentials");
     }
+}
+
+function Registreer(){
+    var username = document.getElementById( "username" ).value;    
+        setCookie("register", username, 365);
+        document.location = "index.html";    
 }
 
 function setCookie(cname, cvalue, exdays) {
@@ -36,12 +47,18 @@ function getCookie(cname) {
 
 function checkCookie() {
     var username=getCookie("username");
-    if (username =="admin" || username=="harry") {
+    if (username =="admin" || username=="harry" || username== getCookie("register").split("-")[1]) {
         
     }else{
         logout();
     }
 }
+
+function Activate() {
+    var username=getCookie("register");
+    setCookie("register", "YES-"+username, 365);    
+}
+
 
 function isAdmin(){
     return (getCookie("username") == "admin");

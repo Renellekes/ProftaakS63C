@@ -8,11 +8,14 @@ package boundary.rest;
 import com.google.gson.Gson;
 import domain.Auto;
 import domain.Cartracker;
+import domain.CartrackerMovement;
 import domain.Eigenaar;
 import domain.Factuur;
 import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -363,5 +366,18 @@ public class restRekeningAdministratie {
     @Consumes({"application/xml", "application/json"})
     public void paypalCallback(String post) {
         System.out.println("AAAAAH PAYPAL STUFF!!! " + post);
+    }
+    
+    @GET
+    @Path("test/{id}")
+    @Produces("application/json")
+    public List<CartrackerMovement> test(@PathParam("id") String id) {
+         Date date = new Date();         
+         Date date2 = new Date();
+         date2.setTime(-86400000);
+         System.out.println(date);
+         System.out.println(date2);
+        List<CartrackerMovement> movement =ira.getAllMovementsForCartracker(id, date, date2);
+        return movement;
     }
 }

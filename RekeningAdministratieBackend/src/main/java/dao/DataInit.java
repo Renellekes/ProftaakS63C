@@ -21,16 +21,22 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import contstants.BetaalStatus;
+import domain.CartrackerMovement;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+import service.RekeningAdministratie;
+
 /**
  *
  * @author kay de groot
  */
 public class DataInit {
-    
+
     private String[] Maand = {"januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"};
-    
-    DatabaseManager database;
-    
+
+    DatabaseManager database;    
+
     public String init(DatabaseManager db) {
         database = db;
         database.addFactuur(new Factuur(0, 200, "Maart"));
@@ -44,10 +50,10 @@ public class DataInit {
         c.setId(999);
         database.addCartracker(c);
         Date date = new Date();
-        date.setMonth(new Date().getMonth()-1);
-        FactuurOnderdeel fo = new FactuurOnderdeel(8,999, k, date, date, 45);
+        date.setMonth(new Date().getMonth() - 1);
+        FactuurOnderdeel fo = new FactuurOnderdeel(8, 999, k, date, date, 45);
         database.addOnderdeel(fo);
-
+        addOnderdelen();
         System.out.println("Start timer");
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -68,9 +74,9 @@ public class DataInit {
         if ("test deze methode".equals(testString)) {
             this.AutomaticFactuur(Maand[mndInt]);
         }
-        return "Hoppa!";    
+        return "Hoppa!";
     }
-    
+
     /**
      * This method wil look through al the Factuuronderdelen for those who have
      * a enddate for this month then they wil be added to a factuur whish is
@@ -94,16 +100,38 @@ public class DataInit {
             }
         }
     }
-    
-    public void addOnderdelen(List<Object> informatie){
-        List<Cartracker> cte =database.findAllCartracker();
-        for(Object o :informatie){
-            for(Cartracker c : cte){
-                if(c.getId() == 0){
+
+    public void addOnderdelen() {
+        Timer tmr = new Timer(true);
+        tmr.scheduleAtFixedRate(new TimerTask() {
+            RekeningAdministratie ram;
+
+            @Override
+            public void run() {
+                Date date = new Date();                
+                Date date2 = new Date();
+                Calendar c = Calendar.getInstance();
+                c.setTime(date);
+                c.add(Calendar.DATE, -1);
+                date2 = c.getTime();
+                List<Cartracker> cs = database.findAllCartracker();
+                for(Cartracker car : cs)
+                {
+                    int id = car.getId();
+                    String carid = ""+id;
+                    List<CartrackerMovement> move = ram.getAllMovementsForCartracker(carid, date2, date);
                     
+                        }
+                Kilometertarief k = new Kilometertarief("testregio", "Stads", 42);
+                FactuurOnderdeel fo = new FactuurOnderdeel(8, 999, k, date2, date, 45);
+                database.addOnderdeel(fo);
+                                
+                if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 1){
+                    int mndInt = Calendar.getInstance().get(Calendar.MONTH) - 1;
+                    AutomaticFactuur(Maand[mndInt]);
                 }
+
             }
-            
-        }
+        }, 0, 86400000);
     }
 }

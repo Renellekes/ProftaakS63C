@@ -197,7 +197,7 @@ public class RekeningAdministratie {
     
     public List<CartrackerMovement> getAllMovements(Date start, Date end){
         try {
-            final MovementSystemSockets ms = new MovementSystemSockets("http://localhost:8080/VPSystem/MovementSystemEndpoint");
+            final MovementSystemSockets ms = new MovementSystemSockets("http://localhost:6061/VPSystem/MovementSystemEndpoint");
             final int callId = ms.getAllMovement(start, end);
             final List<CartrackerMovement> whothefuckcares = new ArrayList<>();
             
@@ -222,7 +222,7 @@ public class RekeningAdministratie {
     
     public List<CartrackerMovement> getAllMovementsForCartracker(String cartrackerId, Date start, Date end){
         try {
-            final MovementSystemSockets ms = new MovementSystemSockets("http://localhost:8080/VPSystem/MovementSystemEndpoint");
+            final MovementSystemSockets ms = new MovementSystemSockets("http://localhost:7071/VerplaatsingenSysteem/MovementSystemEndpoint");
             final int callId = ms.getMovementForUser(cartrackerId, start, end);
             final List<CartrackerMovement> whothefuckcares = new ArrayList<>();
             

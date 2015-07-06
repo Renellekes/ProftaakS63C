@@ -145,7 +145,7 @@ public class MovementSystemSockets {
     public static MovementSystemSockets getInstance(){
         if (instance == null){
             try {
-                instance = new MovementSystemSockets("http://localhost:8080/VPSystem/MovementSystemEndpoint");
+                instance = new MovementSystemSockets("http://localhost:7071/VerplaatsingenSysteem/MovementSystemEndpoint");
             } catch (URISyntaxException ex) {
                 Logger.getLogger(MovementSystemSockets.class.getName()).log(Level.SEVERE, null, ex);
             }
