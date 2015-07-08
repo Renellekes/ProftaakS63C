@@ -28,6 +28,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import service.RekeningAdministratie;
+import service.SendMailTLS;
 
 /**
  *
@@ -369,15 +370,8 @@ public class restRekeningAdministratie {
     }
     
     @GET
-    @Path("test/{id}")
-    @Produces("application/json")
-    public List<CartrackerMovement> test(@PathParam("id") String id) {
-         Date date = new Date();         
-         Date date2 = new Date();
-         date2.setTime(-86400000);
-         System.out.println(date);
-         System.out.println(date2);
-        List<CartrackerMovement> movement =ira.getAllMovementsForCartracker(id, date, date2);
-        return movement;
+    @Path("test/{mail}")
+    public void test(@PathParam("mail") String mail) {
+        SendMailTLS.main(mail);
     }
 }

@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+}
+
 function login(){
     var username = document.getElementById( "username" ).value;
     var password = document.getElementById( "password" ).value;
@@ -22,9 +29,13 @@ function login(){
 }
 
 function Registreer(){
-    var username = document.getElementById( "username" ).value;    
+    var username = document.getElementById( "username" ).value; 
+    var email = document.getElementById( "email" ).value;
+    
         setCookie("register", username, 365);
-        document.location = "index.html";    
+        document.location = "index.html"; 
+        httpGet("http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/test/"+email)
+        
 }
 
 function setCookie(cname, cvalue, exdays) {

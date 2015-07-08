@@ -114,17 +114,15 @@ public class DataInit {
                 c.setTime(date);
                 c.add(Calendar.DATE, -1);
                 date2 = c.getTime();
-                List<Cartracker> cs = database.findAllCartracker();
-                for(Cartracker car : cs)
-                {
-                    int id = car.getId();
-                    String carid = ""+id;
-                    List<CartrackerMovement> move = ram.getAllMovementsForCartracker(carid, date2, date);
-                    
-                        }
-                Kilometertarief k = new Kilometertarief("testregio", "Stads", 42);
-                FactuurOnderdeel fo = new FactuurOnderdeel(8, 999, k, date2, date, 45);
-                database.addOnderdeel(fo);
+//                List<Cartracker> cs = database.findAllCartracker();
+//                for(Cartracker car : cs)
+//                {
+//                    int id = car.getId();
+//                    String carid = ""+id;
+//                    List<CartrackerMovement> move = ram.getAllMovementsForCartracker(carid, date2, date);
+//                    
+//                        }
+                
                                 
                 if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 1){
                     int mndInt = Calendar.getInstance().get(Calendar.MONTH) - 1;

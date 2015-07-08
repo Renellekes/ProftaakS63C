@@ -15,7 +15,8 @@ restservice.factory('restService', ['$resource', function ($resource) {
         null, 
         {
             'getEigenaars': {method: 'GET', isArray: true, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/getAllEigenaars'},
-            'getFactuur':{method: 'GET', isArray: false, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/Facturen/:id'}
+            'getFactuur':{method: 'GET', isArray: false, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/Facturen/:id'},
+            'mail':{method: 'GET', isArray: false, url: 'http://localhost:5051/RekeningAdministratieBackend/api/RekAdmin/test/:mail'}
             
         });
     }]);
