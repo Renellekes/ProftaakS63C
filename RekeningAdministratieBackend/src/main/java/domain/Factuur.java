@@ -95,7 +95,7 @@ public class Factuur implements Serializable {
      * @return int
      */
     public int getNummer() {
-        return nummer;
+        return this.nummer;
     }
 
     /**

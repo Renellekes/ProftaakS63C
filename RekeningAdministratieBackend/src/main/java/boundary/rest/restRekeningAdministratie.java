@@ -15,6 +15,7 @@ import domain.FactuurOnderdeel;
 import domain.Kilometertarief;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -373,5 +374,17 @@ public class restRekeningAdministratie {
     @Path("test/{mail}")
     public void test(@PathParam("mail") String mail) {
         SendMailTLS.main(mail);
+    }
+    
+    @GET
+    @Path("movements")
+    public void movements() {
+        Date date = new Date();                
+                Date date2 = new Date();
+                Calendar c = Calendar.getInstance();
+                c.setTime(date);
+                c.add(Calendar.DATE, -1);
+                date2 = c.getTime();
+        ira.getAllMovements(date2, date);
     }
 }

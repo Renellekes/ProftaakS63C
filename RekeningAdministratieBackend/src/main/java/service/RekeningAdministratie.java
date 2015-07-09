@@ -76,6 +76,7 @@ public class RekeningAdministratie {
     }
 
     public void addFactuur(Factuur factuur) {
+        database.addFactuur(factuur);
     }
 
     public void changeStatusFactuur(String status, int nummer) {
@@ -97,6 +98,12 @@ public class RekeningAdministratie {
         b.setAdres(eigenaar.getAdres());
         b.setWoonplaats(eigenaar.getWoonplaats());
         database.modifyEigenaar(b);
+    }
+
+    public void modifyFactonderdeel(FactuurOnderdeel onderdeel) {
+        FactuurOnderdeel b = (FactuurOnderdeel) database.getFactuurOnderdeel(onderdeel.getFactuurOnderdeelID());
+        b.setFactuurID(onderdeel.getFactuurID());
+        database.MergeFactuurOnderdeel(b);
     }
 
     public void removeEigenaar(int ID) {
@@ -161,7 +168,7 @@ public class RekeningAdministratie {
     public List<Cartracker> getCartrackers() {
         return database.getCartrackers();
     }
-    
+
     public Cartracker getCartracker(int id) {
         return database.getCartracker(id);
     }
@@ -184,56 +191,51 @@ public class RekeningAdministratie {
     }
 
     public Factuur getFactuur(int id) {
-       return database.getFactuur(id);
+        return database.getFactuur(id);
     }
-    
+
     public String init() {
-        return database.init();
+        return database.init(this);
     }
 
     public void factuurBetaald(int id) {
         database.factuurBetaald(id);
     }
-    
-    public List<CartrackerMovement> getAllMovements(Date start, Date end){
+
+    public List<CartrackerMovement> getAllMovements(Date start, Date end) {
         try {
-            final MovementSystemSockets ms = new MovementSystemSockets("http://localhost:6061/VPSystem/MovementSystemEndpoint");
-            final int callId = ms.getAllMovement(start, end);
-            final List<CartrackerMovement> whothefuckcares = new ArrayList<>();
-            
-            Timer tmr = new Timer();
-            tmr.schedule(new TimerTask(){
+            System.out.println("start");
+            MovementSystemSockets ms = new MovementSystemSockets("ws://localhost:7071/VPSystem/MovementSystemEndpoint");
+            System.out.println("go");
+            int callId = ms.getAllMovement(start, end);
+            ms.getCartrackersForCallId(callId);
+            System.out.println("list");
+            List<CartrackerMovement> whothefuckcares;
 
-                @Override
-                public void run() {
-                   for (CartrackerMovement m : ms.getCartrackersForCallId(callId)){
-                       whothefuckcares.add(m);
-                   }
-                }
-            }, 2000);
+            System.out.println("go");
 
-            return whothefuckcares;
+            return null;
         } catch (URISyntaxException ex) {
             Logger.getLogger(RekeningAdministratie.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return null;
     }
-    
-    public List<CartrackerMovement> getAllMovementsForCartracker(String cartrackerId, Date start, Date end){
+
+    public List<CartrackerMovement> getAllMovementsForCartracker(String cartrackerId, Date start, Date end) {
         try {
-            final MovementSystemSockets ms = new MovementSystemSockets("http://localhost:7071/VerplaatsingenSysteem/MovementSystemEndpoint");
+            final MovementSystemSockets ms = new MovementSystemSockets("ws://localhost:7071/VerplaatsingenSysteem/MovementSystemEndpoint");
             final int callId = ms.getMovementForUser(cartrackerId, start, end);
             final List<CartrackerMovement> whothefuckcares = new ArrayList<>();
-            
+
             Timer tmr = new Timer();
-            tmr.schedule(new TimerTask(){
+            tmr.schedule(new TimerTask() {
 
                 @Override
                 public void run() {
-                   for (CartrackerMovement m : ms.getCartrackersForCallId(callId)){
-                       whothefuckcares.add(m);
-                   }
+                    for (CartrackerMovement m : ms.getCartrackersForCallId(callId)) {
+                        whothefuckcares.add(m);
+                    }
                 }
             }, 2000);
 
@@ -242,5 +244,25 @@ public class RekeningAdministratie {
             Logger.getLogger(RekeningAdministratie.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public List<FactuurOnderdeel> findOnderdelenForMonth(String maand) {
+        return database.findOnderdelenForMonth(maand);
+    }
+
+    public List<Cartracker> findAllCartracker() {
+        return database.findAllCartracker();
+    }
+
+    public Factuur getLaatsteFactuur() {
+        return database.getLaatsteFactuur();
+    }
+
+    public void modifyFactuur(Factuur factuur) {
+        Factuur b = (Factuur) database.getFactuur(factuur.getNummer());
+        b.setBetaalStatus(factuur.getBetaalStatus());
+        b.setFactuuronderdelen(factuur.getFactuuronderdelen());
+        b.setTotaalBedrag(factuur.getTotaalBedrag());
+        database.mergeFactuur(b);
     }
 }

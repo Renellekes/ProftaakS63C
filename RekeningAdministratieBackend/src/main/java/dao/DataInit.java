@@ -22,6 +22,7 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import contstants.BetaalStatus;
 import domain.CartrackerMovement;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -36,8 +37,10 @@ public class DataInit {
     private String[] Maand = {"januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"};
 
     DatabaseManager database;    
-
-    public String init(DatabaseManager db) {
+    RekeningAdministratie RAM;
+            
+    public String init(RekeningAdministratie rad,DatabaseManager db) {
+        RAM=rad;
         database = db;
         database.addFactuur(new Factuur(0, 200, "Maart"));
         database.addKilometerTarief(new Kilometertarief("testregio", "Stads", 4522));
@@ -82,26 +85,36 @@ public class DataInit {
      * a enddate for this month then they wil be added to a factuur whish is
      * added to the database and a cartracker.
      */
-    public void AutomaticFactuur(String maand) {
-        System.out.println("Start timeout " + Maand[Calendar.getInstance().get(Calendar.MONTH)] + maand);
-        List<FactuurOnderdeel> onderdelen = database.findOnderdelenForMonth(maand);
-        List<Cartracker> cs = database.findAllCartracker();
+    public void AutomaticFactuur(String maand) {        
+        List<FactuurOnderdeel> onderdelen = RAM.findOnderdelenForMonth(maand);
+        List<FactuurOnderdeel> factuurOnderdelen = new ArrayList();
+        List<Cartracker> cs = RAM.findAllCartracker();
         Factuur factuur = null;
-        System.out.println("Testing 1 " + cs.size() + " : " + onderdelen.size());
         for (Cartracker c : cs) {
             factuur = new Factuur(c.getId(), 0, maand);
-            factuur.setBetaalStatus(BetaalStatus.OPEN);
-            factuur.setFactuuronderdelen(onderdelen);
+            RAM.addFactuur(factuur);   
+            factuur = RAM.getLaatsteFactuur();            
+            factuur.setBetaalStatus(BetaalStatus.OPEN);  
+            for(FactuurOnderdeel onderdeel : onderdelen){
+                if(onderdeel.getCartrackerID() == c.getId()){     
+                    System.out.println("factnummer " +factuur.getNummer());
+                    onderdeel.setFactuurID(factuur.getNummer());
+                    RAM.modifyFactonderdeel(onderdeel);
+                    factuurOnderdelen.add(onderdeel);
+                    
+                }
+                factuur.setFactuuronderdelen(factuurOnderdelen);
+            }
             if (factuur.getSizeOnderdeelList() > 0) {
                 factuur.calculateAmount();
-                database.addFactuur(factuur);
+                RAM.modifyFactuur(factuur);
                 c.addFactuur(factuur);
-                database.mergeCartracker(c);
+                RAM.modifyCartracker(c);
             }
         }
     }
 
-    public void addOnderdelen() {
+    public void addOnderdelen() {        
         Timer tmr = new Timer(true);
         tmr.scheduleAtFixedRate(new TimerTask() {
             RekeningAdministratie ram;
@@ -114,6 +127,11 @@ public class DataInit {
                 c.setTime(date);
                 c.add(Calendar.DATE, -1);
                 date2 = c.getTime();
+                Kilometertarief k = new Kilometertarief("testregio", "Stads", 42);
+                RAM.addKilometerTarief(k);
+                FactuurOnderdeel fo = new FactuurOnderdeel(999, k, date, date, 90);
+                RAM.addFactuurOnderdeel(fo);
+                //database.addOnderdeel(fo);
 //                List<Cartracker> cs = database.findAllCartracker();
 //                for(Cartracker car : cs)
 //                {
@@ -125,7 +143,7 @@ public class DataInit {
                 
                                 
                 if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 1){
-                    int mndInt = Calendar.getInstance().get(Calendar.MONTH) - 1;
+                    int mndInt = Calendar.getInstance().get(Calendar.MONTH) -1;
                     AutomaticFactuur(Maand[mndInt]);
                 }
 

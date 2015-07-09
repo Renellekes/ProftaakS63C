@@ -51,6 +51,16 @@ public class FactuurOnderdeel implements Serializable {
     public FactuurOnderdeel() {
 //        this.setMonth();
     }
+    
+    public FactuurOnderdeel(int CartrackerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
+        this.CartrackerID = CartrackerID;
+        this.kilometertarief = kilometertarief;
+        this.beginTijd = beginTijd;
+        this.eindTijd = eindTijd;
+        this.aantalKilometers = aantalKilometers;
+        this.setMonth();
+        this.calculateAmount();
+    }
 
     public FactuurOnderdeel(int factuurID,int CartrackerID, Kilometertarief kilometertarief, Date beginTijd, Date eindTijd, long aantalKilometers) {
         this.CartrackerID = CartrackerID;

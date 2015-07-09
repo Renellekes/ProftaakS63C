@@ -17,6 +17,8 @@ import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+import service.RekeningAdministratie;
 
 /**
  *
@@ -31,7 +33,7 @@ public class DatabaseManager {
 
     public DatabaseManager() {
     }
-    
+
     public List<Cartracker> findAllCartracker() {
         Query query = em.createQuery("SELECT c FROM Cartracker c");
         List<Cartracker> cartrackers = query.getResultList();
@@ -56,8 +58,9 @@ public class DatabaseManager {
     }
 
     public void addOnderdeel(FactuurOnderdeel fo) {
+        System.out.println(fo.getFactuurID());
         em.persist(fo);
-    }    
+    }
 
     public Factuur findFactuurWithID(int nummer) {
         Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = " + nummer);
@@ -136,7 +139,7 @@ public class DatabaseManager {
     public List<Factuur> getAlleFacturen() {
         Query query = em.createQuery("SELECT c FROM Factuur c");
         List<Factuur> factuurs = query.getResultList();
-        for (Factuur factuur : factuurs){
+        for (Factuur factuur : factuurs) {
             factuur.setFactuuronderdelen(this.getFactuurOnderdelen(factuur.getNummer()));
         }
         return factuurs;
@@ -151,15 +154,15 @@ public class DatabaseManager {
         List<Cartracker> c = query.getResultList();
         return c;
     }
-    
-     public Cartracker getCartracker(int id) {
+
+    public Cartracker getCartracker(int id) {
         Query query = em.createQuery("SELECT c FROM Cartracker c WHERE c.id =" + id);
         List<Cartracker> c = query.getResultList();
         if (c.size() > 0) {
             return c.get(0);
         } else {
             return null;
-        }        
+        }
     }
 
     public void modifyAuto(Auto a) {
@@ -203,25 +206,49 @@ public class DatabaseManager {
             return null;
         }
     }
-    
-     public List<FactuurOnderdeel> getFactuurOnderdelen(int id) {
+
+    public List<FactuurOnderdeel> getFactuurOnderdelen(int id) {
         Query query = em.createQuery("SELECT o FROM FactuurOnderdeel o where o.factuurID = " + id);
         List<FactuurOnderdeel> factuuronderdelen = query.getResultList();
         return factuuronderdelen;
     }
 
-    void MergeFactuurOnderdeel(FactuurOnderdeel fac) {
+    public FactuurOnderdeel getFactuurOnderdeel(int id) {
+        Query query = em.createQuery("SELECT o FROM FactuurOnderdeel o where o.FactuurOnderdeelID = " + id);
+        List<FactuurOnderdeel> factuuronderdelen = query.getResultList();
+        if (factuuronderdelen.size() > 0) {
+            FactuurOnderdeel onderdeel = factuuronderdelen.get(0);
+            return onderdeel;
+        } else {
+            return null;
+        }
+    }
+
+    public void MergeFactuurOnderdeel(FactuurOnderdeel fac) {
         em.merge(fac);
     }
 
-    public String init() {
-        return new DataInit().init(this);
+    public String init(RekeningAdministratie r) {
+        return new DataInit().init(r, this);
     }
 
     public void factuurBetaald(int id) {
         Factuur factuur = this.getFactuur(id);
         factuur.setBetaalStatus(BetaalStatus.BETAALD);
         em.merge(factuur);
+    }
+
+    public Factuur getLaatsteFactuur() {
+        Query query = em.createQuery("SELECT c FROM Factuur c WHERE c.nummer = (SELECT MAX(c.nummer) FROM Factuur c)");
+        List<Factuur> facturen = query.getResultList();
+        if (facturen.size() > 0) {
+            Factuur factuur = facturen.get(0);
+            System.out.println("output nummer: "+factuur.getNummer());
+            factuur.setFactuuronderdelen(getFactuurOnderdelen(factuur.getNummer()));
+            return factuur;
+        } else {
+            return null;
+        }        
     }
 
 }
